@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN" class="font-sans">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="一个无限画布创作工具" />
+        <link rel="icon" href="/canvas/logo.svg" />
+        <title>无限画布</title>
+        
+<script>
+// [aionui-canvas-bridge] injected by AionUi scripts/sync-canvas.js
+// Asks the parent window (AionUi renderer) for the AI model config selected in
+// AionUi (Settings -> Model), persists it into localStorage under the zustand
+// persist key the canvas app reads on boot, then reloads once if it changed so
+// the app bootstraps with the injected config.
+(function () {
+  try {
+    var KEY = 'infinite-canvas:ai_config_store';
+    var handler = function (e) {
+      var d = e && e.data;
+      if (!d || typeof d !== 'object' || d.type !== 'aionui:canvas-config') return;
+      window.removeEventListener('message', handler);
+      var cur = null;
+      try { cur = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (err) {}
+      var next = { state: { config: d.config, webdav: (cur && cur.state && cur.state.webdav) || {} }, version: 0 };
+      var existing = cur && cur.state && cur.state.config;
+      var changed = !existing || JSON.stringify(existing) !== JSON.stringify(d.config);
+      localStorage.setItem(KEY, JSON.stringify(next));
+      if (changed) {
+        // Apply the config on a fresh boot of the canvas app.
+        setTimeout(function () { location.reload(); }, 50);
+      }
+    };
+    window.addEventListener('message', handler);
+    try { parent.postMessage({ type: 'aionui:canvas:request-config' }, '*'); } catch (err) {}
+    setTimeout(function () { window.removeEventListener('message', handler); }, 4000);
+  } catch (err) {}
+})();
+</script>
+<script>
+            try {
+                var s = JSON.parse(localStorage.getItem("infinite-canvas:theme_store") || "{}");
+                var t = s.state && s.state.theme === "light" ? "light" : "dark";
+                document.documentElement.classList.toggle("dark", t === "dark");
+                document.documentElement.style.colorScheme = t;
+            } catch (e) {}
+        </script>
+      <script type="module" crossorigin src="/canvas/assets/index-ChAL9QyA.js"></script>
+      <link rel="stylesheet" crossorigin href="/canvas/assets/index-DB8EH-c_.css">
+    </head>
+    <body class="bg-background text-foreground antialiased">
+        <div id="root"></div>
+        <script src="/canvas/config.js"></script>
+    </body>
+</html>
