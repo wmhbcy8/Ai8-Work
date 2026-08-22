@@ -5,6 +5,7 @@
  */
 
 import { execFile } from 'node:child_process';
+import path from 'node:path';
 import { migrateConfigStorage, migrateLegacyMcpConfigToDb, migrateProviders } from '@/common/config/configMigration';
 import { httpRequest } from '@/common/adapter/httpBridge';
 import { mcpService } from '@/common/adapter/ipcBridge';
@@ -16,7 +17,7 @@ import {
   type ImageGenerationMcpEnvResolveResult,
 } from '@/common/config/imageGenerationMcpEnv';
 import { BUILTIN_IMAGE_GEN_NAME, type IMcpServer, type IProvider } from '@/common/config/storage';
-import { getBuiltinMcpScriptPath, type ProcessConfig as ProcessConfigType } from './initStorage';
+import { getBuiltinMcpScriptPath, getBuiltinMcpBaseDir, type ProcessConfig as ProcessConfigType } from './initStorage';
 import { migrateAssistantsToBackend } from './migrateAssistants';
 
 type ConfigFile = typeof ProcessConfigType;
@@ -24,6 +25,20 @@ type MigrationStepResult = boolean;
 type McpImportServer = Partial<IMcpServer> & Pick<IMcpServer, 'name' | 'transport'>;
 type BackendClientPreferences = Record<string, unknown>;
 const BUILTIN_CHROME_DEVTOOLS_NAME = 'chrome-devtools';
+
+/**
+ * 内置「无限画布」MCP（Ai8 Work 集成）。
+ *
+ * 通过 @basketikun/canvas-agent 的 MCP 模式（stdio），让 Ai8 Work 的智能体会话
+ * 可以直接操作无限画布工作区：创建/编辑画布节点、读取画布内容、触发 AI 生成等。
+ * 默认关闭（避免每次会话都拉取 npm 包），用户在「设置 → 工具 → MCP」中一键启用。
+ *
+ * Built-in Infinite Canvas MCP (Ai8 Work integration). Bridges the AionUi agent
+ * session to the Infinite Canvas workspace through @basketikun/canvas-agent's
+ * MCP mode (stdio): create/edit canvas nodes, query canvas content, trigger AI
+ * generation, etc. Disabled by default; enable it in Settings > Tools > MCP.
+ */
+const BUILTIN_CANVAS_AGENT_NAME = 'infinite-canvas';
 
 /**
  * 内置「应用内浏览器」MCP。
@@ -206,6 +221,15 @@ function buildDefaultMcpServers(): McpImportServer[] {
     args: ['-y', 'chrome-devtools-mcp@latest'],
   };
 
+  // 本地自包含 bundle（out/main/builtin-mcp-canvas-agent.mjs，见 scripts/build-mcp-servers.js），
+  // 由外部 node 进程执行 —— 不依赖网络/npx，打包后开箱即用。
+  // Self-contained local bundle (see scripts/build-mcp-servers.js), executed by an
+  // external node process — no network/npx needed, works offline in packaged builds.
+  const canvasAgentConfig = {
+    command: 'node',
+    args: [getBuiltinMcpScriptPath('builtin-mcp-canvas-agent'), 'mcp'],
+  };
+
   return [
     {
       name: BUILTIN_CHROME_DEVTOOLS_NAME,
@@ -218,6 +242,19 @@ function buildDefaultMcpServers(): McpImportServer[] {
         args: chromeConfig.args,
       },
       original_json: JSON.stringify({ mcpServers: { [BUILTIN_CHROME_DEVTOOLS_NAME]: chromeConfig } }, null, 2),
+    },
+    {
+      name: BUILTIN_CANVAS_AGENT_NAME,
+      description:
+        'Operate the Infinite Canvas workspace: create/edit canvas nodes, run AI generation and query canvas content.',
+      enabled: false,
+      builtin: true,
+      transport: {
+        type: 'stdio',
+        command: canvasAgentConfig.command,
+        args: canvasAgentConfig.args,
+      },
+      original_json: JSON.stringify({ mcpServers: { [BUILTIN_CANVAS_AGENT_NAME]: canvasAgentConfig } }, null, 2),
     },
     buildBuiltinBrowserServer(),
   ];

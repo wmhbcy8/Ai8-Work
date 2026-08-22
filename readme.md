@@ -82,6 +82,14 @@
 > 画布内的 AI 生成能力（文生图 / 视频 / 音频）默认使用注入通道的文本模型；
 > 如需专门的分支模型，可在画布「设置」面板中按需补充，已注入的通道会自动出现在模型列表中。
 
+> 🤖 **智能体会话也能操作画布（内置 MCP）**
+> Ai8 Work 内置了「无限画布 MCP」（基于 [canvas-agent](https://github.com/basketikun/infinite-canvas/tree/main/canvas-agent)，
+> 本地自包含 bundle，离线可用）。启用后，聊天中的 AI 智能体可以直接在你的画布上
+> **创建节点、生成图片/视频/音频、连线编排、读取画布状态**，画布成为智能体的可视化协作区。
+>
+> **启用方式**：设置 → 工具 → MCP → 找到 **Infinite Canvas** → 打开开关（`node .../builtin-mcp-canvas-agent.js mcp`，开箱即用，无需联网）。
+> 使用前需在画布页右上角开启「Agent」连接（本地 Canvas Agent 服务）。
+
 <p align="center">
   <img src="./resources/offica-ai BANNER-function.png" alt="Ai8 Work 功能总览" width="800">
 </p>

@@ -37,7 +37,25 @@ async function main() {
       entryPoints: [path.join(ROOT, 'packages/desktop/src/process/resources/builtinMcp/browserServer.ts')],
       outfile: path.join(ROOT, 'out/main/builtin-mcp-browser.js'),
     }),
+    // Ai8 Work: Infinite Canvas agent (canvas-agent MCP mode, vendored under
+    // builtinMcp/canvasAgent) bundled as a self-contained CJS entry so an
+    // external `node` process can run it from app.asar.unpacked without
+    // resolving npm packages. The upstream CLI entry uses top-level await, so
+    // we bundle the wrapper (canvasAgentEntry.ts) instead.
+    esbuild.build({
+      ...SHARED_OPTIONS,
+      entryPoints: [path.join(ROOT, 'packages/desktop/src/process/resources/builtinMcp/canvasAgentEntry.ts')],
+      outfile: path.join(ROOT, 'out/main/builtin-mcp-canvas-agent.js'),
+    }),
   ]);
+
+  // The vendored canvas-agent config reads ../agent-instructions.md relative to
+  // its bundle (import.meta.url), which resolves to out/agent-instructions.md.
+  const fs = require('fs');
+  fs.copyFileSync(
+    path.join(ROOT, 'packages/desktop/src/process/resources/builtinMcp/agent-instructions.md'),
+    path.join(ROOT, 'out/agent-instructions.md')
+  );
 }
 
 main().catch((err) => {

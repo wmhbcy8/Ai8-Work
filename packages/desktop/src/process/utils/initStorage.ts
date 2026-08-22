@@ -451,6 +451,6 @@ export const getSystemDir = () => {
  * 获取助手规则目录路径（供其他模块使用）
  * Get assistant rules directory path (for use by other modules)
  */
-export { getAssistantsDir, getSkillsDir, getCronSkillsDir, BUILTIN_IMAGE_GEN_ID, getBuiltinMcpScriptPath };
+export { getAssistantsDir, getSkillsDir, getCronSkillsDir, BUILTIN_IMAGE_GEN_ID, getBuiltinMcpScriptPath, getBuiltinMcpBaseDir };
 
 export default initStorage;
