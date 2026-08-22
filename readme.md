@@ -1,20 +1,28 @@
 <p align="center">
-  <img src="./resources/aionui-banner-1.png" alt="AionUi - Cowork with AI Agents" width="100%">
+  <img src="./resources/aionui-banner-1.png" alt="Ai8 Work - Local AI Workbench" width="100%">
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/v/release/iOfficeAI/AionUi?style=flat-square&color=32CD32" alt="Version">
+  <img src="https://img.shields.io/github/v/release/wmhbcy8/Ai8-Work?style=flat-square&color=32CD32" alt="Version">
   &nbsp;
   <img src="https://img.shields.io/badge/license-Apache--2.0-32CD32?style=flat-square&logo=apache&logoColor=white" alt="License">
   &nbsp;
   <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-6C757D?style=flat-square&logo=linux&logoColor=white" alt="Platform">
 </p>
 
-<p align="center">
-  <a href="https://trendshift.io/repositories/15423" target="_blank">
-    <img src="https://trendshift.io/api/badge/repositories/15423" alt="GitHub Trending" height="80">
-  </a>
-</p>
+---
+
+> ## 🚀 Ai8 Work — your local AI workbench
+>
+> A personal fork of [AionUi](https://github.com/iOfficeAI/AionUi) with an **integrated
+> [Infinite Canvas](https://github.com/basketikun/infinite-canvas)** workspace.
+>
+> - 🎨 **Infinite Canvas** — an embedded node canvas as a first-class workspace page (`/canvas`)
+> - 🔌 **Zero extra API setup** — the canvas automatically uses the OpenAI-compatible model
+>   channel you configure in **Settings → Model** (injected via a postMessage bridge)
+> - 🤖 Everything from AionUi: built-in agents, multi-agent chat, remote access, 24/7 automation
+>
+> <sub>Upstream: [iOfficeAI/AionUi](https://github.com/iOfficeAI/AionUi) · Canvas: [basketikun/infinite-canvas](https://github.com/basketikun/infinite-canvas) · Apache-2.0</sub>
 
 ---
 
@@ -24,7 +32,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/iOfficeAI/AionUi/releases">
+  <a href="https://github.com/wmhbcy8/Ai8-Work/releases">
     <img src="https://img.shields.io/badge/⬇️%20Download%20Now-Latest%20Release-32CD32?style=for-the-badge&logo=github&logoColor=white" alt="Download Latest Release" height="50">
   </a>
 </p>
