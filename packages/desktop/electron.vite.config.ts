@@ -279,6 +279,26 @@ export default defineConfig(({ mode }) => {
           output: {
             manualChunks(id: string) {
               if (!id.includes('node_modules')) return undefined;
+              // React Flow (@xyflow/react) is imported only by the canvas page
+              // via React.lazy. Its package path contains "/react/", which the
+              // loose vendor rule below would match, sending @xyflow/react into
+              // `vendor` while its own deps (@xyflow/system, zustand) land in the
+              // entry chunk — the same cross-chunk cycle that leaves #root empty
+              // and produces a full white screen in the packaged build.
+              //
+              // Returning undefined does NOT actually co-locate them: Rollup still
+              // hoists zustand into the entry chunk while @xyflow/react lands in
+              // the canvas lazy chunk, so the two stay split across chunks and the
+              // cycle persists. Pin the whole React-coupled dependency graph
+              // (@xyflow/react, @xyflow/system, zustand, use-sync-external-store,
+              // @dnd-kit, classcat) to a SINGLE self-contained chunk instead.
+              if (
+                id.includes('@xyflow') ||
+                id.includes('zustand') ||
+                id.includes('use-sync-external-store') ||
+                id.includes('@dnd-kit') ||
+                id.includes('classcat')
+              ) return 'xyflow-core';
               // Keep React and every vendor tightly coupled to it in ONE chunk.
               //
               // Splitting these into separate manual chunks (vendor-react,

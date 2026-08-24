@@ -1,12 +1,12 @@
-appId: com.aionui.app
-productName: AionUi
-executableName: AionUi
-copyright: Copyright © 2024 AionUi
+appId: com.ai8work.app
+productName: Ai8 Work
+executableName: Ai8Work
+copyright: Copyright © 2026 Ai8 Work
 
 protocols:
-  - name: AionUi Protocol
+  - name: Ai8 Work Protocol
     schemes:
-      - aionui
+      - ai8work
 
 asar:
   smartUnpack: true
@@ -116,8 +116,8 @@ win:
   target:
     - nsis
     #    - msi
-  icon: resources/app.ico # Use the checked-in Windows icon resource for executable metadata/icon patching
-  artifactName: ${productName}-${version}-${os}-${arch}.${ext}
+  icon: app.ico # Use the checked-in Windows icon resource for executable metadata/icon patching
+  artifactName: Ai8Work-${version}-${os}-${arch}.${ext}
 
 nsis:
   oneClick: false
@@ -126,15 +126,15 @@ nsis:
   createStartMenuShortcut: true
   shortcutName: ${productName}
   uninstallDisplayName: ${productName}
-  artifactName: ${productName}-${version}-${os}-${arch}.${ext}
+  artifactName: Ai8Work-${version}-${os}-${arch}.${ext}
   differentialPackage: false
 
 mac:
   target:
     - dmg
     - zip
-  icon: resources/app.icns
-  artifactName: ${productName}-${version}-${os}-${arch}.${ext}
+  icon: app.icns
+  artifactName: Ai8Work-${version}-${os}-${arch}.${ext}
   category: public.app-category.productivity
   hardenedRuntime: true
   gatekeeperAssess: false
@@ -166,20 +166,20 @@ afterSign: scripts/afterSign.js
 linux:
   target:
     - deb
-  icon: resources/app.png
-  artifactName: ${productName}-${version}-${os}-${arch}.${ext}
+  icon: app.png
+  artifactName: Ai8Work-${version}-${os}-${arch}.${ext}
   category: Utility
-  maintainer: aionui
-  vendor: aionui
+  maintainer: Ai8 Work
+  vendor: Ai8 Work
   synopsis: ${description}
   description: ${description}
   desktop:
     entry:
-      Name: AionUi
+      Name: Ai8 Work
       Comment: ${description}
-      Icon: AionUi
+      Icon: Ai8Work
       Categories: Office;Utility;
-      MimeType: x-scheme-handler/aionui;
+      MimeType: x-scheme-handler/ai8work;
 
 npmRebuild: false
 buildDependenciesFromSource: false
@@ -218,7 +218,7 @@ electronDownload:
 
 publish:
   provider: github
-  owner: iOfficeAI
-  repo: AionUi
+  owner: wmhbcy8
+  repo: Ai8-Work
   publishAutoUpdate: true
   releaseType: release

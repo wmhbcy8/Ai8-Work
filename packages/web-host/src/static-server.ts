@@ -13,6 +13,8 @@
 import http, { type IncomingMessage, type Server, type ServerResponse } from 'node:http';
 import { networkInterfaces } from 'node:os';
 import net, { type Socket } from 'node:net';
+import { stat as fsStat } from 'node:fs';
+import { promisify } from 'node:util';
 import serveHandler from 'serve-handler';
 
 export type StaticServerOptions = {
@@ -189,10 +191,25 @@ export async function startStaticServer(opts: StaticServerOptions): Promise<Stat
       }
 
       // static files + SPA fallback
-      await serveHandler(req, res, {
-        public: opts.staticDir,
-        rewrites: [{ source: '**', destination: '/index.html' }],
-      });
+      //
+      // serve-handler checks file existence with `fs.lstat`, but Electron's
+      // asar patch only supports `fs.stat` (not `lstat`) — so every file inside
+      // app.asar looks "missing" and *every* request (including the canvas app
+      // and all SPA assets) falls through to the SPA rewrite, which serves the
+      // login page instead of the canvas. Static assets here are plain files
+      // (no symlinks), so substituting `stat` for `lstat` is safe and makes
+      // asar-backed staticDir work again. See `getHandlers` in serve-handler.
+      await serveHandler(
+        req,
+        res,
+        {
+          public: opts.staticDir,
+          rewrites: [{ source: '**', destination: '/index.html' }],
+        },
+        {
+          lstat: promisify(fsStat),
+        },
+      );
     } catch (err) {
       if (!res.headersSent) {
         res.writeHead(500, { 'content-type': 'application/json' });

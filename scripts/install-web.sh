@@ -3,7 +3,7 @@
 # AionUi WebUI — One-Click Installation Script
 # ============================================================================
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/iOfficeAI/AionUi/main/scripts/install-web.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/wmhbcy8/Ai8-Work/master/scripts/install-web.sh | bash
 #   # Or specify version:
 #   VERSION=1.0.0 bash install-web.sh
 #   # Or install to custom directory:
@@ -20,7 +20,7 @@ VERSION="${VERSION:-__VERSION__}"
 # so never add a literal "__VERSION__" string to any comparison below.
 INSTALL_DIR="${INSTALL_DIR:-${HOME}/.local/share/aionui-web}"
 BIN_DIR="${BIN_DIR:-${HOME}/.local/bin}"
-MIRROR="${MIRROR:-https://github.com/iOfficeAI/AionUi/releases/download}"
+MIRROR="${MIRROR:-https://github.com/wmhbcy8/Ai8-Work/releases/download}"
 CREATE_SYMLINK="${CREATE_SYMLINK:-1}"
 UPDATE_PATH="${UPDATE_PATH:-1}"
 
@@ -104,7 +104,7 @@ Environment Variables:
 
 Examples:
   # Install latest version
-  curl -fsSL https://raw.githubusercontent.com/iOfficeAI/AionUi/main/scripts/install-web.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/wmhbcy8/Ai8-Work/master/scripts/install-web.sh | bash
 
   # Install specific version
   VERSION=1.0.0 bash install-web.sh
@@ -171,10 +171,10 @@ resolve_version() {
         info "Resolving latest version from GitHub API..."
 
         if command -v curl &>/dev/null; then
-            VERSION=$(curl -fsSL "https://api.github.com/repos/iOfficeAI/AionUi/releases/latest" \
+            VERSION=$(curl -fsSL "https://api.github.com/repos/wmhbcy8/Ai8-Work/releases/latest" \
                 | grep '"tag_name"' | head -1 | sed 's/.*"v\([^"]*\)".*/\1/')
         elif command -v wget &>/dev/null; then
-            VERSION=$(wget -qO- "https://api.github.com/repos/iOfficeAI/AionUi/releases/latest" \
+            VERSION=$(wget -qO- "https://api.github.com/repos/wmhbcy8/Ai8-Work/releases/latest" \
                 | grep '"tag_name"' | head -1 | sed 's/.*"v\([^"]*\)".*/\1/')
         else
             die "curl or wget is required to resolve version. Please install curl or wget."
@@ -202,7 +202,7 @@ download_tarball() {
 
     # Build download URL
     # MIRROR formats:
-    #   - GitHub: https://github.com/iOfficeAI/AionUi/releases/download
+    #   - GitHub: https://github.com/wmhbcy8/Ai8-Work/releases/download
     #   - file: file:///path/to/releases
     if [[ "$MIRROR" == file://* ]]; then
         # Local file mirror (for offline installation or testing)
@@ -456,8 +456,8 @@ print_summary() {
         fi
     fi
     echo ""
-    echo -e "  ${BOLD}📖 Documentation:${NC}  https://github.com/iOfficeAI/AionUi"
-    echo -e "  ${BOLD}🐛 Report issues:${NC}  https://github.com/iOfficeAI/AionUi/issues"
+    echo -e "  ${BOLD}📖 Documentation:${NC}  https://github.com/wmhbcy8/Ai8-Work"
+    echo -e "  ${BOLD}🐛 Report issues:${NC}  https://github.com/wmhbcy8/Ai8-Work/issues"
     echo ""
     echo -e "  ${BOLD}🗑️  Uninstall:${NC}"
     echo ""

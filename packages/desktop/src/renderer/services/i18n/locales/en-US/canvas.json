@@ -1,0 +1,9 @@
+{
+  "title": "Infinite Canvas",
+  "description": "Local infinite canvas creation tool",
+  "starting": "Starting canvas…",
+  "failedToStart": "Canvas failed to start",
+  "retry": "Retry",
+  "urlNotAvailable": "Canvas URL not available.",
+  "missingResources": "Canvas resources are missing in this build (loaded the app shell instead). Please reinstall the latest version of Ai8 Work."
+}

@@ -1,0 +1,9 @@
+{
+  "title": "無限畫布",
+  "description": "本地無限畫布創作工具",
+  "starting": "正在啟動畫布…",
+  "failedToStart": "畫布啟動失敗",
+  "retry": "重試",
+  "urlNotAvailable": "畫布位址不可用。",
+  "missingResources": "目前建置缺少畫布資源（載入到的是應用程式外殼）。請重新安裝最新版本的 Ai8 Work。"
+}

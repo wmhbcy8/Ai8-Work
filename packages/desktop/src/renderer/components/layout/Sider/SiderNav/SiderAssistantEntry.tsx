@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { Tooltip } from '@arco-design/web-react';
 import { Ghost } from '@icon-park/react';
 import classNames from 'classnames';
@@ -26,11 +25,9 @@ const SiderAssistantEntry: React.FC<SiderAssistantEntryProps> = ({
   siderTooltipProps,
   onClick,
 }) => {
-  const { t } = useTranslation();
-
   if (collapsed) {
     return (
-      <Tooltip {...siderTooltipProps} content={t('settings.assistants')} position='right'>
+      <Tooltip {...siderTooltipProps} content='百技助手' position='right'>
         <div
           className={classNames(
             'w-full h-34px flex items-center justify-center cursor-pointer transition-colors rd-8px text-t-primary',
@@ -51,7 +48,7 @@ const SiderAssistantEntry: React.FC<SiderAssistantEntryProps> = ({
   }
 
   return (
-    <Tooltip {...siderTooltipProps} content={t('settings.assistants')} position='right'>
+    <Tooltip {...siderTooltipProps} content='百技助手' position='right'>
       <div
         className={classNames(
           'box-border group h-34px w-full flex items-center justify-start gap-8px ps-10px pe-8px rd-0.5rem cursor-pointer shrink-0 transition-all text-t-primary',
@@ -70,7 +67,7 @@ const SiderAssistantEntry: React.FC<SiderAssistantEntryProps> = ({
           />
         </span>
         <span className='collapsed-hidden text-t-primary text-14px font-[500] leading-24px'>
-          {t('settings.assistants')}
+          百技助手
         </span>
       </div>
     </Tooltip>

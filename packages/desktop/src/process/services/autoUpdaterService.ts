@@ -141,10 +141,11 @@ class AutoUpdaterService extends EventEmitter {
       log.info(`Update channel set to: ${channel}`);
     }
     autoUpdater.setFeedURL(cdnFeedOptions);
-    log.info('Update feed set to CDN provider');
-    log.debug('[auto-update] CDN feed configured', {
+    log.info(`Update feed set to GitHub provider (${cdnFeedOptions.owner}/${cdnFeedOptions.repo})`);
+    log.debug('[auto-update] Update feed configured', {
       provider: cdnFeedOptions.provider,
-      url: cdnFeedOptions.url,
+      owner: cdnFeedOptions.owner,
+      repo: cdnFeedOptions.repo,
       channel: channel ?? 'latest',
       platform: process.platform,
       arch: process.arch,
@@ -196,9 +197,10 @@ class AutoUpdaterService extends EventEmitter {
     try {
       const cdnFeedOptions = buildCdnFeedOptions();
       const devConfig = [
-        'provider: generic',
-        `url: ${cdnFeedOptions.url}`,
-        'updaterCacheDirName: com.aionui.app',
+        'provider: github',
+        `owner: ${cdnFeedOptions.owner}`,
+        `repo: ${cdnFeedOptions.repo}`,
+        'updaterCacheDirName: com.ai8work.app',
         '',
       ].join('\n');
       const configPath = path.join(app.getPath('userData'), 'dev-app-update.yml');
@@ -459,7 +461,7 @@ class AutoUpdaterService extends EventEmitter {
 
   /**
    * In dev mode the running shell is the stock Electron bundle (com.github.Electron),
-   * while the downloaded archive contains the packaged app (com.aionui.app). Squirrel.Mac
+   * while the downloaded archive contains the packaged app (com.ai8work.app). Squirrel.Mac
    * looks for a bundle matching the *running* id, fails to find it, and reports
    * "Could not locate update bundle". This is expected in dev and cannot be reproduced
    * without a packaged build, so surface a clearer message instead of the raw error.

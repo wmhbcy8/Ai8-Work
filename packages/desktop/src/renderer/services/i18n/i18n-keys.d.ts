@@ -86,6 +86,13 @@ export type I18nKey =
   | 'agentMode.switchSuccess'
   | 'agentMode.yolo'
   | 'agentMode.yoloNoSandbox'
+  | 'canvas.description'
+  | 'canvas.failedToStart'
+  | 'canvas.missingResources'
+  | 'canvas.retry'
+  | 'canvas.starting'
+  | 'canvas.title'
+  | 'canvas.urlNotAvailable'
   | 'codex.config.export_success'
   | 'codex.config.import_failed'
   | 'codex.config.import_success'
@@ -3032,4 +3039,5 @@ export type I18nModule =
   | 'guid'
   | 'agent'
   | 'team'
-  | 'pet';
+  | 'pet'
+  | 'canvas';

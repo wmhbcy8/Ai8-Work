@@ -1,0 +1,9 @@
+{
+  "title": "无限画布",
+  "description": "本地无限画布创作工具",
+  "starting": "正在启动画布…",
+  "failedToStart": "画布启动失败",
+  "retry": "重试",
+  "urlNotAvailable": "画布地址不可用。",
+  "missingResources": "当前构建缺少画布资源（加载到的是应用外壳）。请重新安装最新版本的 Ai8 Work。"
+}

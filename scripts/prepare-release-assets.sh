@@ -133,7 +133,7 @@ echo "==> Validating desktop release assets ..."
 
 for arch in x64 arm64; do
   for ext in dmg zip; do
-    asset="AionUi-${VERSION}-mac-${arch}.${ext}"
+    asset="Ai8Work-${VERSION}-mac-${arch}.${ext}"
     if [ ! -f "$OUTPUT_DIR/$asset" ]; then
       if [ "$ext" = "zip" ]; then
         echo "::error::Missing macOS zip artifact: $asset"

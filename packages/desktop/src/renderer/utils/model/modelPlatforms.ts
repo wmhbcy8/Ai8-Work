@@ -261,6 +261,14 @@ export const MODEL_PLATFORMS: PlatformConfig[] = [
     platform: 'custom',
     base_url: 'https://api.stepfun.com/v1',
   },
+  {
+    // OvaiJisuan MaaS——AI 文本/图片/视频/语音一体化网关（客户自配 API key，可 override）
+    name: 'OvaiJisuan MaaS',
+    value: 'OvaiJisuan-MaaS',
+    logo: buildLogoAssetUrl('ai-cloud/infiniai.svg'),
+    platform: 'custom',
+    base_url: 'https://maas.ovaijisuan.com/v1',
+  },
 ];
 
 /**

@@ -60,8 +60,8 @@ interface AutoUpdateCheckParams {
   includePrerelease?: boolean;
 }
 
-const DEFAULT_REPO = 'iOfficeAI/AionUi';
-const DEFAULT_USER_AGENT = 'AionUi';
+const DEFAULT_REPO = 'wmhbcy8/Ai8-Work';
+const DEFAULT_USER_AGENT = 'Ai8Work';
 const ALLOWED_ASSET_EXTS = new Set(['.exe', '.msi', '.dmg', '.zip', '.deb', '.rpm']);
 const CDN_HOST = 'static.aionui.com';
 const CDN_BASE_URL = `https://${CDN_HOST}/releases`;
@@ -88,12 +88,12 @@ const normalizeTagToSemver = (tag: string): string | null => {
 };
 
 /**
- * Rewrite a GitHub release asset URL to the CDN URL for faster download.
- * The CDN path follows the fixed convention `{base}/{version}/{original-filename}`,
- * matching electron-builder's artifactName output, so no name conversion is needed.
+ * Resolve a release-asset download URL. Ai8 Work does not use the upstream
+ * AionUi CDN — assets are served straight from GitHub Releases, following the
+ * fixed release-asset URL scheme, so no name conversion is needed.
  */
-const rewriteAssetUrlToCDN = (assetName: string, version: string): string => {
-  return `${CDN_BASE_URL}/${version}/${assetName}`;
+const rewriteAssetUrlToCDN = (assetName: string, version: string, repo?: string): string => {
+  return `https://github.com/${resolveRepo(repo)}/releases/download/v${version}/${assetName}`;
 };
 
 type RuntimePlatformInfo = {
@@ -230,10 +230,10 @@ export const parseCdnManifest = (raw: string): CdnLatestManifest | null => {
 };
 
 /**
- * Build an UpdateReleaseInfo from the CDN manifest alone. `htmlUrl`/`body`
+ * Build an UpdateReleaseInfo from the channel manifest alone. `htmlUrl`/`body`
  * stay empty here — the GitHub best-effort enrichment fills them when
- * reachable. fallbackUrl follows GitHub's fixed release-asset URL scheme, so
- * no API call is needed to construct it.
+ * reachable. All asset URLs follow GitHub's fixed release-asset URL scheme
+ * (Ai8 Work has no CDN), so no API call is needed to construct them.
  */
 export const mapCdnManifestToRelease = (manifest: CdnLatestManifest, repo: string): UpdateReleaseInfo | null => {
   const version = semver.valid(manifest.version);
@@ -244,7 +244,7 @@ export const mapCdnManifestToRelease = (manifest: CdnLatestManifest, repo: strin
     if (!name || !isAllowedAssetName(name)) continue;
     assets.push({
       name,
-      url: rewriteAssetUrlToCDN(name, version),
+      url: rewriteAssetUrlToCDN(name, version, repo),
       fallbackUrl: `https://github.com/${repo}/releases/download/v${version}/${name}`,
       size: file.size ?? 0,
     });
@@ -351,16 +351,19 @@ const CDN_MANIFEST_TIMEOUT_MS = 15000;
 const GITHUB_NOTES_TIMEOUT_MS = 10000;
 
 /**
- * Fetch and parse the authoritative CDN channel manifest for the current
- * platform/arch. Any failure here fails the manual check — the CDN is the
- * single source of truth for "is there an update".
+ * Fetch and parse the authoritative channel manifest for the current
+ * platform/arch. Ai8 Work has no CDN: the manifest is read from the electron-
+ * builder channel yml attached to the latest GitHub release. Any failure here
+ * fails the manual check — GitHub is the single source of truth for "is there
+ * an update".
  */
-const fetchCdnManifest = async (): Promise<CdnLatestManifest> => {
-  const url = `${CDN_BASE_URL}/${resolveCdnChannelFile()}`;
+const fetchCdnManifest = async (repo?: string): Promise<CdnLatestManifest> => {
+  const resolvedRepo = resolveRepo(repo);
+  const url = `https://github.com/${resolvedRepo}/releases/latest/download/${resolveCdnChannelFile()}`;
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), CDN_MANIFEST_TIMEOUT_MS);
 
-  log.info('[manual-update] Checking CDN manifest:', url);
+  log.info('[manual-update] Checking GitHub channel manifest:', url);
   try {
     const res = await fetch(url, {
       headers: { 'User-Agent': DEFAULT_USER_AGENT },
@@ -373,7 +376,7 @@ const fetchCdnManifest = async (): Promise<CdnLatestManifest> => {
     if (!manifest) {
       throw new Error((await getI18n()).t('update.errors.cdnManifestInvalid'));
     }
-    log.info('[manual-update] CDN manifest resolved:', {
+    log.info('[manual-update] Channel manifest resolved:', {
       url,
       version: manifest.version,
       files: manifest.files.length,
@@ -689,9 +692,10 @@ export function initUpdateBridge(): void {
         // 若要 dev/预发布版本更新可靠生效，需要 CI 在 dev 构建时把 `package.json#version`
         // 注入为带 prerelease 的 semver（如 `1.7.2-dev.1234+sha.abcdef0`），以保证比较顺序正确。
 
-        // The CDN channel manifest is the authoritative source. It serves a single
-        // stable channel, so `includePrerelease` no longer affects detection.
-        const manifest = await fetchCdnManifest();
+        // The GitHub channel manifest is the authoritative source. It serves a single
+        // stable channel (the latest non-draft, non-prerelease GitHub release), so
+        // `includePrerelease` no longer affects detection.
+        const manifest = await fetchCdnManifest(repo);
         const latest = mapCdnManifestToRelease(manifest, repo);
 
         const currentSemver = semver.valid(currentVersion) || semver.coerce(currentVersion)?.version;

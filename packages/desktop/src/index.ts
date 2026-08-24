@@ -456,20 +456,28 @@ const createWindow = ({ showOnReady = true }: { showOnReady?: boolean } = {}): v
   console.log('[AionUi] Creating main window...');
   const { x: windowX, y: windowY, width: windowWidth, height: windowHeight } = resolveInitialBounds();
 
-  // Get app icon for development mode (Windows/Linux need icon in BrowserWindow)
-  // In production, icons are set via forge.config.ts packagerConfig
-  let devIcon: Electron.NativeImage | undefined;
-  if (!app.isPackaged) {
+  // Get app icon. Windows/Linux need an explicit icon in BrowserWindow for the
+  // taskbar / title bar to show the rounded brand logo.
+  //  - Dev: read the checked-in resources/ (app.ico on Windows, app_dev.png on Linux).
+  //  - Production: electron-builder patches the exe icon (win.icon), but the window
+  //    itself also needs one; we ship resources/app.png via extraResources into the
+  //    app's resources dir, so use that as the runtime window icon.
+  let windowIcon: Electron.NativeImage | undefined;
+  if (process.platform !== 'darwin') {
     try {
-      // Windows: app.ico (no dev version), Linux: app_dev.png (with padding)
-      const iconFile = process.platform === 'win32' ? 'app.ico' : 'app_dev.png';
-      const iconPath = path.join(process.cwd(), 'resources', iconFile);
+      let iconPath: string;
+      if (!app.isPackaged) {
+        const iconFile = process.platform === 'win32' ? 'app.ico' : 'app_dev.png';
+        iconPath = path.join(process.cwd(), 'resources', iconFile);
+      } else {
+        iconPath = path.join(process.resourcesPath || process.cwd(), 'app.png');
+      }
       if (fs.existsSync(iconPath)) {
-        devIcon = nativeImage.createFromPath(iconPath);
-        if (devIcon.isEmpty()) devIcon = undefined;
+        windowIcon = nativeImage.createFromPath(iconPath);
+        if (windowIcon.isEmpty()) windowIcon = undefined;
       }
     } catch {
-      // Ignore icon loading errors in development
+      // Ignore icon loading errors
     }
   }
 
@@ -483,8 +491,9 @@ const createWindow = ({ showOnReady = true }: { showOnReady?: boolean } = {}): v
     show: false, // Hide until CSS is loaded to prevent FOUC
     backgroundColor: '#ffffff',
     autoHideMenuBar: true,
-    // Set icon for Windows/Linux in development mode
-    ...(devIcon && process.platform !== 'darwin' ? { icon: devIcon } : {}),
+    // Set icon for Windows/Linux (dev + production) so the taskbar/title bar
+    // shows the rounded brand logo instead of the default/generic icon.
+    ...(windowIcon ? { icon: windowIcon } : {}),
     // Custom titlebar configuration / 自定义标题栏配置
     ...(process.platform === 'darwin'
       ? {
