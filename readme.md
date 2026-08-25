@@ -21,13 +21,13 @@
 > 读文件、写代码、生成文档，并在可视化画布上与你共创内容。
 >
 > **本项目特色：**
-> - 🎨 **无限画布工作区** — 全新 `/canvas` 工作台，节点式画布嵌入，AI 创作可视化
+> - 🎨 **无限画布工作区** — 节点式 AI 工作流画布（Ai8 Studio），拖拽连线即编排，AI 创作可视化
 > - 🔌 **模型零配置打通** — 画布自动复用你在「设置 → 模型」中配置的 OpenAI 兼容模型通道，无需二次配置
 > - 🛡️ **模型通道增强（v2.1.65）** — 自动拉取供应商权威 `/v1/models`，修复模型名错乱与聊天 "Failed to fetch"，模型 ID 确定性解析
 > - 🏷️ **百技助手** — 内置助手品牌升级，中文界面更贴合本地化场景
 > - 🤖 **完整继承 AionUi** — 内置智能体、多 Agent 协作、远程访问、24/7 定时任务等全部能力
 >
-> <sub>上游项目：<a href="https://github.com/iOfficeAI/AionUi">iOfficeAI/AionUi</a> · 画布引擎：<a href="https://github.com/basketikun/infinite-canvas">basketikun/infinite-canvas</a> · 开源协议：Apache-2.0</sub>
+> <sub>上游项目：<a href="https://github.com/iOfficeAI/AionUi">iOfficeAI/AionUi</a> · 画布引擎：Tapnow Studio（`Ai8 Studio` 节点式画布） · 开源协议：Apache-2.0</sub>
 >
 > 🌐 官方网站：**[https://ai8.app](https://ai8.app)** —— 产品介绍 / 下载 / 文档 / 三语支持
 
@@ -39,7 +39,7 @@
 
 - **模型通道可靠性** — 针对聊天 "Failed to fetch" 与卡片模型名错乱的问题，改为直接拉取供应商权威 `/v1/models`，确定性生成模型 `_uid`，并对模型做统一分类；`configRef` 竞态修复，多通道切换不串配置。
 - **品牌升级** — 内置助手入口更名为「**百技助手**」；画布欢迎页由 "Tapnow Studio" 改为 "**Ai8 Studio**"。
-- **无限画布持续增强** — 画布作为独立工作区嵌入，AI 创作可视化，节点式编排更顺滑。
+- **画布引擎升级** — 无限画布迁移到自包含的 Tapnow /「Ai8 Studio」节点式引擎，支持 **Chat / 图片 / 视频** 三类节点，自动注入「设置 → 模型」的权威模型清单。
 
 ---
 
@@ -75,34 +75,27 @@
 
 > ### Infinite Canvas — 让 AI 创作「看得见」/ *Visualize AI creation*
 
-无限画布是 Ai8 Work 在 AionUi 之上**新增加的旗舰功能**：将
-[basketikun/infinite-canvas](https://github.com/basketikun/infinite-canvas)
-以子应用形式无缝嵌入桌面应用，作为一个独立的工作区页面（左侧导航 →「无限画布」）。
+无限画布是 Ai8 Work 在 AionUi 之上**新增加的旗舰功能**：将自包含的
+**Tapnow /「Ai8 Studio」节点式画布引擎**以单文件 HTML 形式嵌入桌面应用，
+作为一个独立的工作区页面（左侧导航 →「无限画布」）。
+
+在这里，**节点即模型、连线即流程**：把「对话 / 图片 / 视频」三类节点拖到画布上，
+连线搭出你的 AI 工作流，一键运行。
 
 | 能力 | 说明 |
 | --- | --- |
-| **节点式无限画布** | 自由拖拽、缩放、连线、节点组织；内置小地图（Minimap）与撤销/重做 |
-| **AI 文生图 / 图生图** | 在画布上直接生成与编辑图片，支持参考图、多轮迭代 |
-| **AI 视频 / 音频生成** | 接入 OpenAI 兼容的视频、音频生成模型 |
-| **画布问答（Canvas QA）** | 选中节点即可对画布内容提问，AI 结合上下文作答 |
+| **节点式 AI 工作流画布** | 自由拖拽、缩放、连线、编排节点，整条工作流一键运行 |
+| **Chat 对话节点** | 调用注入的对话/文本模型，沿流程连续推理（支持多步链式创作） |
+| **Image 图片节点** | 文生图 / 图生图，自动识别并优先使用具备图片生成能力的模型 |
+| **Video 视频节点** | 接入视频生成模型；由模型 id 关键词自动识别映射（视频/音频类模型统一入口） |
 | **模型零配置** | ✅ **画布自动使用「设置 → 模型」里配置的模型通道**，无需在画布内再填任何 API Key |
-| **本地优先存储** | 数据保存在本地（IndexedDB），支持 WebDAV 云同步、导入/导出 |
-| **插件系统** | 支持画布节点插件扩展（TypeScript SDK） |
+| **权威模型清单** | 自动拉取供应商 `/v1/models`，模型 id 与卡片名称确定性对齐，杜绝 "Failed to fetch" |
+| **沙箱化嵌入** | 画布以单文件 HTML 在隔离 iframe（Blob URL）中运行，安全隔离、独立升级 |
 
 > 🎯 **设计要点：一套 API，处处可用**
-> 你在 Ai8 Work「设置 → 模型」中配置的 OpenAI 兼容供应商（API 地址 + Key + 模型），
-> 会通过内置桥接（postMessage）自动注入画布并持久化。**画布侧零配置**，改模型只需在设置里改一处。
->
-> 画布内的 AI 生成能力（文生图 / 视频 / 音频）默认使用注入通道的文本模型；
-> 如需专门的分支模型，可在画布「设置」面板中按需补充，已注入的通道会自动出现在模型列表中。
-
-> 🤖 **智能体会话也能操作画布（内置 MCP）**
-> Ai8 Work 内置了「无限画布 MCP」（基于 [canvas-agent](https://github.com/basketikun/infinite-canvas/tree/main/canvas-agent)，
-> 本地自包含 bundle，离线可用）。启用后，聊天中的 AI 智能体可以直接在你的画布上
-> **创建节点、生成图片/视频/音频、连线编排、读取画布状态**，画布成为智能体的可视化协作区。
->
-> **启用方式**：设置 → 工具 → MCP → 找到 **Infinite Canvas** → 打开开关（`node .../builtin-mcp-canvas-agent.js mcp`，开箱即用，无需联网）。
-> 使用前需在画布页右上角开启「Agent」连接（本地 Canvas Agent 服务）。
+> 你在 Ai8 Work「设置 → 模型」中配置的 OpenAI 兼容 / Gemini 供应商（API 地址 + Key + 模型），
+> 会通过内置桥接（postMessage `aionui:config`）自动注入画布，并按能力分类映射到 **Chat / Image / Video** 节点。
+> **画布侧零配置**，改模型只需在设置里改一处，画布即自动同步；供应商 `/v1/models` 会在后台拉取以校准模型 id。
 
 <p align="center">
   <img src="./resources/offica-ai BANNER-function.png" alt="Ai8 Work 功能总览" width="800">
@@ -327,7 +320,7 @@ Ai8 Work 自动检测并统一管理，在一个界面里与它们全部协作�
 ### 3. 开始使用
 
 - **对话工作区** — 打开任意助手开始 Cowork
-- **无限画布** — 点击左侧导航「无限画布」进入画布工作区，直接与 AI 共创图片、视频、脑图
+- **无限画布** — 点击左侧导航「无限画布」进入画布工作区，用 Chat / 图片 / 视频节点搭出你的 AI 工作流
 - **定时任务** — 设置 → 定时任务，让 AI 24/7 自动驾驶
 
 ---
@@ -340,18 +333,19 @@ Ai8 Work 自动检测并统一管理，在一个界面里与它们全部协作�
 ┌──────────────────────────── Ai8 Work (Electron) ────────────────────────────┐
 │ 桌面端 renderer (React + Arco Design)                                        │
 │   ├─ 会话 / 团队 / 定时任务 / 设置 工作区                                     │
-│   └─ /canvas 无限画布工作区（iframe 嵌入）                                    │
-│         ▲ postMessage 配置桥（aionui:canvas:*）                              │
+│   └─ 无限画布工作区（iframe 嵌入）                                             │
+│         ▲ postMessage 配置桥（aionui:config）                                │
+│         └─ tapnow.html — Ai8 Studio 单文件画布引擎（?raw → Blob URL）         │
 │  web-host 静态服务器（本地 25808 端口）                                      │
-│   └─ /canvas/* ← Infinite Canvas 子应用（VITE_BASE=/canvas/ 构建）            │
+│   └─ 承载远程 WebUI / web-cli 等静态资源                                      │
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
 - **桌面壳**：Electron + React + TypeScript + Arco Design（monorepo：desktop / web-cli / web-host）
 - **智能体引擎**：内置 aionrs 引擎 + 外部 CLI 智能体（ACP 协议）+ MCP 工具统一管理
-- **无限画布**：以静态子应用嵌入，升级隔离——上游更新只需重跑 `scripts/sync-canvas.js`
-- **模型打通**：设置 → 模型 的 OpenAI 兼容供应商 → postMessage 桥 → 画布 localStorage（零配置注入）
-- **数据存储**：会话/设置本地存储；画布数据 IndexedDB + WebDAV 同步
+- **无限画布**：自包含的 Ai8 Studio 单文件画布引擎（tapnow.html），以 Blob URL 在 sandbox iframe 中运行，主进程隔离、独立升级
+- **模型打通**：设置 → 模型 的 OpenAI 兼容 / Gemini 供应商 → postMessage（`aionui:config`）→ 画布内自动注入并按能力分类为 Chat / Image / Video（零配置）
+- **数据存储**：会话/设置本地存储；画布数据随应用以 localStorage 本地持久化
 
 ---
 
@@ -370,8 +364,8 @@ bun run dev
 bun run make        # electron-vite build
 bun run dist        # 完整打包（electron-builder）
 
-# 同步无限画布子应用（画布上游升级后执行）
-node scripts/sync-canvas.js --src <infinite-canvas/web 路径>
+# 画布引擎升级：替换 src/renderer/pages/canvas/tapnow.html（Ai8 Studio 单文件）后重新构建
+# （模型注入 / 分类映射逻辑见 pages/canvas/index.tsx）
 
 # 无头 E2E 验证（画布配置注入）
 node scripts/verify-canvas-e2e.js
@@ -386,7 +380,7 @@ node scripts/verify-canvas-e2e.js
 本项目基于 [Apache-2.0](LICENSE) 开源许可发布。
 
 - 上游基础：**[iOfficeAI/AionUi](https://github.com/iOfficeAI/AionUi)**（Apache-2.0）
-- 画布引擎：**[basketikun/infinite-canvas](https://github.com/basketikun/infinite-canvas)**（MIT）
+- 画布引擎：**[Tapnow Studio](https://github.com/chapterv/Tapnow-Studio-PP)**（节点式 AI 工作流画布，衍生为「Ai8 Studio」单文件引擎；其上游遵循 GPLv3，分发时请注意，本仓库整体仍以 Apache-2.0 发布）
 - Office 文档能力：**[iOfficeAI/OfficeCLI](https://github.com/iOfficeAI/OfficeCLI)**
 
 感谢所有开源项目与社区的支持。🙏
