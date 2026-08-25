@@ -23,9 +23,23 @@
 > **本项目特色：**
 > - 🎨 **无限画布工作区** — 全新 `/canvas` 工作台，节点式画布嵌入，AI 创作可视化
 > - 🔌 **模型零配置打通** — 画布自动复用你在「设置 → 模型」中配置的 OpenAI 兼容模型通道，无需二次配置
+> - 🛡️ **模型通道增强（v2.1.65）** — 自动拉取供应商权威 `/v1/models`，修复模型名错乱与聊天 "Failed to fetch"，模型 ID 确定性解析
+> - 🏷️ **百技助手** — 内置助手品牌升级，中文界面更贴合本地化场景
 > - 🤖 **完整继承 AionUi** — 内置智能体、多 Agent 协作、远程访问、24/7 定时任务等全部能力
 >
 > <sub>上游项目：<a href="https://github.com/iOfficeAI/AionUi">iOfficeAI/AionUi</a> · 画布引擎：<a href="https://github.com/basketikun/infinite-canvas">basketikun/infinite-canvas</a> · 开源协议：Apache-2.0</sub>
+>
+> 🌐 官方网站：**[https://ai8.app](https://ai8.app)** —— 产品介绍 / 下载 / 文档 / 三语支持
+
+---
+
+## 🔄 近期更新 / *What's New*
+
+> 最新版本：**v2.1.65**（2026-08-25）
+
+- **模型通道可靠性** — 针对聊天 "Failed to fetch" 与卡片模型名错乱的问题，改为直接拉取供应商权威 `/v1/models`，确定性生成模型 `_uid`，并对模型做统一分类；`configRef` 竞态修复，多通道切换不串配置。
+- **品牌升级** — 内置助手入口更名为「**百技助手**」；画布欢迎页由 "Tapnow Studio" 改为 "**Ai8 Studio**"。
+- **无限画布持续增强** — 画布作为独立工作区嵌入，AI 创作可视化，节点式编排更顺滑。
 
 ---
 
@@ -117,7 +131,7 @@
 - 无需单独安装任何 CLI 工具，**内置完整智能体引擎**（aionrs）
 - 粘贴任意 API Key 即可开始使用
 - 完整能力：文件读写、联网搜索、图片生成、MCP（模型上下文协议）工具
-- **21 个内置专业助手**开箱即用：Cowork、PPT 创作、Word 创作、Excel 创作、Morph PPT、Pitch Deck、Dashboard、学术论文、金融模型等
+- **21 个内置专业助手（「百技助手」）**开箱即用：Cowork、PPT 创作、Word 创作、Excel 创作、Morph PPT、Pitch Deck、Dashboard、学术论文、金融模型等
 
 <p align="center">
   <img src="./resources/homepage.png" alt="内置智能体与助手" width="800">
