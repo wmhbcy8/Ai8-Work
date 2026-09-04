@@ -14,6 +14,7 @@ import http, { type IncomingMessage, type Server, type ServerResponse } from 'no
 import { networkInterfaces } from 'node:os';
 import net, { type Socket } from 'node:net';
 import { stat as fsStat } from 'node:fs';
+import type { lstat as fsLstat } from 'node:fs';
 import { promisify } from 'node:util';
 import serveHandler from 'serve-handler';
 
@@ -207,7 +208,7 @@ export async function startStaticServer(opts: StaticServerOptions): Promise<Stat
           rewrites: [{ source: '**', destination: '/index.html' }],
         },
         {
-          lstat: promisify(fsStat),
+          lstat: promisify(fsStat) as unknown as typeof fsLstat,
         }
       );
     } catch (err) {
