@@ -66,9 +66,7 @@ const SiderAssistantEntry: React.FC<SiderAssistantEntryProps> = ({
             style={{ lineHeight: 0 }}
           />
         </span>
-        <span className='collapsed-hidden text-t-primary text-14px font-[500] leading-24px'>
-          百技助手
-        </span>
+        <span className='collapsed-hidden text-t-primary text-14px font-[500] leading-24px'>百技助手</span>
       </div>
     </Tooltip>
   );

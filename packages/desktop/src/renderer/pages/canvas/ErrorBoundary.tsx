@@ -20,10 +20,7 @@ const pushLog = (logs: string[], msg: string): string[] => {
   return next.length > 20 ? next.slice(next.length - 20) : next;
 };
 
-export class CanvasErrorBoundary extends React.Component<
-  React.PropsWithChildren<{ label?: string }>,
-  CaptureState
-> {
+export class CanvasErrorBoundary extends React.Component<React.PropsWithChildren<{ label?: string }>, CaptureState> {
   constructor(props: React.PropsWithChildren<{ label?: string }>) {
     super(props);
     this.state = { hasError: false, message: '', stack: '', logs: [] };
@@ -49,9 +46,7 @@ export class CanvasErrorBoundary extends React.Component<
     };
     const onRejection = (e: PromiseRejectionEvent) => {
       const r: unknown = e.reason;
-      this.appendLog(
-        `[unhandledrejection] ${r instanceof Error ? `${r.message}\n${r.stack}` : String(r)}`,
-      );
+      this.appendLog(`[unhandledrejection] ${r instanceof Error ? `${r.message}\n${r.stack}` : String(r)}`);
     };
     const onUnhandledError = (e: unknown) => {
       this.appendLog(`[console.error] ${String(e)}`);
@@ -94,12 +89,24 @@ export class CanvasErrorBoundary extends React.Component<
             <strong>错误信息：</strong>
             {message || '(无)'}
           </div>
-          <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all', borderTop: '1px solid #eee', marginTop: 12, paddingTop: 12, maxHeight: 300, overflow: 'auto' }}>
+          <pre
+            style={{
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-all',
+              borderTop: '1px solid #eee',
+              marginTop: 12,
+              paddingTop: 12,
+              maxHeight: 300,
+              overflow: 'auto',
+            }}
+          >
             {stack || '(无堆栈)'}
           </pre>
           <hr />
           <h4>运行日志 / 全局错误</h4>
-          <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all', maxHeight: 300, overflow: 'auto', color: '#555' }}>
+          <pre
+            style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all', maxHeight: 300, overflow: 'auto', color: '#555' }}
+          >
             {logs.length ? logs.join('\n') : '(暂无)'}
           </pre>
         </div>

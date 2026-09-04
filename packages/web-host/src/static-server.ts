@@ -208,7 +208,7 @@ export async function startStaticServer(opts: StaticServerOptions): Promise<Stat
         },
         {
           lstat: promisify(fsStat),
-        },
+        }
       );
     } catch (err) {
       if (!res.headersSent) {

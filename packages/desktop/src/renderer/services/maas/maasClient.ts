@@ -49,10 +49,7 @@ function joinUrl(baseUrl: string, path: string): string {
  * 文本生成——POST /v1/chat/completions（同步/流式）。
  * 流式时通过 onChunk 回调累积文本。
  */
-export async function maasChat(
-  params: MaasChatParams,
-  onChunk?: (delta: string) => void,
-): Promise<string> {
+export async function maasChat(params: MaasChatParams, onChunk?: (delta: string) => void): Promise<string> {
   const { base_url, api_key } = params.provider;
   const body: Record<string, unknown> = {
     model: params.model,
@@ -150,7 +147,9 @@ export async function maasImage(params: MaasImageParams): Promise<string[]> {
 
   const json = await resp.json().catch(() => ({}));
   const data = Array.isArray(json.data) ? json.data : [];
-  return data.map((d: { url?: string; b64_json?: string }) => d.url ?? (d.b64_json ? `data:image/png;base64,${d.b64_json}` : '')).filter(Boolean);
+  return data
+    .map((d: { url?: string; b64_json?: string }) => d.url ?? (d.b64_json ? `data:image/png;base64,${d.b64_json}` : ''))
+    .filter(Boolean);
 }
 
 /**
@@ -158,11 +157,7 @@ export async function maasImage(params: MaasImageParams): Promise<string[]> {
  * 返回 task id，需轮询 /v1/videos/:id 获取进度，完成后得到 video url。
  * 这里返回任务 id，由调用方决定轮询策略。
  */
-export async function maasVideo(
-  provider: MaasProviderRef,
-  model: string,
-  prompt: string,
-): Promise<MaasTaskResult> {
+export async function maasVideo(provider: MaasProviderRef, model: string, prompt: string): Promise<MaasTaskResult> {
   const { base_url, api_key } = provider;
   const resp = await fetch(joinUrl(base_url, '/videos'), {
     method: 'POST',
@@ -178,10 +173,7 @@ export async function maasVideo(
 }
 
 /** 视频任务轮询 */
-export async function maasVideoStatus(
-  provider: MaasProviderRef,
-  taskId: string,
-): Promise<MaasTaskResult> {
+export async function maasVideoStatus(provider: MaasProviderRef, taskId: string): Promise<MaasTaskResult> {
   const { base_url, api_key } = provider;
   const resp = await fetch(joinUrl(base_url, `/videos/${taskId}`), {
     headers: { Authorization: `Bearer ${api_key}` },
@@ -202,7 +194,7 @@ export async function maasAudioSpeech(
   provider: MaasProviderRef,
   model: string,
   text: string,
-  voice?: string,
+  voice?: string
 ): Promise<string> {
   const { base_url, api_key } = provider;
   const resp = await fetch(joinUrl(base_url, '/audio/speech'), {

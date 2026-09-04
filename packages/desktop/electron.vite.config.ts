@@ -298,7 +298,8 @@ export default defineConfig(({ mode }) => {
                 id.includes('use-sync-external-store') ||
                 id.includes('@dnd-kit') ||
                 id.includes('classcat')
-              ) return 'xyflow-core';
+              )
+                return 'xyflow-core';
               // Keep React and every vendor tightly coupled to it in ONE chunk.
               //
               // Splitting these into separate manual chunks (vendor-react,

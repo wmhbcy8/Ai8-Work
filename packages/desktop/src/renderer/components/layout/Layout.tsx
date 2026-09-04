@@ -397,12 +397,7 @@ const Layout: React.FC<{
                   })}
                   onClick={onClick}
                 >
-                  <img
-                    className='w-full h-full object-cover'
-                    src={appLogo}
-                    alt='Ai8 Work'
-                    draggable={false}
-                  />
+                  <img className='w-full h-full object-cover' src={appLogo} alt='Ai8 Work' draggable={false} />
                 </div>
                 {isSettingsRoute ? (
                   <Tooltip content={t('common.back', { defaultValue: 'Back to Chat' })} position='bottom'>

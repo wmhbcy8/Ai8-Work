@@ -27,10 +27,42 @@ interface KindMeta {
 }
 
 export const KIND_META: Record<NodeKind, KindMeta> = {
-  text: { label: '文字', emoji: '📝', accent: '#165dff', softBg: '#f5f8ff', border: '#c9d8ff', width: 232, category: 'source' },
-  aiText: { label: 'AI 文本', emoji: '🤖', accent: '#722ed1', softBg: '#f9f5ff', border: '#d3c0f0', width: 268, category: 'ai' },
-  image: { label: 'AI 绘图', emoji: '🎨', accent: '#00b42a', softBg: '#f6fdf6', border: '#b7eb8f', width: 268, category: 'ai' },
-  result: { label: '结果', emoji: '📋', accent: '#ff7d00', softBg: '#fffbe6', border: '#ffe58f', width: 300, category: 'output' },
+  text: {
+    label: '文字',
+    emoji: '📝',
+    accent: '#165dff',
+    softBg: '#f5f8ff',
+    border: '#c9d8ff',
+    width: 232,
+    category: 'source',
+  },
+  aiText: {
+    label: 'AI 文本',
+    emoji: '🤖',
+    accent: '#722ed1',
+    softBg: '#f9f5ff',
+    border: '#d3c0f0',
+    width: 268,
+    category: 'ai',
+  },
+  image: {
+    label: 'AI 绘图',
+    emoji: '🎨',
+    accent: '#00b42a',
+    softBg: '#f6fdf6',
+    border: '#b7eb8f',
+    width: 268,
+    category: 'ai',
+  },
+  result: {
+    label: '结果',
+    emoji: '📋',
+    accent: '#ff7d00',
+    softBg: '#fffbe6',
+    border: '#ffe58f',
+    width: 300,
+    category: 'output',
+  },
 };
 
 export const STATUS_META: Record<NodeStatus, { label: string; color: string; bg: string }> = {

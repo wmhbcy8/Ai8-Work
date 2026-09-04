@@ -10,5 +10,21 @@
   "endOfLine": "lf",
   "quoteProps": "as-needed",
   "jsxSingleQuote": true,
-  "bracketSameLine": false
+  "bracketSameLine": false,
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/out/**",
+    "**/.webpack/**",
+    "**/resources/**",
+    "**/public/**",
+    "**/mobile/**",
+    "**/scripts/**",
+    "**/docs/**",
+    "**/tapnow.html",
+    "**/*.min.js",
+    "**/*.min.css",
+    "**/*.lock"
+  ]
 }

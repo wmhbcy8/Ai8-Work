@@ -78,11 +78,26 @@ function pickApiType(p: IProvider): 'openai' | 'gemini' {
 function classifyModel(id: string): ModelType | 'Audio' {
   const s = id.toLowerCase();
   // 视频（先判，避免 "hunyuan-video" / "wan-video" 被图片规则误判）
-  if (/(cogvideo|cogvideox|kling|wan-|wanx|runway|gen-?3|sora|hunyuan-video|minimax-video|pika|hailuo|vidu|seedance|veo|video|film|animation|t2v|i2v)/.test(s)) return 'Video';
+  if (
+    /(cogvideo|cogvideox|kling|wan-|wanx|runway|gen-?3|sora|hunyuan-video|minimax-video|pika|hailuo|vidu|seedance|veo|video|film|animation|t2v|i2v)/.test(
+      s
+    )
+  )
+    return 'Video';
   // 音频 / 语音（Tapnow 无音频节点）
-  if (/(tts|speech|speak|audio|voice|cosy|melo|suno|fish|elevenlabs|asr|whisper|transcri|dash-?audio|minimax-?audio|seed-?tts)/.test(s)) return 'Audio';
+  if (
+    /(tts|speech|speak|audio|voice|cosy|melo|suno|fish|elevenlabs|asr|whisper|transcri|dash-?audio|minimax-?audio|seed-?tts)/.test(
+      s
+    )
+  )
+    return 'Audio';
   // 图片
-  if (/(flux|fluffy|dall-e|dalle|stable|sdxl|stability|imagen|kolors|midjourney|recraft|seedream|playground|gpt-image|nano-banana|image|picture|t2i|i2i|hunyuan-image|kandinsky|txt2img|draw)/.test(s)) return 'Image';
+  if (
+    /(flux|fluffy|dall-e|dalle|stable|sdxl|stability|imagen|kolors|midjourney|recraft|seedream|playground|gpt-image|nano-banana|image|picture|t2i|i2i|hunyuan-image|kandinsky|txt2img|draw)/.test(
+      s
+    )
+  )
+    return 'Image';
   return 'Chat';
 }
 
@@ -102,9 +117,7 @@ async function fetchAuthoritativeModels(provider: IProvider): Promise<string[]> 
     });
     if (!res.ok) return [];
     const j = (await res.json()) as { data?: Array<{ id: string }> };
-    return (j.data || [])
-      .map((m) => m.id)
-      .filter((id) => !/(embedding|rerank|reranker)/i.test(id)); // 剔除非可用作节点的模型
+    return (j.data || []).map((m) => m.id).filter((id) => !/(embedding|rerank|reranker)/i.test(id)); // 剔除非可用作节点的模型
   } catch {
     return [];
   }
@@ -173,10 +186,7 @@ export default function CanvasPage() {
   const { data: rawProviders } = useProvidersQuery();
   const { getAvailableModels } = useModelProviderList();
 
-  const providerList = useMemo<IProvider[]>(
-    () => (Array.isArray(rawProviders) ? rawProviders : []),
-    [rawProviders]
-  );
+  const providerList = useMemo<IProvider[]>(() => (Array.isArray(rawProviders) ? rawProviders : []), [rawProviders]);
 
   const [config, setConfig] = useState<TapnowInjectedConfig>({
     providers: [],
@@ -240,9 +250,9 @@ export default function CanvasPage() {
         ref={iframeRef}
         src={blobUrl}
         onLoad={handleLoad}
-        title="Infinite Canvas"
+        title='Infinite Canvas'
         style={{ width: '100%', height: '100%', border: '0', display: 'block' }}
-        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads"
+        sandbox='allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads'
       />
     </div>
   );
