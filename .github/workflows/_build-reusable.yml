@@ -283,33 +283,46 @@ jobs:
           Write-Host "Rebuilding native modules for Electron $electronVer ($arch)"
           Write-Host "=========================================="
 
-          # Strategy: Try prebuild-install first (faster, more reliable)
-          # Fallback to electron-rebuild only if prebuild-install fails
+          # better-sqlite3 publishes prebuilt binaries for Electron on GitHub
+          # Releases (e.g. better-sqlite3-v12.8.0-electron-v136-win32-arm64.tar.gz).
+          # prebuild-install MUST run from inside the module directory: it reads the
+          # `binary` config from <module>/package.json. Running it from the repo
+          # root silently exits 1 ("no matching prebuild") which then falls back to
+          # electron-rebuild — and on an x64 hosted runner electron-rebuild cannot
+          # cross-compile for win-arm64 (no ARM64 MSVC toolchain), failing the job.
           $success = $false
+          $sqliteDir = "node_modules/better-sqlite3"
+          $sqliteNode = "$sqliteDir/build/Release/better_sqlite3.node"
 
           # Step 1: Try prebuild-install (downloads prebuilt binaries)
           Write-Host ""
-          Write-Host "[Step 1] Trying prebuild-install..."
-          $prebuildResult = $null
+          Write-Host "[Step 1] Trying prebuild-install from $sqliteDir..."
+          Push-Location $sqliteDir
           try {
-          $prebuildResult = bun x --yes prebuild-install --runtime=electron --target=$electronVer --platform=win32 --arch=$arch --force 2>&1
-            if ($LASTEXITCODE -eq 0) {
+            $prebuildOutput = bun x --yes prebuild-install --runtime=electron --target=$electronVer --platform=win32 --arch=$arch --force 2>&1
+            $prebuildCode = $LASTEXITCODE
+            if ($prebuildCode -eq 0) {
               Write-Host "✅ prebuild-install succeeded"
               $success = $true
             } else {
-              Write-Host "⚠️ prebuild-install exited with code $LASTEXITCODE"
+              Write-Host "⚠️ prebuild-install exited with code $prebuildCode"
+              Write-Host ($prebuildOutput | Out-String)
             }
           } catch {
             Write-Host "⚠️ prebuild-install failed: $_"
+          } finally {
+            Pop-Location
           }
 
-          # Step 2: Verify or fallback to electron-rebuild
-          $sqliteNode = "node_modules/better-sqlite3/build/Release/better_sqlite3.node"
-          if (-not (Test-Path $sqliteNode)) {
+          # Step 2: Fallback to electron-rebuild (compile from source). Only used if
+          # prebuild-install above did not succeed. The Electron version is passed
+          # explicitly and npx runs from the repo root, so electron-rebuild rebuilds
+          # the project's own modules (bunx would run inside its cache dir instead).
+          if (-not $success) {
             Write-Host ""
-            Write-Host "[Step 2] prebuild-install didn't produce binary, trying electron-rebuild..."
+            Write-Host "[Step 2] prebuild-install didn't produce a binary, trying electron-rebuild..."
             try {
-              bunx electron-rebuild -f -w better-sqlite3
+              npx --yes @electron/rebuild -f -w better-sqlite3 --version $electronVer
               if ($LASTEXITCODE -eq 0) {
                 Write-Host "✅ electron-rebuild succeeded"
                 $success = $true
