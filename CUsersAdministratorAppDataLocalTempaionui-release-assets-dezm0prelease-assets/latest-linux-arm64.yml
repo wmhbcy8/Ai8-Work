@@ -1,0 +1,5 @@
+version: 1.0.0
+files:
+  - url: AionUi-1.0.0-arm64.deb
+    sha512: fake-sha512-linux-arm64
+    size: 300000

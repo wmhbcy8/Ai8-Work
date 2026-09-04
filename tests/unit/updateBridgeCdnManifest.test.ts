@@ -127,7 +127,7 @@ describe('parseCdnManifest', () => {
 });
 
 describe('mapCdnManifestToRelease', () => {
-  it('maps files to CDN-primary assets with GitHub fallback URLs', () => {
+  it('maps files to GitHub release-asset URLs (Ai8 Work has no CDN)', () => {
     const manifest = parseCdnManifest(SAMPLE_YML);
     if (!manifest) throw new Error('manifest should parse');
     const release = mapCdnManifestToRelease(manifest, 'iOfficeAI/AionUi');
@@ -137,7 +137,7 @@ describe('mapCdnManifestToRelease', () => {
     expect(release?.htmlUrl).toBe('');
     expect(release?.publishedAt).toBe('2026-07-31T14:45:19.381Z');
     const dmg = release?.assets.find((a) => a.name.endsWith('.dmg'));
-    expect(dmg?.url).toBe('https://static.aionui.com/releases/2.1.45/AionUi-2.1.45-mac-arm64.dmg');
+    expect(dmg?.url).toBe('https://github.com/iOfficeAI/AionUi/releases/download/v2.1.45/AionUi-2.1.45-mac-arm64.dmg');
     expect(dmg?.fallbackUrl).toBe(
       'https://github.com/iOfficeAI/AionUi/releases/download/v2.1.45/AionUi-2.1.45-mac-arm64.dmg'
     );

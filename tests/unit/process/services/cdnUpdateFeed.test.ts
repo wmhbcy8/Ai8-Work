@@ -2,57 +2,21 @@
  * @license
  * Copyright 2025 AionUi (aionui.com)
  * SPDX-License-Identifier: Apache-2.0
+ *
+ * Ai8 Work fork: the update feed is served from this project's GitHub Releases
+ * (electron-builder channel manifests uploaded alongside the installers), so the
+ * built-in GitHub provider is used instead of the upstream AionUi release CDN.
+ * The upstream custom-CDN provider tests were removed together with
+ * cdnGenericProvider.ts, which this fork no longer uses.
  */
 
-import { describe, expect, it, vi } from 'vitest';
-import type { UpdateInfo } from 'electron-updater';
-import type { AppUpdater } from 'electron-updater/out/AppUpdater';
-import type { ProviderRuntimeOptions } from 'electron-updater/out/providers/Provider';
-import { CdnGenericProvider } from '@/process/services/cdnGenericProvider';
-import { buildCdnFeedOptions, CDN_UPDATE_BASE_URL } from '@/process/services/updateFeed';
+import { describe, expect, it } from 'vitest';
+import { GITHUB_REPO, buildCdnFeedOptions } from '@/process/services/updateFeed';
 
-const makeRuntimeOptions = (): ProviderRuntimeOptions => ({
-  isUseMultipleRangeRequest: true,
-  platform: 'darwin',
-  executor: {
-    request: vi.fn(),
-  } as unknown as ProviderRuntimeOptions['executor'],
-});
+describe('GitHub update feed options', () => {
+  it('builds a github electron-updater provider pointed at the configured repo', () => {
+    const [owner, repo] = GITHUB_REPO.split('/');
 
-describe('CDN update feed options', () => {
-  it('builds a custom electron-updater provider pointed at the release CDN', () => {
-    const options = buildCdnFeedOptions();
-
-    expect(options.provider).toBe('custom');
-    expect(options.url).toBe(CDN_UPDATE_BASE_URL);
-    expect(options.updateProvider).toBe(CdnGenericProvider);
-  });
-});
-
-describe('CdnGenericProvider', () => {
-  it('resolves relative update files under the version directory', () => {
-    const provider = new CdnGenericProvider(
-      {
-        provider: 'custom',
-        url: 'https://static.aionui.com/releases',
-      },
-      {} as AppUpdater,
-      makeRuntimeOptions()
-    );
-
-    const files = provider.resolveFiles({
-      version: '2.1.14',
-      files: [
-        {
-          url: 'AionUi-2.1.14-mac-arm64.dmg',
-          sha512: 'sha512-value',
-        },
-      ],
-      path: 'AionUi-2.1.14-mac-arm64.dmg',
-      sha512: 'sha512-value',
-      releaseDate: '2026-06-08T00:00:00.000Z',
-    } satisfies UpdateInfo);
-
-    expect(files[0]?.url.href).toBe('https://static.aionui.com/releases/2.1.14/AionUi-2.1.14-mac-arm64.dmg');
+    expect(buildCdnFeedOptions()).toEqual({ provider: 'github', owner, repo });
   });
 });

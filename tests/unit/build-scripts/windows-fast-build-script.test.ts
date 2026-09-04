@@ -7,13 +7,13 @@ const packageJson = JSON.parse(readFileSync('package.json', 'utf8')) as {
 const buildScript = readFileSync('scripts/build-with-builder.js', 'utf8');
 
 describe('Windows fast build scripts', () => {
-  it('provides an x64 fast installer build that lowers compression and skips executable editing', () => {
+  it('provides an x64 fast installer build that lowers compression and skips executable signing', () => {
     const script = packageJson.scripts['build-win:x64:fast'];
 
     expect(script).toBeTypeOf('string');
     expect(script).toContain('ELECTRON_BUILDER_COMPRESSION_LEVEL=1');
     expect(script).toContain('node scripts/build-with-builder.js x64 --win --x64');
-    expect(script).toContain('--config.win.signAndEditExecutable=false');
+    expect(script).toContain('--config.win.signExecutable=false');
   });
 
   it('supports a temporary build-time auto-update version override', () => {

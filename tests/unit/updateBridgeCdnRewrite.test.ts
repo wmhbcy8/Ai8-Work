@@ -134,9 +134,10 @@ const makeDeferred = () => {
   return { promise, resolve, reject };
 };
 
-// The check flow is CDN-first: the channel yml is the authoritative source of
-// version + assets, GitHub only enriches release notes. Serve both hosts.
-const CDN_CHANNEL_YML = `version: 1.9.22
+// The check flow is GitHub-first: the channel yml attached to the latest GitHub
+// release is the authoritative source of version + assets, GitHub API only
+// enriches release notes. Serve both hosts.
+const GITHUB_CHANNEL_YML = `version: 1.9.22
 files:
   - url: AionUi-1.9.22-mac-arm64.dmg
     size: 123
@@ -151,8 +152,8 @@ releaseDate: '2026-04-29T00:00:00Z'
 const stubCdnAndGitHubFetch = () => {
   const fetchMock = vi.fn(async (input: RequestInfo | URL) => {
     const url = String(input);
-    if (url.startsWith('https://static.aionui.com/releases/latest')) {
-      return new Response(CDN_CHANNEL_YML, { status: 200 });
+    if (url.startsWith('https://github.com/iOfficeAI/AionUi/releases/latest/download/')) {
+      return new Response(GITHUB_CHANNEL_YML, { status: 200 });
     }
     if (url.startsWith('https://api.github.com/')) {
       return new Response(JSON.stringify(makeGitHubReleaseResponse()), { status: 200 });
@@ -163,12 +164,12 @@ const stubCdnAndGitHubFetch = () => {
   return fetchMock;
 };
 
-describe('updateBridge CDN URL rewriting', () => {
+describe('updateBridge GitHub URL rewriting', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it('rewrites asset.url to the CDN path and keeps GitHub URL in fallbackUrl', async () => {
+  it('maps channel-manifest assets to GitHub release-asset URLs', async () => {
     const fetchMock = stubCdnAndGitHubFetch();
 
     try {
@@ -182,28 +183,31 @@ describe('updateBridge CDN URL rewriting', () => {
 
       const macAsset = assets.find((a: { name: string }) => a.name === 'AionUi-1.9.22-mac-arm64.dmg');
       expect(macAsset).toBeDefined();
-      expect(macAsset?.url).toBe('https://static.aionui.com/releases/1.9.22/AionUi-1.9.22-mac-arm64.dmg');
+      expect(macAsset?.url).toBe(
+        'https://github.com/iOfficeAI/AionUi/releases/download/v1.9.22/AionUi-1.9.22-mac-arm64.dmg'
+      );
       expect(macAsset?.fallbackUrl).toBe(
         'https://github.com/iOfficeAI/AionUi/releases/download/v1.9.22/AionUi-1.9.22-mac-arm64.dmg'
       );
 
       const linuxAsset = assets.find((a: { name: string }) => a.name === 'AionUi-1.9.22-linux-amd64.deb');
-      expect(linuxAsset?.url).toBe('https://static.aionui.com/releases/1.9.22/AionUi-1.9.22-linux-amd64.deb');
+      expect(linuxAsset?.url).toBe(
+        'https://github.com/iOfficeAI/AionUi/releases/download/v1.9.22/AionUi-1.9.22-linux-amd64.deb'
+      );
       expect(fetchMock).toHaveBeenCalled();
     } finally {
       vi.unstubAllGlobals();
     }
   });
 
-  it('uses the normalized version (no v prefix) in the CDN path', async () => {
+  it('builds GitHub URLs with the v-prefixed release tag in the path', async () => {
     stubCdnAndGitHubFetch();
 
     try {
       const handler = await getCheckHandler();
       const result = await handler({ repo: 'iOfficeAI/AionUi' });
       const asset = result.data?.latest?.assets?.[0];
-      expect(asset?.url).toMatch(/^https:\/\/static\.aionui\.com\/releases\/1\.9\.22\//);
-      expect(asset?.url).not.toMatch(/\/v1\.9\.22\//);
+      expect(asset?.url).toMatch(/^https:\/\/github\.com\/iOfficeAI\/AionUi\/releases\/download\/v1\.9\.22\//);
     } finally {
       vi.unstubAllGlobals();
     }

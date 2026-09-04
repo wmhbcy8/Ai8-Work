@@ -128,7 +128,7 @@ type FetchScenario = {
 const stubFetch = (scenario: FetchScenario) => {
   const fetchMock = vi.fn(async (input: RequestInfo | URL) => {
     const url = String(input);
-    if (url.startsWith('https://static.aionui.com/releases/latest')) {
+    if (url.startsWith('https://github.com/wmhbcy8/Ai8-Work/releases/latest/download/')) {
       if (!scenario.cdn) throw new Error('unexpected CDN request');
       return scenario.cdn();
     }
@@ -145,7 +145,7 @@ const stubFetch = (scenario: FetchScenario) => {
 const ymlResponse = (body: string) => new Response(body, { status: 200 });
 const jsonResponse = (body: unknown) => new Response(JSON.stringify(body), { status: 200 });
 
-describe('update.check CDN-first', () => {
+describe('update.check GitHub channel-manifest', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -154,7 +154,7 @@ describe('update.check CDN-first', () => {
     vi.unstubAllGlobals();
   });
 
-  it('reports an update from the CDN manifest and attaches GitHub notes', async () => {
+  it('reports an update from the GitHub channel manifest and attaches GitHub notes', async () => {
     stubFetch({ cdn: () => ymlResponse(CDN_YML), github: () => jsonResponse(GITHUB_RELEASES) });
     const handler = await getCheckHandler();
     const res = await handler({});
@@ -164,7 +164,7 @@ describe('update.check CDN-first', () => {
     expect(res.data?.latest?.body).toBe('changelog body');
     expect(res.data?.latest?.htmlUrl).toBe('https://github.com/iOfficeAI/AionUi/releases/tag/v2.1.45');
     expect(res.data?.latest?.recommendedAsset?.url).toBe(
-      'https://static.aionui.com/releases/2.1.45/AionUi-2.1.45-mac-arm64.dmg'
+      'https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.45/AionUi-2.1.45-mac-arm64.dmg'
     );
   });
 
@@ -179,7 +179,7 @@ describe('update.check CDN-first', () => {
     expect(res.data?.latest?.assets.length).toBeGreaterThan(0);
   });
 
-  it('ignores GitHub releases that do not match the CDN version', async () => {
+  it('ignores GitHub releases that do not match the channel-manifest version', async () => {
     stubFetch({
       cdn: () => ymlResponse(CDN_YML),
       github: () => jsonResponse([{ ...GITHUB_RELEASES[0], tag_name: 'v9.9.9' }]),
@@ -190,7 +190,7 @@ describe('update.check CDN-first', () => {
     expect(res.data?.latest?.body).toBeUndefined();
   });
 
-  it('reports up-to-date when CDN version equals current version', async () => {
+  it('reports up-to-date when channel-manifest version equals current version', async () => {
     stubFetch({
       cdn: () => ymlResponse(CDN_YML.replace(/2\.1\.45/g, '2.1.40')),
       github: () => jsonResponse([]),
@@ -201,14 +201,14 @@ describe('update.check CDN-first', () => {
     expect(res.data?.updateAvailable).toBe(false);
   });
 
-  it('fails the check when the CDN manifest request fails', async () => {
+  it('fails the check when the channel-manifest request fails', async () => {
     stubFetch({ cdn: () => new Response('nope', { status: 502 }), github: () => jsonResponse(GITHUB_RELEASES) });
     const handler = await getCheckHandler();
     const res = await handler({});
     expect(res.success).toBe(false);
   });
 
-  it('fails the check when the CDN manifest is malformed', async () => {
+  it('fails the check when the channel manifest is malformed', async () => {
     stubFetch({ cdn: () => ymlResponse('not: [valid'), github: () => jsonResponse(GITHUB_RELEASES) });
     const handler = await getCheckHandler();
     const res = await handler({});
