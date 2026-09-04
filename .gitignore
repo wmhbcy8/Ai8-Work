@@ -238,3 +238,16 @@ graphify-out/
 .analysis/
 temp/
 .playwright-mcp/
+
+# Guard: a mocked virtual FS once leaked sanitized Windows temp paths into the
+# repo root as literal top-level directories starting with "C"+PUA-char
+# (e.g. `C<U+F03A>Users...aionui-release-assets-*`). Those were committed by
+# `git add -A` (commit 3a6204f) and removed in the cleanup commit below.
+# No legit top-level directory starts with "C", so ignore them all.
+/C*/
+
+# Debug scratch files accidentally committed earlier (now cleaned up)
+/scripts/_vt.txt
+/scripts/_grep-*
+/scripts/_scan-*
+/scripts/_ocr*
