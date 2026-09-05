@@ -4,14 +4,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { act, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 // AgentLogoIcon lives in AgentBadge but is a named export consumed by
 // AgentModeSelector, MobileConversationBrand, and ChatLayout.
 import { AgentLogoIcon } from '@/renderer/components/agent/AgentBadge';
-import ThemedLogo from '@/renderer/components/agent/ThemedLogo';
 
 const { useAgentLogosMock } = vi.hoisted(() => ({
   useAgentLogosMock: vi.fn(),
@@ -81,5 +80,24 @@ describe('AgentLogoIcon', () => {
     render(<AgentLogoIcon agentLogoIsFallback />);
 
     expect(screen.getByTestId('robot-fallback')).toBeInTheDocument();
+  });
+
+  it('degrades to the Robot fallback when the backend logo image fails to load', async () => {
+    useAgentLogosMock.mockReturnValue({});
+
+    const { container } = render(<AgentLogoIcon backend='openai' />);
+
+    // Wait for ThemedLogo's detection fetch to settle → plain <img> is shown.
+    await act(async () => {
+      await Promise.resolve();
+    });
+    const img = container.querySelector('img');
+    expect(img).not.toBeNull();
+
+    fireEvent.error(img!);
+
+    // No broken-image glyph: the 16px titlebar slot shows the Robot placeholder.
+    expect(screen.getByTestId('robot-fallback')).toBeInTheDocument();
+    expect(container.querySelector('img')).toBeNull();
   });
 });

@@ -20,7 +20,7 @@
  */
 
 import { LinkCloud } from '@icon-park/react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 /**
  * Per-URL detection cache. A boolean is a settled result; a promise is an
@@ -100,14 +100,28 @@ export type ThemedLogoProps = {
   className?: string;
   style?: React.CSSProperties;
   title?: string;
-  /** Rendered when `src` is empty. */
+  /** Rendered when `src` is empty or fails to load. */
   fallback?: React.ReactNode;
 };
 
 const ThemedLogo: React.FC<ThemedLogoProps> = ({ src, alt, className, style, title, fallback = null }) => {
   const tintable = useTintableLogo(src);
+  // Remote assets can fail to load (404, CDN outage, offline). Without error
+  // handling the browser paints its broken-image glyph in the logo slot, so on
+  // error we render the `fallback` node instead (same as an empty `src`).
+  const [loadFailed, setLoadFailed] = useState(false);
+  const lastLoadedSrc = useRef(src);
 
-  if (!src) return <>{fallback}</>;
+  // A new source starts a fresh load attempt — only clear the error state once
+  // `src` actually changes (not on every parent re-render).
+  useEffect(() => {
+    if (lastLoadedSrc.current !== src) {
+      lastLoadedSrc.current = src;
+      setLoadFailed(false);
+    }
+  }, [src]);
+
+  if (!src || loadFailed) return <>{fallback}</>;
 
   // Detection still in flight — render nothing visible (avoids the black
   // flash of a tintable SVG rendered through <img> before detection settles).
@@ -148,7 +162,9 @@ const ThemedLogo: React.FC<ThemedLogoProps> = ({ src, alt, className, style, tit
     );
   }
 
-  return <img src={src} alt={alt} title={title} className={className} style={style} />;
+  return (
+    <img src={src} alt={alt} title={title} className={className} style={style} onError={() => setLoadFailed(true)} />
+  );
 };
 
 /**

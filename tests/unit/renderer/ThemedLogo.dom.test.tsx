@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { act, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import ThemedLogo, {
@@ -131,6 +131,65 @@ describe('ThemedLogo', () => {
   it('renders the fallback node when src is empty', () => {
     render(<ThemedLogo src={null} alt='none' fallback={<span data-testid='logo-fallback' />} />);
     expect(screen.getByTestId('logo-fallback')).toBeInTheDocument();
+  });
+
+  it('renders the fallback node when the image fails to load', () => {
+    const { container } = render(
+      <ThemedLogo
+        src='http://127.0.0.1:1/api/assets/logos/minimax.png'
+        alt='Dead logo'
+        fallback={<span data-testid='logo-fallback' />}
+      />
+    );
+    const img = container.querySelector('img');
+    expect(img).not.toBeNull();
+
+    fireEvent.error(img!);
+
+    expect(screen.getByTestId('logo-fallback')).toBeInTheDocument();
+    expect(container.querySelector('img')).toBeNull();
+  });
+
+  it('renders nothing (never a broken-image glyph) when a failing logo has no fallback', () => {
+    const { container } = render(<ThemedLogo src='http://127.0.0.1:1/api/assets/logos/minimax.png' alt='Dead logo' />);
+    const img = container.querySelector('img');
+    expect(img).not.toBeNull();
+
+    fireEvent.error(img!);
+
+    expect(container.querySelector('img')).toBeNull();
+    expect(container.querySelector('img, span[role="img"]')).toBeNull();
+  });
+
+  it('clears the load failure and renders again once src changes', () => {
+    const fallback = <span data-testid='logo-fallback' />;
+    const { container, rerender } = render(
+      <ThemedLogo src='http://127.0.0.1:1/api/assets/logos/a.png' alt='Logo A' fallback={fallback} />
+    );
+    fireEvent.error(container.querySelector('img')!);
+    expect(container.querySelector('img')).toBeNull();
+
+    rerender(<ThemedLogo src='http://127.0.0.1:1/api/assets/logos/b.png' alt='Logo B' fallback={fallback} />);
+
+    const retried = container.querySelector('img');
+    expect(retried).not.toBeNull();
+    expect(retried?.getAttribute('src')).toContain('b.png');
+  });
+
+  it('falls back when an svg that failed detection also fails to render', async () => {
+    // Non-ok response → cached as not tintable → rendered as <img>.
+    stubFetch(() => Promise.resolve(svgResponse('<svg></svg>', false)));
+    const { container } = render(
+      <ThemedLogo src={uniqueSvgUrl()} alt='Gone svg' fallback={<span data-testid='logo-fallback' />} />
+    );
+    await flushDetection();
+
+    const img = container.querySelector('img');
+    expect(img).not.toBeNull();
+    fireEvent.error(img!);
+
+    expect(screen.getByTestId('logo-fallback')).toBeInTheDocument();
+    expect(container.querySelector('img')).toBeNull();
   });
 
   it('stays hidden during detection to avoid first-paint black flash', () => {

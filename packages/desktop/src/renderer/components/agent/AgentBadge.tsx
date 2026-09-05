@@ -31,9 +31,10 @@ export const AgentLogoIcon: React.FC<
   Pick<AgentBadgeProps, 'backend' | 'agentLogo' | 'agentLogoIsEmoji' | 'agentLogoIsFallback' | 'agent_name'>
 > = ({ backend, agentLogo, agentLogoIsEmoji, agentLogoIsFallback, agent_name }) => {
   const logos = useAgentLogos();
+  const fallbackIcon = <Robot theme='outline' size={16} fill={iconColors.primary} />;
   const logoContent = (() => {
     if (agentLogoIsFallback) {
-      return <Robot theme='outline' size={16} fill={iconColors.primary} />;
+      return fallbackIcon;
     }
     if (agentLogo) {
       if (agentLogoIsEmoji) {
@@ -44,14 +45,22 @@ export const AgentLogoIcon: React.FC<
           src={agentLogo}
           alt={`${agent_name || 'agent'} logo`}
           className='block w-16px h-16px object-contain'
+          fallback={fallbackIcon}
         />
       );
     }
     const logo = resolveAgentLogo(logos, { backend });
     if (logo) {
-      return <ThemedLogo src={logo} alt={`${backend} logo`} className='block w-16px h-16px object-contain' />;
+      return (
+        <ThemedLogo
+          src={logo}
+          alt={`${backend} logo`}
+          className='block w-16px h-16px object-contain'
+          fallback={fallbackIcon}
+        />
+      );
     }
-    return <Robot theme='outline' size={16} fill={iconColors.primary} />;
+    return fallbackIcon;
   })();
 
   return (
