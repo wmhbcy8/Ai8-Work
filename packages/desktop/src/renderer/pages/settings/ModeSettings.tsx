@@ -6,11 +6,15 @@
 
 import React from 'react';
 import ModelModalContent from '@/renderer/components/settings/SettingsModal/contents/ModelModalContent';
+import KnowledgeModelSettingCard from './components/KnowledgeModelSettingCard';
 import SettingsPageWrapper from './components/SettingsPageWrapper';
 
 const ModeSettings: React.FC = () => {
   return (
     <SettingsPageWrapper contentClassName='max-w-1100px'>
+      <div className='mb-16px'>
+        <KnowledgeModelSettingCard />
+      </div>
       <ModelModalContent />
     </SettingsPageWrapper>
   );

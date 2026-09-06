@@ -29,7 +29,7 @@ import {
   KB_NOTES_DIR,
 } from './kbStore';
 import { extractFile, distillConversation, distillImport, isSupportedImportFile } from './kbIngest';
-import { isAiConfigured } from './kbLlm';
+import { isAiConfigured, requireKbLlmTarget } from './kbLlm';
 
 interface KbSettingsFile {
   root?: string;
@@ -87,14 +87,13 @@ export class KnowledgeBaseService {
 
   async getAiSettings(): Promise<TKbAiSettings> {
     await this.loadSettings();
-    return this.settings.ai ?? { baseUrl: '', apiKey: '', model: '' };
+    return this.settings.ai ?? {};
   }
 
   async saveAiSettings(ai: TKbAiSettings): Promise<void> {
     await this.loadSettings();
     this.settings.ai = {
-      baseUrl: (ai.baseUrl ?? '').trim(),
-      apiKey: ai.apiKey ?? '',
+      providerId: (ai.providerId ?? '').trim(),
       model: (ai.model ?? '').trim(),
     };
     await this.persistSettings();
@@ -168,9 +167,6 @@ export class KnowledgeBaseService {
   async saveChat(input: TKbSaveChatInput): Promise<TKbSaveChatResult> {
     const root = await this.requireRoot();
     const ai = await this.getAiSettings();
-    if (!isAiConfigured(ai)) {
-      throw new Error('请先在知识笔记的「AI 设置」中配置模型服务，再执行「存入知识笔记」');
-    }
     const transcript = (input.transcript ?? '').slice(0, MAX_TRANSCRIPT_CHARS);
     if (!transcript.trim()) {
       throw new Error('当前会话没有可保存的消息内容');
@@ -186,7 +182,7 @@ export class KnowledgeBaseService {
       tags: [...(input.tags ?? []), ...result.tags],
       source: input.conversationId || undefined,
       keepDate: true,
-      model: ai.model,
+      model: result.model || ai.model,
     });
     return { relPath, title: result.title, updated: Boolean(existingRelPath) };
   }
@@ -194,8 +190,10 @@ export class KnowledgeBaseService {
   async importFiles(filePaths: string[]): Promise<TKbImportFileResult[]> {
     const root = await this.requireRoot();
     const ai = await this.getAiSettings();
-    if (!isAiConfigured(ai)) {
-      throw new Error('请先在知识笔记的「AI 设置」中配置模型服务，再导入文件');
+    // Check once up-front so a missing/disabled model service fails fast with a
+    // single clear message instead of one error per file.
+    if (filePaths.length > 0) {
+      await requireKbLlmTarget(ai);
     }
     const results: TKbImportFileResult[] = [];
     for (const filePath of filePaths) {
@@ -215,7 +213,7 @@ export class KnowledgeBaseService {
           type: 'import',
           tags: distilled.tags,
           keepDate: false,
-          model: ai.model,
+          model: distilled.model || ai.model,
         });
         results.push({ filePath, relPath, title: distilled.title || baseName });
       } catch (err) {

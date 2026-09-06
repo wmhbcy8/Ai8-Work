@@ -15,10 +15,10 @@ import type { TKbNoteMeta } from '@/common/knowledge/types';
 
 async function invoke<T>(promise: Promise<{ ok: boolean; data?: T; error?: string }>): Promise<T> {
   const result = await promise;
-  if (!result.ok || result.data === undefined) {
+  if (!result.ok) {
     throw new Error(result.error ?? '未知错误');
   }
-  return result.data;
+  return result.data as T;
 }
 
 function errorMessage(err: unknown): string {

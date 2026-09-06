@@ -34,17 +34,25 @@ export interface TKbNoteMeta {
 export interface TKbOverview {
   /** Absolute path of the vault root, or null when no directory was chosen yet. */
   root: string | null;
-  /** Whether AI settings (OpenAI-compatible endpoint) are configured. */
+  /** Whether the AI settings currently bind a model (Settings 中已配置的模型). */
   aiConfigured: boolean;
   /** Total number of notes in the vault. */
   count: number;
 }
 
+/**
+ * 知识笔记的 AI 模型绑定（不保存任何密钥/地址）。
+ *
+ * 复用「设置 → 模型」中已添加的模型服务：
+ * - providerId/model 都为空 = 跟随默认（自动使用软件已配置的第一个可用模型）。
+ * - 只填 providerId = 使用该服务下第一个可用模型。
+ * - 两者都填 = 固定使用该模型。
+ */
 export interface TKbAiSettings {
-  /** OpenAI-compatible base URL, e.g. https://api.openai.com/v1 or http://127.0.0.1:11434/v1 */
-  baseUrl: string;
-  apiKey: string;
-  model: string;
+  /** 绑定的 Provider id（设置页已添加的模型服务）。留空 = 跟随默认。 */
+  providerId?: string;
+  /** 绑定的模型名。留空 = 该 Provider 下第一个可用模型。 */
+  model?: string;
 }
 
 export interface TKbSearchHit {

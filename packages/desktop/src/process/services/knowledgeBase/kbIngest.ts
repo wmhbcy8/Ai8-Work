@@ -10,7 +10,7 @@ import pdfParse from 'pdf-parse';
 import { extractRawText as mammothExtractRawText } from 'mammoth';
 import * as XLSX from 'xlsx-republish';
 import type { TKbAiSettings } from '@/common/knowledge/types';
-import { chatCompletion } from './kbLlm';
+import { chatCompletion, requireKbLlmTarget } from './kbLlm';
 
 /** Ingest helpers: turn office documents / PDF / images into distilled Markdown notes. */
 
@@ -20,6 +20,18 @@ export interface DistillResult {
   title: string;
   tags: string[];
   markdown: string;
+  /** Model that produced the note (from the resolved provider binding). */
+  model?: string;
+}
+
+/**
+ * Resolve the AI model for this distillation once and pin it, so every
+ * stage of the same operation uses the exact same model. Throws with a
+ * guidance message when no usable provider exists.
+ */
+async function resolveEffectiveAi(ai: TKbAiSettings): Promise<TKbAiSettings> {
+  const target = await requireKbLlmTarget(ai);
+  return { providerId: target.provider.id, model: target.model };
 }
 
 const IMAGE_EXTS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.webp', '.bmp']);
@@ -198,7 +210,8 @@ export async function distillImport(
 
   if (source.kind === 'image') {
     const system = `${IMPORT_SYSTEM_PROMPT}\n用户提供的是图片「${source.promptName}」，请识别图中的文字/表格/图表后整理成笔记。图片若为流程图/架构图请用文字结构描述。`;
-    const output = await chatCompletion(ai, {
+    const effectiveAi = await resolveEffectiveAi(ai);
+    const output = await chatCompletion(effectiveAi, {
       system,
       user: '请按输出格式要求整理这张图片的内容。',
       imageDataUrl: source.dataUrl,
@@ -206,13 +219,14 @@ export async function distillImport(
     });
     const head = parseJsonHead(output);
     const markdown = head?.markdown || output.trim();
-    return { title: baseName, tags: cleanTags(head?.tags), markdown };
+    return { title: baseName, tags: cleanTags(head?.tags), markdown, model: effectiveAi.model };
   }
 
   const text = truncate(source.text);
 
   // Stage 1 — analyze (cheap): title candidates + tags + outline
-  const analyze = await chatCompletion(ai, {
+  const effectiveAi = await resolveEffectiveAi(ai);
+  const analyze = await chatCompletion(effectiveAi, {
     system:
       '你是知识库整理助手。请阅读下面材料，只输出一行 JSON（不要输出其他任何文字）：{"title": "建议的笔记标题(≤30字)", "tags": ["标签1","标签2"], "outline": ["要点1标题", "要点2标题"]}',
     user: text,
@@ -236,7 +250,7 @@ export async function distillImport(
   // Stage 2 — write the final note guided by the outline
   const outlineHint = outline.length > 0 ? `\n建议大纲：\n${outline.map((o, i) => `${i + 1}. ${o}`).join('\n')}` : '';
   const system = `${IMPORT_SYSTEM_PROMPT}\n材料来源文件名：${sourceName}${outlineHint}`;
-  const output = await chatCompletion(ai, {
+  const output = await chatCompletion(effectiveAi, {
     system,
     user: `标题候选：${title}。请依据这份材料写出完整笔记。\n\n${text}`,
     maxTokens: 4096,
@@ -244,7 +258,7 @@ export async function distillImport(
   const head = parseJsonHead(output);
   const body = head?.markdown || output.trim();
   const finalTags = head?.tags ? cleanTags(head.tags) : tags;
-  return { title, tags: finalTags, markdown: body };
+  return { title, tags: finalTags, markdown: body, model: effectiveAi.model };
 }
 
 const CHAT_SYSTEM_PROMPT = `你是「知识笔记」的知识库整理助手。用户提供一段 AI 对话记录。
@@ -262,7 +276,8 @@ export async function distillConversation(
   transcript: string
 ): Promise<DistillResult> {
   const system = CHAT_SYSTEM_PROMPT;
-  const output = await chatCompletion(ai, {
+  const effectiveAi = await resolveEffectiveAi(ai);
+  const output = await chatCompletion(effectiveAi, {
     system,
     user: `对话主题：${conversationTitle}\n\n对话记录：\n${truncate(transcript)}`,
     maxTokens: 4096,
@@ -276,5 +291,6 @@ export async function distillConversation(
     title: heading ? heading[1].trim().slice(0, 60) : fallbackTitle,
     tags: cleanTags(head?.tags),
     markdown: body,
+    model: effectiveAi.model,
   };
 }

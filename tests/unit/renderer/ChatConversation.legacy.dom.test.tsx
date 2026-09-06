@@ -1,4 +1,5 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -91,7 +92,11 @@ describe('ChatConversation legacy runtime rendering', () => {
   it.each(['gemini', 'codex', 'openclaw-gateway', 'nanobot', 'remote'] as const)(
     'renders %s history without the old runtime chat',
     (type) => {
-      render(<ChatConversation conversation={legacyConversation(type)} />);
+      render(
+        <MemoryRouter>
+          <ChatConversation conversation={legacyConversation(type)} />
+        </MemoryRouter>
+      );
 
       expect(screen.getByText('message history')).toBeInTheDocument();
       expect(screen.queryByTestId('legacy-openclaw-chat')).not.toBeInTheDocument();
@@ -113,23 +118,25 @@ describe('ChatConversation legacy runtime rendering', () => {
     });
 
     render(
-      <ChatConversation
-        conversation={
-          {
-            id: 'conv-acp',
-            user_id: 'user-1',
-            name: 'ACP history',
-            type: 'acp',
-            model: {},
-            extra: { workspace: '/tmp/aionui-history', backend: 'claude' },
-            status: 'finished',
-            source: 'aionui',
-            created_at: 1,
-            modified_at: 1,
-            pinned: false,
-          } as TChatConversation
-        }
-      />
+      <MemoryRouter>
+        <ChatConversation
+          conversation={
+            {
+              id: 'conv-acp',
+              user_id: 'user-1',
+              name: 'ACP history',
+              type: 'acp',
+              model: {},
+              extra: { workspace: '/tmp/aionui-history', backend: 'claude' },
+              status: 'finished',
+              source: 'aionui',
+              created_at: 1,
+              modified_at: 1,
+              pinned: false,
+            } as TChatConversation
+          }
+        />
+      </MemoryRouter>
     );
 
     expect(screen.getByTestId('mock-acp-chat')).toBeInTheDocument();
@@ -155,23 +162,25 @@ describe('ChatConversation legacy runtime rendering', () => {
     });
 
     render(
-      <ChatConversation
-        conversation={
-          {
-            id: 'conv-acp',
-            user_id: 'user-1',
-            name: 'ACP history',
-            type: 'acp',
-            model: {},
-            extra: { workspace: '/tmp/aionui-history', backend: 'claude', current_model_id: 'model-1' },
-            status: 'finished',
-            source: 'aionui',
-            created_at: 1,
-            modified_at: 1,
-            pinned: false,
-          } as TChatConversation
-        }
-      />
+      <MemoryRouter>
+        <ChatConversation
+          conversation={
+            {
+              id: 'conv-acp',
+              user_id: 'user-1',
+              name: 'ACP history',
+              type: 'acp',
+              model: {},
+              extra: { workspace: '/tmp/aionui-history', backend: 'claude', current_model_id: 'model-1' },
+              status: 'finished',
+              source: 'aionui',
+              created_at: 1,
+              modified_at: 1,
+              pinned: false,
+            } as TChatConversation
+          }
+        />
+      </MemoryRouter>
     );
 
     expect(screen.getByTestId('mock-acp-model-selector')).toBeInTheDocument();

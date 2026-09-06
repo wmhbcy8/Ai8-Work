@@ -75,7 +75,7 @@ export function initKnowledgeBaseBridge(): void {
         content: input.content,
         title: input.title,
         tags: input.tags,
-        type: input.relPath.startsWith('imports/') ? 'import' : 'note',
+        type: input.relPath?.startsWith('imports/') ? 'import' : 'note',
       })
     )
   );

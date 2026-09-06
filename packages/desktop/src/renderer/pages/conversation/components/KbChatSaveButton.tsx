@@ -6,7 +6,8 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Message, Tooltip } from '@arco-design/web-react';
+import { useNavigate } from 'react-router-dom';
+import { Button, Message, Modal, Tooltip } from '@arco-design/web-react';
 import { BookmarkOne } from '@icon-park/react';
 import { ipcBridge } from '@/common';
 import type { TMessage } from '@/common/chat/chatLib';
@@ -19,10 +20,10 @@ interface KbChatSaveButtonProps {
 
 async function invoke<T>(promise: Promise<{ ok: boolean; data?: T; error?: string }>): Promise<T> {
   const result = await promise;
-  if (!result.ok || result.data === undefined) {
+  if (!result.ok) {
     throw new Error(result.error ?? '未知错误');
   }
-  return result.data;
+  return result.data as T;
 }
 
 function errorMessage(err: unknown): string {
@@ -40,6 +41,7 @@ function messageToLine(message: TMessage): string | null {
 /** Header action: distill the current conversation into the 知识笔记 vault. */
 const KbChatSaveButton: React.FC<KbChatSaveButtonProps> = ({ conversation_id, conversationTitle }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [saving, setSaving] = React.useState(false);
 
   const handleSave = React.useCallback(async () => {
@@ -66,11 +68,25 @@ const KbChatSaveButton: React.FC<KbChatSaveButtonProps> = ({ conversation_id, co
         result.updated ? t('knowledge.chatSavedMessage') + '（已更新）' : t('knowledge.chatSavedMessage')
       );
     } catch (err) {
-      Message.error(errorMessage(err));
+      const message = errorMessage(err);
+      // 没有可用模型 / 绑定失效 → 弹窗引导去设置（而不是展示冷冰冰的错误）
+      const needModel = message.includes('设置 → 模型');
+      const needRebind = message.includes('知识笔记 → AI 设置');
+      if (needModel || needRebind) {
+        Modal.warning({
+          title: t('knowledge.aiModelNeededTitle'),
+          content: message,
+          okText: needRebind ? t('knowledge.aiModelNeededToKb') : t('knowledge.aiGoSettings'),
+          cancelText: t('knowledge.cancel'),
+          onOk: () => navigate(needRebind ? '/knowledge' : '/settings/model'),
+        });
+      } else {
+        Message.error(message);
+      }
     } finally {
       setSaving(false);
     }
-  }, [conversationTitle, conversation_id, t]);
+  }, [conversationTitle, conversation_id, navigate, t]);
 
   return (
     <Tooltip content={t('knowledge.saveChatTitle')}>
