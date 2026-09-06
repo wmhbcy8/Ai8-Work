@@ -61,50 +61,127 @@ describe('RotatingApiClient', () => {
     it('identifies 401 as retryable', () => {
       const client = new TestRotatingApiClient('key', AuthType.USE_OPENAI);
       const error = { status: 401 };
-      expect((client as any).isRetryableError(error)).toBe(true);
+      expect(
+        (
+          client as unknown as {
+            isRetryableError: (error: unknown) => boolean;
+            options: { maxRetries?: number; retryDelay?: number };
+          }
+        ).isRetryableError(error)
+      ).toBe(true);
     });
 
     it('identifies 429 as retryable', () => {
       const client = new TestRotatingApiClient('key', AuthType.USE_OPENAI);
       const error = { status: 429 };
-      expect((client as any).isRetryableError(error)).toBe(true);
+      expect(
+        (
+          client as unknown as {
+            isRetryableError: (error: unknown) => boolean;
+            options: { maxRetries?: number; retryDelay?: number };
+          }
+        ).isRetryableError(error)
+      ).toBe(true);
     });
 
     it('identifies 503 as retryable', () => {
       const client = new TestRotatingApiClient('key', AuthType.USE_OPENAI);
       const error = { status: 503 };
-      expect((client as any).isRetryableError(error)).toBe(true);
+      expect(
+        (
+          client as unknown as {
+            isRetryableError: (error: unknown) => boolean;
+            options: { maxRetries?: number; retryDelay?: number };
+          }
+        ).isRetryableError(error)
+      ).toBe(true);
     });
 
     it('identifies 5xx as retryable', () => {
       const client = new TestRotatingApiClient('key', AuthType.USE_OPENAI);
-      expect((client as any).isRetryableError({ status: 500 })).toBe(true);
-      expect((client as any).isRetryableError({ status: 502 })).toBe(true);
-      expect((client as any).isRetryableError({ status: 599 })).toBe(true);
+      expect(
+        (
+          client as unknown as {
+            isRetryableError: (error: unknown) => boolean;
+            options: { maxRetries?: number; retryDelay?: number };
+          }
+        ).isRetryableError({ status: 500 })
+      ).toBe(true);
+      expect(
+        (
+          client as unknown as {
+            isRetryableError: (error: unknown) => boolean;
+            options: { maxRetries?: number; retryDelay?: number };
+          }
+        ).isRetryableError({ status: 502 })
+      ).toBe(true);
+      expect(
+        (
+          client as unknown as {
+            isRetryableError: (error: unknown) => boolean;
+            options: { maxRetries?: number; retryDelay?: number };
+          }
+        ).isRetryableError({ status: 599 })
+      ).toBe(true);
     });
 
     it('identifies 400 as non-retryable', () => {
       const client = new TestRotatingApiClient('key', AuthType.USE_OPENAI);
       const error = { status: 400 };
-      expect((client as any).isRetryableError(error)).toBe(false);
+      expect(
+        (
+          client as unknown as {
+            isRetryableError: (error: unknown) => boolean;
+            options: { maxRetries?: number; retryDelay?: number };
+          }
+        ).isRetryableError(error)
+      ).toBe(false);
     });
 
     it('identifies 404 as non-retryable', () => {
       const client = new TestRotatingApiClient('key', AuthType.USE_OPENAI);
       const error = { status: 404 };
-      expect((client as any).isRetryableError(error)).toBe(false);
+      expect(
+        (
+          client as unknown as {
+            isRetryableError: (error: unknown) => boolean;
+            options: { maxRetries?: number; retryDelay?: number };
+          }
+        ).isRetryableError(error)
+      ).toBe(false);
     });
 
     it('handles error with code instead of status', () => {
       const client = new TestRotatingApiClient('key', AuthType.USE_OPENAI);
       const error = { code: 429 };
-      expect((client as any).isRetryableError(error)).toBe(true);
+      expect(
+        (
+          client as unknown as {
+            isRetryableError: (error: unknown) => boolean;
+            options: { maxRetries?: number; retryDelay?: number };
+          }
+        ).isRetryableError(error)
+      ).toBe(true);
     });
 
     it('handles non-object error', () => {
       const client = new TestRotatingApiClient('key', AuthType.USE_OPENAI);
-      expect((client as any).isRetryableError('string error')).toBe(false);
-      expect((client as any).isRetryableError(null)).toBe(false);
+      expect(
+        (
+          client as unknown as {
+            isRetryableError: (error: unknown) => boolean;
+            options: { maxRetries?: number; retryDelay?: number };
+          }
+        ).isRetryableError('string error')
+      ).toBe(false);
+      expect(
+        (
+          client as unknown as {
+            isRetryableError: (error: unknown) => boolean;
+            options: { maxRetries?: number; retryDelay?: number };
+          }
+        ).isRetryableError(null)
+      ).toBe(false);
     });
   });
 
@@ -192,18 +269,46 @@ describe('RotatingApiClient', () => {
   describe('options', () => {
     it('uses default maxRetries and retryDelay', () => {
       const client = new TestRotatingApiClient('key', AuthType.USE_OPENAI);
-      expect((client as any).options.maxRetries).toBe(3);
-      expect((client as any).options.retryDelay).toBe(1000);
+      expect(
+        (
+          client as unknown as {
+            isRetryableError: (error: unknown) => boolean;
+            options: { maxRetries?: number; retryDelay?: number };
+          }
+        ).options.maxRetries
+      ).toBe(3);
+      expect(
+        (
+          client as unknown as {
+            isRetryableError: (error: unknown) => boolean;
+            options: { maxRetries?: number; retryDelay?: number };
+          }
+        ).options.retryDelay
+      ).toBe(1000);
     });
 
     it('accepts custom maxRetries', () => {
       const client = new TestRotatingApiClient('key', AuthType.USE_OPENAI, { maxRetries: 5 });
-      expect((client as any).options.maxRetries).toBe(5);
+      expect(
+        (
+          client as unknown as {
+            isRetryableError: (error: unknown) => boolean;
+            options: { maxRetries?: number; retryDelay?: number };
+          }
+        ).options.maxRetries
+      ).toBe(5);
     });
 
     it('accepts custom retryDelay', () => {
       const client = new TestRotatingApiClient('key', AuthType.USE_OPENAI, { retryDelay: 2000 });
-      expect((client as any).options.retryDelay).toBe(2000);
+      expect(
+        (
+          client as unknown as {
+            isRetryableError: (error: unknown) => boolean;
+            options: { maxRetries?: number; retryDelay?: number };
+          }
+        ).options.retryDelay
+      ).toBe(2000);
     });
   });
 });

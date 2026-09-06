@@ -323,6 +323,7 @@ async function selectMode(page: import('@playwright/test').Page, modeValue: stri
     .poll(
       async () =>
         page.evaluate((targetMode) => {
+          // oxlint-disable-next-line unicorn/consistent-function-scoping -- must stay inline: page.evaluate serializes the callback
           const isVisible = (el: Element) => {
             const node = el as HTMLElement;
             const style = window.getComputedStyle(node);
@@ -337,6 +338,7 @@ async function selectMode(page: import('@playwright/test').Page, modeValue: stri
     )
     .toBeTruthy();
   await page.evaluate((targetMode) => {
+    // oxlint-disable-next-line unicorn/consistent-function-scoping -- must stay inline: page.evaluate serializes the callback
     const isVisible = (el: Element) => {
       const node = el as HTMLElement;
       const style = window.getComputedStyle(node);

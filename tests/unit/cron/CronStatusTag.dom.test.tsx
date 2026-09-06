@@ -47,19 +47,19 @@ describe('CronStatusTag', () => {
   });
 
   it('renders error status for job with error last_status', () => {
-    const job = mockJob({ state: { last_status: 'error' } as any });
+    const job = mockJob({ state: { last_status: 'error' } as never });
     render(<CronStatusTag job={job} />);
     expect(screen.getByText('cron.status.error')).toBeInTheDocument();
   });
 
   it('renders error status for job with missed last_status', () => {
-    const job = mockJob({ state: { last_status: 'missed' } as any });
+    const job = mockJob({ state: { last_status: 'missed' } as never });
     render(<CronStatusTag job={job} />);
     expect(screen.getByText('cron.status.error')).toBeInTheDocument();
   });
 
   it('renders paused status even if error when disabled', () => {
-    const job = mockJob({ enabled: false, state: { last_status: 'error' } as any });
+    const job = mockJob({ enabled: false, state: { last_status: 'error' } as never });
     render(<CronStatusTag job={job} />);
     expect(screen.getByText('cron.status.paused')).toBeInTheDocument();
   });

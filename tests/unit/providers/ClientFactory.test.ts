@@ -106,7 +106,7 @@ describe('ClientFactory', () => {
 
       expect(GeminiRotatingClient).toHaveBeenCalled();
       expect(client).toBeInstanceOf(GeminiRotatingClient);
-      const calls = (GeminiRotatingClient as any).mock.calls;
+      const calls = (GeminiRotatingClient as unknown as { mock: { calls: unknown[][] } }).mock.calls;
       expect(calls[0][1]).toMatchObject({
         model: 'gemini-3-pro-image-preview',
         baseURL: 'https://generativelanguage.googleapis.com',
@@ -121,7 +121,7 @@ describe('ClientFactory', () => {
         base_url: 'https://gateway.example.com/v1',
       };
       await ClientFactory.createRotatingClient(newApiProvider);
-      const calls = (OpenAIRotatingClient as any).mock.calls;
+      const calls = (OpenAIRotatingClient as unknown as { mock: { calls: unknown[][] } }).mock.calls;
       expect(calls.length).toBeGreaterThan(0);
       // Client should receive normalized URL
       const config = calls[0][1];
@@ -135,14 +135,14 @@ describe('ClientFactory', () => {
         base_url: 'https://api.openai.com/v1beta',
       };
       await ClientFactory.createRotatingClient(standardProvider);
-      const calls = (OpenAIRotatingClient as any).mock.calls;
+      const calls = (OpenAIRotatingClient as unknown as { mock: { calls: unknown[][] } }).mock.calls;
       const config = calls[0][1];
       expect(config.baseURL).toBe('https://api.openai.com/v1beta');
     });
 
     it('passes timeout option to client', async () => {
       await ClientFactory.createRotatingClient(mockProvider, { timeout: 30000 });
-      const calls = (OpenAIRotatingClient as any).mock.calls;
+      const calls = (OpenAIRotatingClient as unknown as { mock: { calls: unknown[][] } }).mock.calls;
       const config = calls[0][1];
       expect(config.timeout).toBe(30000);
     });
@@ -151,7 +151,7 @@ describe('ClientFactory', () => {
       await ClientFactory.createRotatingClient(mockProvider, {
         rotatingOptions: { maxRetries: 5, retryDelay: 2000 },
       });
-      const calls = (OpenAIRotatingClient as any).mock.calls;
+      const calls = (OpenAIRotatingClient as unknown as { mock: { calls: unknown[][] } }).mock.calls;
       const rotatingOpts = calls[0][2];
       expect(rotatingOpts.maxRetries).toBe(5);
       expect(rotatingOpts.retryDelay).toBe(2000);
@@ -159,7 +159,7 @@ describe('ClientFactory', () => {
 
     it('adds default HTTP-Referer and X-Title headers for OpenAI', async () => {
       await ClientFactory.createRotatingClient(mockProvider);
-      const calls = (OpenAIRotatingClient as any).mock.calls;
+      const calls = (OpenAIRotatingClient as unknown as { mock: { calls: unknown[][] } }).mock.calls;
       const config = calls[0][1];
       expect(config.defaultHeaders).toEqual({
         'HTTP-Referer': 'https://github.com/wmhbcy8/Ai8-Work',
@@ -169,7 +169,7 @@ describe('ClientFactory', () => {
 
     it('handles proxy option for OpenAI', async () => {
       await ClientFactory.createRotatingClient(mockProvider, { proxy: 'http://proxy.example.com:8080' });
-      const calls = (OpenAIRotatingClient as any).mock.calls;
+      const calls = (OpenAIRotatingClient as unknown as { mock: { calls: unknown[][] } }).mock.calls;
       const config = calls[0][1];
       expect(config.httpAgent).toBeDefined();
     });
@@ -181,7 +181,7 @@ describe('ClientFactory', () => {
         use_model: 'claude-sonnet-4-20250514',
       };
       await ClientFactory.createRotatingClient(anthropicProvider);
-      const calls = (AnthropicRotatingClient as any).mock.calls;
+      const calls = (AnthropicRotatingClient as unknown as { mock: { calls: unknown[][] } }).mock.calls;
       const config = calls[0][1];
       expect(config.model).toBe('claude-sonnet-4-20250514');
     });
@@ -193,7 +193,7 @@ describe('ClientFactory', () => {
         use_model: 'gemini-3-pro-image-preview',
       };
       await ClientFactory.createRotatingClient(geminiProvider);
-      const calls = (GeminiRotatingClient as any).mock.calls;
+      const calls = (GeminiRotatingClient as unknown as { mock: { calls: unknown[][] } }).mock.calls;
       const config = calls[0][1];
       expect(config.model).toBe('gemini-3-pro-image-preview');
     });
