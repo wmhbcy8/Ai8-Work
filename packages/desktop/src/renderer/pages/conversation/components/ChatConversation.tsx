@@ -211,6 +211,9 @@ const AionrsConversationPanel: React.FC<{ conversation: AionrsConversation; slid
       <div className='flex items-center gap-8px'>
         <CronJobManager conversation_id={conversation.id} cron_job_id={cronJobId} />
         {!isMobile && (
+          <KbChatSaveButton conversation_id={conversation.id} conversationTitle={conversation.name || ''} />
+        )}
+        {!isMobile && (
           <AionrsModelSelector
             selection={modelSelection}
             thoughtLevel={runtimeConfig.thoughtLevel}

@@ -28,7 +28,13 @@ import {
   KB_IMPORTS_DIR,
   KB_NOTES_DIR,
 } from './kbStore';
-import { extractFile, distillConversation, distillImport, isSupportedImportFile } from './kbIngest';
+import {
+  appendOriginalToMarkdown,
+  extractFile,
+  distillConversation,
+  distillImport,
+  isSupportedImportFile,
+} from './kbIngest';
 import { isAiConfigured, requireKbLlmTarget } from './kbLlm';
 
 interface KbSettingsFile {
@@ -207,8 +213,10 @@ export class KnowledgeBaseService {
         const source = await extractFile(filePath);
         const distilled = await distillImport(ai, source, path.basename(filePath));
         const relPath = await uniqueMdRelPath(root, KB_IMPORTS_DIR, distilled.title || baseName);
+        // 正文 = AI 摘要 + 原文全文附录（保证阅读区能看到文件最底部内容）
+        const body = appendOriginalToMarkdown(distilled.markdown.replace(/^#\s+.*\n?/, ''), source);
         await writeNoteFile(root, relPath, {
-          body: distilled.markdown.replace(/^#\s+.*\n?/, ''),
+          body,
           title: distilled.title || baseName,
           type: 'import',
           tags: distilled.tags,

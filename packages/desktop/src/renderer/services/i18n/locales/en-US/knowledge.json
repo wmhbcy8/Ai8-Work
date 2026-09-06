@@ -20,6 +20,8 @@
   "aiGoSettings": "Go to Settings to add a model",
   "aiSettingsNote": "Keys and URLs are maintained in Settings → Models only; only the model choice is saved here.",
   "aiSettingsSaved": "Model selection saved.",
+  "createNote": "Create",
+  "createNoteTitleRequired": "Please enter a note title.",
   "loading": "Loading…",
   "aiModelNeededTitle": "A model service is required",
   "aiModelNeededToKb": "Go to Knowledge Notes and choose a model",

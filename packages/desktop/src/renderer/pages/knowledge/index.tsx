@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Message, Modal, Space } from '@arco-design/web-react';
+import { Button, Input, Message, Modal, Space } from '@arco-design/web-react';
 import { FolderOpen, Notebook, SettingConfig } from '@icon-park/react';
 import { ipcBridge } from '@/common';
 import type { TKbNoteMeta, TKbOverview } from '@/common/knowledge/types';
@@ -40,6 +40,10 @@ const KnowledgeBasePage: React.FC = () => {
   const [searchHits, setSearchHits] = React.useState<Set<string> | null>(null);
   const [selected, setSelected] = React.useState<TKbNoteMeta | null>(null);
   const [aiSettingsOpen, setAiSettingsOpen] = React.useState(false);
+  const [createOpen, setCreateOpen] = React.useState(false);
+  const [createTitle, setCreateTitle] = React.useState('');
+  const [createTags, setCreateTags] = React.useState('');
+  const [creating, setCreating] = React.useState(false);
   const [busy, setBusy] = React.useState(false);
 
   const loadAll = React.useCallback(async () => {
@@ -109,29 +113,42 @@ const KnowledgeBasePage: React.FC = () => {
     return searchHits?.has(note.relPath) ?? false;
   });
 
-  const handleCreateNote = React.useCallback(async () => {
-    const title = window.prompt(t('knowledge.titlePlaceholder'), '');
-    if (!title || !title.trim()) return;
-    const tagsRaw = window.prompt(t('knowledge.tagsPlaceholder'), '');
-    const tags = (tagsRaw ?? '')
+  // Electron 的 window.prompt 不可用（静默返回 null），新建笔记改走应用内弹窗。
+  const openCreateNote = React.useCallback(() => {
+    setCreateTitle('');
+    setCreateTags('');
+    setCreateOpen(true);
+  }, []);
+
+  const handleCreateNoteConfirm = React.useCallback(async () => {
+    const title = createTitle.trim();
+    if (!title) {
+      Message.warning(t('knowledge.createNoteTitleRequired'));
+      return;
+    }
+    const tags = createTags
       .split(/[,，]/)
       .map((s) => s.trim())
       .filter(Boolean)
       .slice(0, 8);
+    setCreating(true);
     try {
       const meta = await invoke(
         ipcBridge.knowledge.writeNote.invoke({
-          content: `# ${title.trim()}\n\n`,
-          title: title.trim(),
+          content: `# ${title}\n\n`,
+          title,
           tags,
         })
       );
+      setCreateOpen(false);
       await loadAll();
       setSelected(meta);
     } catch (err) {
       Message.error(errorMessage(err));
+    } finally {
+      setCreating(false);
     }
-  }, [loadAll, t]);
+  }, [createTags, createTitle, loadAll, t]);
 
   const handleImportFiles = React.useCallback(async () => {
     setBusy(true);
@@ -239,7 +256,7 @@ const KnowledgeBasePage: React.FC = () => {
         onSelect={setSelected}
         onChooseFolder={() => void handleChooseFolder()}
         onOpenFolder={() => void handleOpenFolder()}
-        onNewNote={() => void handleCreateNote()}
+        onNewNote={openCreateNote}
         onImport={() => void handleImportFiles()}
         onAiSettings={() => setAiSettingsOpen(true)}
         busy={busy}
@@ -263,7 +280,7 @@ const KnowledgeBasePage: React.FC = () => {
               <Button
                 type='outline'
                 icon={<Notebook theme='outline' size='16' fill='currentColor' />}
-                onClick={() => void handleCreateNote()}
+                onClick={openCreateNote}
               >
                 {t('knowledge.newNote')}
               </Button>
@@ -276,6 +293,38 @@ const KnowledgeBasePage: React.FC = () => {
         onClose={() => setAiSettingsOpen(false)}
         onSaved={() => void loadAll().catch((err) => setLoadError(errorMessage(err)))}
       />
+      <Modal
+        title={t('knowledge.newNote')}
+        visible={createOpen}
+        onCancel={() => setCreateOpen(false)}
+        onOk={() => void handleCreateNoteConfirm()}
+        confirmLoading={creating}
+        okText={t('knowledge.createNote')}
+        cancelText={t('knowledge.cancel')}
+        autoFocus
+      >
+        <div className='flex flex-col gap-14px pt-8px'>
+          <div>
+            <div className='mb-6px text-13px text-t-primary'>{t('knowledge.titlePlaceholder')}</div>
+            <Input
+              value={createTitle}
+              onChange={setCreateTitle}
+              placeholder={t('knowledge.titlePlaceholder')}
+              maxLength={80}
+              onPressEnter={() => void handleCreateNoteConfirm()}
+            />
+          </div>
+          <div>
+            <div className='mb-6px text-13px text-t-primary'>{t('knowledge.tagsPlaceholder')}</div>
+            <Input
+              value={createTags}
+              onChange={setCreateTags}
+              placeholder={t('knowledge.tagsPlaceholder')}
+              maxLength={120}
+            />
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

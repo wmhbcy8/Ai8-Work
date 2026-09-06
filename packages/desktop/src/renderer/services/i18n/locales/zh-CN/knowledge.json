@@ -20,6 +20,8 @@
   "aiGoSettings": "前往设置添加模型",
   "aiSettingsNote": "密钥与地址仅在「设置 → 模型」中维护，这里只保存模型选择。",
   "aiSettingsSaved": "模型选择已保存",
+  "createNote": "创建",
+  "createNoteTitleRequired": "请输入笔记标题",
   "loading": "加载中…",
   "aiModelNeededTitle": "需要模型服务",
   "aiModelNeededToKb": "去知识笔记选择模型",

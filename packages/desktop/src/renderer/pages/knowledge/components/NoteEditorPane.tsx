@@ -35,7 +35,7 @@ const MARKDOWN_CSS = `
 .knowledge-markdown-preview li { margin: 2px 0; }
 .knowledge-markdown-preview blockquote { border-left: 3px solid var(--color-fill-3); padding-left: 12px; margin: 10px 0; color: var(--color-text-2); }
 .knowledge-markdown-preview code { background: var(--color-fill-2); padding: 1px 6px; border-radius: 4px; font-size: 0.92em; font-family: var(--font-family-mono); }
-.knowledge-markdown-preview pre { background: var(--color-fill-2); padding: 12px; border-radius: 8px; overflow-x: auto; margin: 10px 0; }
+.knowledge-markdown-preview pre { background: var(--color-fill-2); padding: 12px 16px; border-radius: 8px; margin: 10px 0; white-space: pre-wrap; word-break: break-word; overflow-x: hidden; line-height: 1.7; }
 .knowledge-markdown-preview pre code { background: transparent; padding: 0; }
 .knowledge-markdown-preview table { border-collapse: collapse; margin: 10px 0; width: max-content; max-width: 100%; }
 .knowledge-markdown-preview th, .knowledge-markdown-preview td { border: 1px solid var(--color-fill-3); padding: 5px 10px; }

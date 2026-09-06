@@ -36,6 +36,8 @@ async function resolveEffectiveAi(ai: TKbAiSettings): Promise<TKbAiSettings> {
 
 const IMAGE_EXTS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.webp', '.bmp']);
 const MAX_TEXT_CHARS = 120_000;
+/** 笔记末尾「原文全文」保留的最大字符数（超出时在末尾明确提示）。 */
+const MAX_ORIGINAL_CHARS = 600_000;
 
 export function isSupportedImportFile(filePath: string): boolean {
   const ext = path.extname(filePath).toLowerCase();
@@ -65,13 +67,13 @@ function mimeForExt(ext: string): string {
 
 function sheetToMarkdownRows(wb: XLSX.WorkBook): string {
   const parts: string[] = [];
-  const sheetNames = wb.SheetNames.slice(0, 5);
+  const sheetNames = wb.SheetNames.slice(0, 20);
   for (const sheetName of sheetNames) {
     const ws = wb.Sheets[sheetName];
     if (!ws) continue;
     parts.push(`## 工作表：${sheetName}`);
     const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' }) as unknown[][];
-    for (const rawRow of rows.slice(0, 300)) {
+    for (const rawRow of rows.slice(0, 5000)) {
       const row = Array.isArray(rawRow) ? rawRow : [rawRow];
       const cells: string[] = [];
       for (const cell of row) {
@@ -140,6 +142,28 @@ export async function extractFile(filePath: string): Promise<ExtractedSource> {
 function truncate(text: string): string {
   if (text.length <= MAX_TEXT_CHARS) return text;
   return `${text.slice(0, MAX_TEXT_CHARS)}\n\n（内容过长，已截断，省略 ${text.length - MAX_TEXT_CHARS} 字）`;
+}
+
+/**
+ * 给导入文件的笔记追加「原文全文」附录，确保在笔记阅读区能一直滚动到
+ * 文件真正的最底部内容（AI 摘要可能受输出长度限制而未覆盖原文结尾）。
+ * 图片/对话不在调用方使用此函数，仅文本类导入文件需要。
+ */
+export function appendOriginalToMarkdown(markdown: string, source: ExtractedSource): string {
+  if (source.kind !== 'text') return markdown;
+  const text = source.text.trim();
+  if (!text) return markdown;
+  const fenced = text.length > MAX_ORIGINAL_CHARS ? text.slice(0, MAX_ORIGINAL_CHARS) : text;
+  // 防止正文里出现整行的 ``` 提前结束代码围栏
+  const escaped = fenced
+    .split('\n')
+    .map((line) => (/^`{3,}$/.test(line.trim()) ? `    ${line}` : line))
+    .join('\n');
+  const truncationNote =
+    text.length > MAX_ORIGINAL_CHARS
+      ? `\n> ⚠️ 原文过长，笔记仅保留前 ${MAX_ORIGINAL_CHARS} 字（原文共 ${text.length} 字）。\n`
+      : '';
+  return `${markdown}\n\n---\n\n## 原文全文\n\n${truncationNote}\`\`\`text\n${escaped}\n\`\`\``;
 }
 
 /** Tolerant first-line-JSON reader: `{"tags":[...]}` then the markdown body. */

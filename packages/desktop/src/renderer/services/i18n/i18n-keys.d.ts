@@ -1109,6 +1109,8 @@ export type I18nKey =
   | 'knowledge.chooseFolder'
   | 'knowledge.confirm'
   | 'knowledge.confirmDeleteTitle'
+  | 'knowledge.createNote'
+  | 'knowledge.createNoteTitleRequired'
   | 'knowledge.delete'
   | 'knowledge.deleteConfirm'
   | 'knowledge.edit'
