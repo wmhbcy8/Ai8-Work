@@ -122,6 +122,9 @@ const Layout: React.FC<{
 }> = ({ sider, onSessionClick: _onSessionClick }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  // 品牌 logo 为本地打包资源；万一加载失败（如资源缺失），隐藏破图占位，避免出现
+  // Chromium broken-image glyph。正常构建下该资源始终存在，此状态不会触发。
+  const [brandLogoFailed, setBrandLogoFailed] = useState(false);
   const [viewportWidth, setViewportWidth] = useState<number>(() =>
     typeof window === 'undefined' ? 390 : window.innerWidth
   );
@@ -397,7 +400,19 @@ const Layout: React.FC<{
                   })}
                   onClick={onClick}
                 >
-                  <img className='w-full h-full object-cover' src={appLogo} alt='Ai8 Work' draggable={false} />
+                  {brandLogoFailed ? (
+                    <span className='flex items-center justify-center w-full h-full text-15px font-bold text-t-primary select-none'>
+                      Ai
+                    </span>
+                  ) : (
+                    <img
+                      className='w-full h-full object-cover'
+                      src={appLogo}
+                      alt='Ai8 Work'
+                      draggable={false}
+                      onError={() => setBrandLogoFailed(true)}
+                    />
+                  )}
                 </div>
                 {isSettingsRoute ? (
                   <Tooltip content={t('common.back', { defaultValue: 'Back to Chat' })} position='bottom'>

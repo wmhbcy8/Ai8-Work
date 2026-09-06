@@ -39,6 +39,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref }}
+          lfs: true
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -88,6 +89,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref }}
+          lfs: true
 
       - name: Get commit hash
         id: commit
