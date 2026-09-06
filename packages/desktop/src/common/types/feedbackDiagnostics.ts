@@ -72,6 +72,11 @@ export const FEEDBACK_MODULES = [
     tag: 'agent-team',
   },
   {
+    i18nKey: 'settings.bugReportModuleKnowledge',
+    descriptionI18nKey: 'settings.bugReportModuleKnowledgeDescription',
+    tag: 'knowledge',
+  },
+  {
     i18nKey: 'settings.bugReportModuleDisplaySettings',
     descriptionI18nKey: 'settings.bugReportModuleDisplaySettingsDescription',
     tag: 'display-desktop',

@@ -23,6 +23,7 @@ import agent from './agent.json';
 import team from './team.json';
 import pet from './pet.json';
 import canvas from './canvas.json';
+import knowledge from './knowledge.json';
 
 export default {
   common,
@@ -45,4 +46,5 @@ export default {
   team,
   pet,
   canvas,
+  knowledge,
 };

@@ -26,6 +26,7 @@ import ChatLayout from './ChatLayout';
 import ChatSlider from './ChatSlider.tsx';
 import AcpModelSelector from '@/renderer/components/agent/AcpModelSelector';
 import AcpRuntimeRestartButton from '@/renderer/components/agent/AcpRuntimeRestartButton';
+import KbChatSaveButton from './KbChatSaveButton';
 import { getConversationOrNull } from '@/renderer/pages/conversation/utils/conversationCache';
 import { getConversationCreateErrorMessage } from '@/renderer/pages/conversation/utils/conversationCreateError';
 import GoogleModelSelector from '../platforms/gemini/GoogleModelSelector';
@@ -419,6 +420,11 @@ const ChatConversation: React.FC<{
             conversation_id={conversation.id}
             availability={runtimeReadyConversationId === conversation.id ? 'ready' : 'initializing'}
           />
+        </div>
+      )}
+      {conversation && !isMobile && !isLegacyReadOnlyConversation && (
+        <div className='shrink-0'>
+          <KbChatSaveButton conversation_id={conversation.id} conversationTitle={conversation.name || ''} />
         </div>
       )}
     </div>

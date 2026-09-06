@@ -27,6 +27,7 @@ const ScheduledTasksPage = React.lazy(() => import('@renderer/pages/cron/Schedul
 const TaskDetailPage = React.lazy(() => import('@renderer/pages/cron/ScheduledTasksPage/TaskDetailPage'));
 const TeamIndex = React.lazy(() => import('@renderer/pages/team'));
 const CanvasPage = React.lazy(() => import('@renderer/pages/canvas'));
+const KnowledgeBasePage = React.lazy(() => import('@renderer/pages/knowledge'));
 
 const withRouteFallback = (Component: React.LazyExoticComponent<React.ComponentType>) => (
   <RouteErrorBoundary>
@@ -79,6 +80,7 @@ const PanelRoute: React.FC<{ layout: React.ReactElement }> = ({ layout }) => {
           <Route index element={<Navigate to='/guid' replace />} />
           <Route path='/guid' element={withRouteFallback(Guid)} />
           <Route path='/canvas' element={withRouteFallback(CanvasPage)} />
+          <Route path='/knowledge' element={withRouteFallback(KnowledgeBasePage)} />
           <Route path='/conversation/:id' element={withRouteFallback(Conversation)} />
           <Route
             path='/team/:id'

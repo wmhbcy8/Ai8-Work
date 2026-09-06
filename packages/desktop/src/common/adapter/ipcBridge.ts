@@ -15,6 +15,17 @@
 import type { IConfirmation } from '@/common/chat/chatLib';
 import type { AcpSlashCommandApiItem } from '@/common/chat/slash/types';
 import { bridge } from '@/common/platform/bridge';
+import type {
+  TKbAiSettings,
+  TKbImportFileResult,
+  TKbNoteMeta,
+  TKbOverview,
+  TKbResult,
+  TKbSaveChatInput,
+  TKbSaveChatResult,
+  TKbSearchHit,
+  TKbWriteNoteInput,
+} from '@/common/knowledge/types';
 import { buildListTasksPath } from './teamTaskPath';
 import type { OpenDialogOptions } from 'electron';
 import type {
@@ -1478,6 +1489,88 @@ export const windowControls = {
   close: bridge.buildProvider<void, void>('window-controls:close'),
   isMaximized: bridge.buildProvider<boolean, void>('window-controls:is-maximized'),
   maximizedChanged: bridge.buildEmitter<{ is_maximized: boolean }>('window-controls:maximized-changed'),
+};
+
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// Knowledge Base (知识笔记) — Electron-only local Markdown vault.
+// Every endpoint is implemented by the main process (process/bridge/
+// knowledgeBaseBridge.ts). There is no backend/WebUI counterpart; all calls
+// resolve a TKbResult envelope so bridge transports that cannot propagate
+// exceptions never leave the renderer's promise pending.
+// ---------------------------------------------------------------------------
+
+const nativeKbGetOverview = bridge.buildProvider<TKbResult<TKbOverview>, void>('kb.get-overview');
+const nativeKbSelectRoot = bridge.buildProvider<TKbResult<string | null>, void>('kb.select-root');
+const nativeKbListNotes = bridge.buildProvider<TKbResult<TKbNoteMeta[]>, void>('kb.list-notes');
+const nativeKbReadNote = bridge.buildProvider<TKbResult<{ content: string; meta: TKbNoteMeta }>, { relPath: string }>(
+  'kb.read-note'
+);
+const nativeKbWriteNote = bridge.buildProvider<TKbResult<TKbNoteMeta>, TKbWriteNoteInput>('kb.write-note');
+const nativeKbDeleteNote = bridge.buildProvider<TKbResult<void>, { relPath: string }>('kb.delete-note');
+const nativeKbSearch = bridge.buildProvider<TKbResult<TKbSearchHit[]>, { keyword: string; type?: string }>('kb.search');
+const nativeKbGetAiSettings = bridge.buildProvider<TKbResult<TKbAiSettings>, void>('kb.get-ai-settings');
+const nativeKbSaveAiSettings = bridge.buildProvider<TKbResult<void>, TKbAiSettings>('kb.save-ai-settings');
+const nativeKbSaveChat = bridge.buildProvider<TKbResult<TKbSaveChatResult>, TKbSaveChatInput>('kb.save-chat');
+const nativeKbImportFiles = bridge.buildProvider<TKbResult<TKbImportFileResult[]>, { filePaths: string[] }>(
+  'kb.import-files'
+);
+const nativeKbChooseImportFiles = bridge.buildProvider<TKbResult<string[]>, void>('kb.choose-import-files');
+const nativeKbOpenFolder = bridge.buildProvider<TKbResult<void>, { dir: string }>('kb.open-folder');
+
+export const knowledge = {
+  getOverview: {
+    provider: nativeKbGetOverview.provider,
+    invoke: nativeKbGetOverview.invoke,
+  },
+  selectRoot: {
+    provider: nativeKbSelectRoot.provider,
+    invoke: nativeKbSelectRoot.invoke,
+  },
+  listNotes: {
+    provider: nativeKbListNotes.provider,
+    invoke: nativeKbListNotes.invoke,
+  },
+  readNote: {
+    provider: nativeKbReadNote.provider,
+    invoke: nativeKbReadNote.invoke,
+  },
+  writeNote: {
+    provider: nativeKbWriteNote.provider,
+    invoke: nativeKbWriteNote.invoke,
+  },
+  deleteNote: {
+    provider: nativeKbDeleteNote.provider,
+    invoke: nativeKbDeleteNote.invoke,
+  },
+  search: {
+    provider: nativeKbSearch.provider,
+    invoke: nativeKbSearch.invoke,
+  },
+  getAiSettings: {
+    provider: nativeKbGetAiSettings.provider,
+    invoke: nativeKbGetAiSettings.invoke,
+  },
+  saveAiSettings: {
+    provider: nativeKbSaveAiSettings.provider,
+    invoke: nativeKbSaveAiSettings.invoke,
+  },
+  saveChat: {
+    provider: nativeKbSaveChat.provider,
+    invoke: nativeKbSaveChat.invoke,
+  },
+  importFiles: {
+    provider: nativeKbImportFiles.provider,
+    invoke: nativeKbImportFiles.invoke,
+  },
+  chooseImportFiles: {
+    provider: nativeKbChooseImportFiles.provider,
+    invoke: nativeKbChooseImportFiles.invoke,
+  },
+  openFolder: {
+    provider: nativeKbOpenFolder.provider,
+    invoke: nativeKbOpenFolder.invoke,
+  },
 };
 
 // ---------------------------------------------------------------------------

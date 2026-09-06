@@ -20,6 +20,7 @@ const ROUTE_MODULE_MAP: ReadonlyArray<readonly [prefix: string, tag: FeedbackMod
   ['/conversation', 'conversation-session'],
   // The Ai8 Studio canvas is an AI creation/session workspace.
   ['/canvas', 'conversation-session'],
+  ['/knowledge', 'knowledge'],
   ['/team', 'agent-team'],
   ['/scheduled', 'scheduled-task'],
   ['/assistants', 'assistant-preset'],
