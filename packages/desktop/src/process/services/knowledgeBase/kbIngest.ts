@@ -154,10 +154,10 @@ export function appendOriginalToMarkdown(markdown: string, source: ExtractedSour
   const text = source.text.trim();
   if (!text) return markdown;
   const fenced = text.length > MAX_ORIGINAL_CHARS ? text.slice(0, MAX_ORIGINAL_CHARS) : text;
-  // 防止正文里出现整行的 ``` 提前结束代码围栏
+  // 防止正文里出现整行（可含 ≤3 前导空格）的 ``` 提前结束代码围栏
   const escaped = fenced
     .split('\n')
-    .map((line) => (/^`{3,}$/.test(line.trim()) ? `    ${line}` : line))
+    .map((line) => (/^ {0,3}`{3,}\s*$/.test(line) ? `    ${line}` : line))
     .join('\n');
   const truncationNote =
     text.length > MAX_ORIGINAL_CHARS
