@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./resources/aionui-banner-1.png" alt="Ai8 Work — 本地 AI 工作台" width="100%">
+  <img src="./docs/screenshots/banner.jpg" alt="Ai8 Work — AI ∞ · 无穷创造" width="100%">
 </p>
 
 <p align="center">
@@ -14,33 +14,35 @@
 
 ---
 
-> ## 🚀 Ai8 Work — 你的本地 AI 工作台 / _Your Local AI Workbench_
+> ## 🚀 Ai8 Work — AI ∞ · 无穷创造 / _Your Infinite AI Workbench_
 >
-> 基于 [AionUi](https://github.com/iOfficeAI/AionUi)（Apache-2.0）深度定制的开源 AI 协作平台，
-> **内置无限画布（Infinite Canvas）**，让 AI 智能体不仅会聊天，还会在你的电脑上
-> 读文件、写代码、生成文档，并在可视化画布上与你共创内容。
+> **ai8 = ai∞**：把「8」放倒，就是数学中的无穷符号 **∞**。
 >
-> **本项目特色：**
+> Ai8 Work 相信：AI 新时代里真正属于你的产品，应该带来 **无穷无尽的创造力与解决方案**——一个桌面，拥有**无穷多的 AI 数字员工**：写方案、做 PPT、跑数据、写代码、整理知识、定时干活、跨端协办……创造没有上限。
 >
-> - 🎨 **无限画布工作区** — 节点式 AI 工作流画布（Ai8 Studio），拖拽连线即编排，AI 创作可视化
-> - 🔌 **模型零配置打通** — 画布自动复用你在「设置 → 模型」中配置的 OpenAI 兼容模型通道，无需二次配置
-> - 🛡️ **模型通道增强（v2.1.65）** — 自动拉取供应商权威 `/v1/models`，修复模型名错乱与聊天 "Failed to fetch"，模型 ID 确定性解析
-> - 🏷️ **百技助手** — 内置助手品牌升级，中文界面更贴合本地化场景
-> - 🤖 **完整继承 AionUi** — 内置智能体、多 Agent 协作、远程访问、24/7 定时任务等全部能力
+> **我们把立场说清楚（我们的 FLAG）：**
 >
-> <sub>上游项目：<a href="https://github.com/iOfficeAI/AionUi">iOfficeAI/AionUi</a> · 画布引擎：Tapnow Studio（`Ai8 Studio` 节点式画布） · 开源协议：Apache-2.0</sub>
+> - 🔓 **不捆绑任何人的数据** — 笔记、文档、对话都以你的本地文件保存（纯 Markdown / 纯文本），随时带走，永远属于你
+> - 🔌 **不捆绑任何模型** — 聚合 30+ 模型平台，也支持任意 OpenAI 兼容 API 与本地模型；随时更换、自由组合
+> - 🖥️ **不锁定任何平台** — Windows / macOS / Linux 桌面端 + 浏览器 WebUI（手机 / 平板 / PWA），一处工作、随处访问
+> - 👥 **无穷无尽的 AI 数字员工** — 内置 21 位「百技助手」开箱即用 + 自动接入 Claude Code / Codex 等数十种外部 CLI 智能体，统一管理、并行协作、组队攻坚
 >
-> 🌐 官方网站：**[https://ai8.app](https://ai8.app)** —— 产品介绍 / 下载 / 文档 / 三语支持
+> <sub>开源协议：Apache-2.0 · 画布引擎：Ai8 Studio（节点式画布） · 官方网站：**[https://ai8.app](https://ai8.app)**</sub>
 
 ---
 
 ## 🔄 近期更新 / _What's New_
 
-> 最新版本：**v2.1.65**（2026-08-25）
+> 最新版本：**v2.1.71**（2026-09-07）
 
-- **模型通道可靠性** — 针对聊天 "Failed to fetch" 与卡片模型名错乱的问题，改为直接拉取供应商权威 `/v1/models`，确定性生成模型 `_uid`，并对模型做统一分类；`configRef` 竞态修复，多通道切换不串配置。
-- **品牌升级** — 内置助手入口更名为「**百技助手**」；画布欢迎页由 "Tapnow Studio" 改为 "**Ai8 Studio**"。
-- **画布引擎升级** — 无限画布迁移到自包含的 Tapnow /「Ai8 Studio」节点式引擎，支持 **Chat / 图片 / 视频** 三类节点，自动注入「设置 → 模型」的权威模型清单。
+- 📝 **知识笔记（全新）** — 左侧导航新增「知识笔记」工作区：把任意本地文件夹变成你的**第二大脑**
+  - **导入即笔记** — 拖入 PDF / Word / Excel / PPT / TXT / Markdown / 网页 / 文件夹… 自动提炼要点、生成结构化笔记
+  - **对话一键存档** — 任何一段 AI 对话都能一键保存为笔记，方法与结论统统留档
+  - **长文可追溯** — 超长文档自动摘要 + 原文附录，阅读流畅、随时回查
+  - **纯 Markdown 本地保存** — 笔记就是你自己的 `.md` 文件，可用 Obsidian 或任何工具打开；数据不离开你的电脑
+- 🐛 **体验修复** — 修复「新建笔记无反应」「知识库长文无法滚动到底」等问题
+- 🏷️ **渠道增强（v2.1.70）** — 渠道设置全新界面：Telegram / Slack / Discord / 飞书（Lark）/ 钉钉 / 企业微信，一处配置
+- **历史更新** — v2.1.65：模型通道可靠性（自动拉取供应商权威 `/v1/models`，修复聊天 "Failed to fetch"）；v2.1.62：品牌升级「百技助手」、画布引擎迁移至「Ai8 Studio」
 
 ---
 
@@ -63,21 +65,22 @@
 
 ## 📋 目录 / _Contents_
 
-- [✨ 新增功能：无限画布](#-新增功能无限画布)
+- [✨ 旗舰功能：无限画布](#-旗舰功能无限画布)
 - [🖥️ Cowork —— 与你并肩工作的 AI 智能体](#️-cowork--与你并肩工作的-ai-智能体)
-- [🚀 快速开始](#-快速开始)
+- [📝 知识笔记 —— 本地第二大脑](#-知识笔记--本地第二大脑)
+- [🚀 快速开始（下载安装）](#-快速开始下载安装)
 - [📦 技术架构](#-技术架构)
 - [🔨 构建与开发](#-构建与开发)
 - [📜 许可证与致谢](#-许可证与致谢)
 
 ---
 
-## ✨ 新增功能：无限画布
+## ✨ 旗舰功能：无限画布
 
 > ### Infinite Canvas — 让 AI 创作「看得见」/ _Visualize AI creation_
 
-无限画布是 Ai8 Work 在 AionUi 之上**新增加的旗舰功能**：将自包含的
-**Tapnow /「Ai8 Studio」节点式画布引擎**以单文件 HTML 形式嵌入桌面应用，
+无限画布是 Ai8 Work 的**旗舰功能**：将自包含的
+**「Ai8 Studio」节点式画布引擎**以单文件 HTML 形式嵌入桌面应用，
 作为一个独立的工作区页面（左侧导航 →「无限画布」）。
 
 在这里，**节点即模型、连线即流程**：把「对话 / 图片 / 视频」三类节点拖到画布上，
@@ -99,7 +102,7 @@
 > **画布侧零配置**，改模型只需在设置里改一处，画布即自动同步；供应商 `/v1/models` 会在后台拉取以校准模型 id。
 
 <p align="center">
-  <img src="./resources/offica-ai BANNER-function.png" alt="Ai8 Work 功能总览" width="800">
+  <img src="./docs/screenshots/canvas.jpg" alt="无限画布工作区（Ai8 Work 实拍）" width="800">
 </p>
 
 ---
@@ -108,7 +111,7 @@
 
 > ### AI Agents That Work Alongside You
 
-**Ai8 Work 远不止是一个聊天客户端。** 它是一个 **Cowork（协作）平台**——AI 智能体在你的电脑上与你并肩工作：
+**Ai8 Work 远不止是一个聊天客户端。** 它是一个 **Cowork（协作）平台**——AI 数字员工在你的电脑上与你并肩工作：
 读取文件、编写代码、浏览网页、自动完成任务。你全程可见、随时可控。
 
 | 能力对比               | 传统 AI 聊天工具 | **Ai8 Work（Cowork）**                 |
@@ -128,7 +131,15 @@
 - **21 个内置专业助手（「百技助手」）**开箱即用：Cowork、PPT 创作、Word 创作、Excel 创作、Morph PPT、Pitch Deck、Dashboard、学术论文、金融模型等
 
 <p align="center">
-  <img src="./resources/homepage.png" alt="内置智能体与助手" width="800">
+  <img src="./docs/screenshots/home.jpg" alt="Ai8 Work 主界面（百技助手随叫随到）" width="800">
+</p>
+
+### 💬 对话即工作台 —— 一个对话框，完成真实工作
+
+把文件、文件夹拖给 AI，它读取、执行、产出，全程可见：
+
+<p align="center">
+  <img src="./docs/screenshots/chat.jpg" alt="真实 AI 对话：读取文件、调用工具、完成任务" width="800">
 </p>
 
 ### 📊 Office 办公助手 —— PPT / Word / Excel
@@ -151,6 +162,10 @@ Ai8 Work 自动检测并统一管理，在一个界面里与它们全部协作�
 - 🧩 **MCP 统一管理** — 一处管理 MCP 工具，按各智能体能力自动注入/同步传输层
 - 🚀 **YOLO / 全自动模式** — 支持无人值守模式的智能体可一键开启（具体权限行为取决于所选智能体）
 
+<p align="center">
+  <img src="./docs/screenshots/agents.jpg" alt="设置 → Agents：数十种智能体统一管理（v2.1.71 实拍）" width="800">
+</p>
+
 ### 👨‍👩‍👧 团队模式 —— 多智能体协同作战
 
 以 **Leader + Teammates** 结构组织多智能体协作：Leader 接收指令、拆解子任务，
@@ -160,10 +175,6 @@ Ai8 Work 自动检测并统一管理，在一个界面里与它们全部协作�
 - **Leader 编排** — 支持 Claude Code、Codex、Hermes、Gemini、Snow CLI、Aion CLI 等后端
 - **团队隔离工作区** — 所有智能体共享同一目录，各自独立审批弹窗 + 侧边栏待审批角标
 - **动态扩缩容** — 团队运行中可增删 Teammates；静默智能体自动升级为失败并可一键移除
-
-<p align="center">
-  <img src="./resources/AionUi_team.gif" alt="团队模式" width="800">
-</p>
 
 ### 🔑 任意 API Key，获得完整 Cowork 能力
 
@@ -181,29 +192,20 @@ Ai8 Work 自动检测并统一管理，在一个界面里与它们全部协作�
 国际平台（DeepSeek / MiniMax / Novita / OpenRouter / xAI / 火山方舟 / Poe 等）、本地模型（Ollama / LM Studio）。
 文件读写、联网搜索、图片生成、工具调用等能力与模型无关，全部可用。
 
-<p align="center">
-  <img src="./resources/llm_newapi.png" alt="30+ AI 平台支持" width="800">
-</p>
-
 ### 🧩 可扩展的助手与技能体系
 
-- **自定义助手** — 用自己的规则与能力定义专属助手
 - **三级技能系统** — 内置技能（随应用发布）、自定义技能（你的专属）、扩展技能（第三方扩展 SDK 贡献）；按会话开关，聊天头部技能指示器实时显示
 - **21 个内置专业助手** — 详见上文「内置智能体」；技能包括 `pptx`、`docx`、`pdf`、`xlsx`、`mermaid` 等
 
-<p align="center">
-  <img src="./resources/assitants.png" alt="助手与技能生态" width="800">
-</p>
-
-### 🌍 随处访问 —— 你的 7×24 AI 助手
+### 🌍 随处访问 —— 你的 7×24 AI 数字员工
 
 - **WebUI 模式** — 手机 / 平板 / 任意电脑浏览器访问；支持局域网、跨网、服务器部署；二维码或密码登录
-- **聊天平台集成** — **Telegram** · **飞书（Lark）** · **钉钉（DingTalk，AI 卡片流式 + 自动降级）** · **微信（个人号）** · 企业微信 / Slack / Discord 即将到来
+- **聊天平台集成** — **Telegram** · **飞书（Lark）** · **钉钉（DingTalk，AI 卡片流式 + 自动降级）** · **微信（个人号）** · 企业微信 / Slack / Discord 等持续扩展
 
-> 配置：Ai8 Work → 设置 → WebUI 设置 → Channel，填入 Bot Token 即可。
+> 配置：Ai8 Work → 设置 → 渠道，填入 Bot Token 即可。
 
 <p align="center">
-  <img src="./resources/webui-remote.gif" alt="WebUI 远程访问" width="800">
+  <img src="./docs/screenshots/channels.jpg" alt="设置 → 渠道：Telegram / Slack / Discord / 飞书 / 钉钉 / 企业微信" width="800">
 </p>
 
 ### ⏰ 定时任务 —— 让 AI 自动驾驶
@@ -214,10 +216,6 @@ _设置一次，AI 智能体按计划自动运行，真正做到 24/7 无人值�
 - **三种调度模式** — 标准 Cron 表达式（支持时区）/ 固定间隔（每 N 分钟/小时）/ 一次性触发
 - **AI 自主创建任务** — 对话中智能体可直接创建定时任务
 - **典型场景** — 定时数据汇总、日报/周报生成、文件整理、提醒通知
-
-<p align="center">
-  <img src="./resources/alart-task.png" alt="定时任务" width="800">
-</p>
 
 <details>
 <summary><strong>🔍 定时任务详情（点击展开）</strong></summary>
@@ -232,72 +230,21 @@ _设置一次，AI 智能体按计划自动运行，真正做到 24/7 无人值�
 
 </details>
 
-### 👁️ 预览面板 —— 即时查看 AI 生成结果
+---
 
-_支持 10+ 种格式：PDF、Word、Excel、PPT、代码、Markdown、图片、HTML、Diff……无需切换应用。_
+## 📝 知识笔记 —— 本地第二大脑
 
-- **即时预览** — 智能体生成文件后立即查看
-- **实时跟踪 + 可编辑** — 自动跟踪文件变化；Markdown、代码、HTML 支持实时编辑
-- **多标签页** — 同时打开多个文件，各自独立标签页
+> ### Knowledge Notes — 把知识沉淀成你自己的
 
-**支持的格式**：文档（PDF / Word / Excel / PowerPoint / ODT / ODS / CSV）、代码（JS / TS / Python / Java / Go / Rust / C/C++ / 30+ 语言）、标记（Markdown / HTML）、图片（PNG / JPG / GIF / SVG / WebP / BMP / AVIF）、其他（Diff / Patch）
+_不用再在「云端笔记」和「你的数据」之间做选择。知识笔记把任意本地文件夹变成你的私人知识库，一切以纯 Markdown 保存在你自己的硬盘上。_
 
-<p align="center">
-  <img src="./resources/preview.gif" alt="预览面板" width="800">
-</p>
-
-### 🗂️ 智能文件管理 —— 文件操作自动化
-
-- **自动整理** — 识别内容自动分类，文件夹井井有条
-- **高效批处理** — 一键重命名、合并文件
-- **自动执行** — AI 智能体独立执行文件操作
-- **场景** — 整理下载文件夹 · 照片批量重命名 · 多文档合并 · 按内容自动归档
-
-### 📈 Excel 数据处理 —— AI 驱动的数据分析
-
-- **智能分析** — AI 分析数据模式并生成洞察
-- **自动美化** — 专业样式自动格式化 Excel 报表
-- **数据变换** — 自然语言完成数据转换、合并、重构
-- **报表生成** — 从原始数据一键生成完整报告
+- **📥 导入即笔记** — 拖入 PDF / Word / Excel / PPT / 网页 / TXT / Markdown 甚至整个文件夹，AI 自动提炼要点、生成结构化 Markdown 笔记（超长内容自动摘要 + 原文附录，可追溯）
+- **💾 对话一键存档** — 聊天窗口一键把整段对话保存为笔记，标题、正文、标签自动整理
+- **📂 本地文件夹即知识库** — 选择任意目录作为「知识笔记」根目录，笔记以 `.md` 文件存放，随时可以用 Obsidian / Typora / VS Code 等任何工具打开
+- **🔍 随时检索** — 全部笔记统一检索，让沉淀的知识随时可被调取
 
 <p align="center">
-  <img src="./resources/generate_xlsx.gif" alt="Excel 数据处理" width="800">
-</p>
-
-### 🎨 AI 图片生成与编辑
-
-- **文生图** — 自然语言描述生成图片
-- **图片编辑** — 修改与增强已有图片
-- **图片识别** — 分析并描述图片内容
-- **批量处理** — 一次生成多张图片
-
-<p align="center">
-  <img src="./resources/Image_Generation.gif" alt="AI 图片生成" width="800">
-</p>
-
-### 📄 文档生成 —— PPT、Word、Markdown
-
-- **PPTX 生成器** — 从大纲/主题生成专业演示文稿
-- **Word 文档** — 结构规范的格式化文档
-- **Markdown 文件** — 技术文档写作
-- **PDF 转换** — 多格式互转
-
-### 🎨 界面个性化定制
-
-- **CSS 自定义** — 通过 CSS 代码自由定制界面颜色、风格、布局，打造专属体验
-
-<p align="center">
-  <img src="./resources/css with skin.gif" alt="CSS 界面定制" width="800">
-</p>
-
-### ⚡ 多任务并行处理
-
-- **独立上下文** — 每个会话独立维护上下文与历史
-- **并行执行** — 多任务同时运行互不干扰
-- **智能管理** — 会话间轻松切换，状态可视化
-
-<p align="center">
-  <img src="./resources/multichat-side-by-side.gif" alt="多任务并行" width="800">
+  <img src="./docs/screenshots/knowledge.jpg" alt="知识笔记（Ai8 Work v2.1.71 实拍）" width="800">
 </p>
 
 ---
@@ -306,9 +253,19 @@ _支持 10+ 种格式：PDF、Word、Excel、PPT、代码、Markdown、图片、
 
 > ### Quick Start
 
-### 1. 下载安装
+### 1. 下载安装（GitHub 最新版）
 
-从 [Releases](https://github.com/wmhbcy8/Ai8-Work/releases) 下载对应平台安装包（macOS / Windows / Linux），安装即用。
+从 **[GitHub Releases](https://github.com/wmhbcy8/Ai8-Work/releases/latest)** 下载对应平台安装包，安装即用：
+
+| 平台               | 安装包（v2.1.71）                                                                                          |
+| ------------------ | --------------------------------------------------------------------------------------------------------- |
+| **Windows** x64    | [Ai8Work-2.1.71-win-x64.exe](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.71/Ai8Work-2.1.71-win-x64.exe) |
+| **Windows** arm64  | [Ai8Work-2.1.71-win-arm64.exe](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.71/Ai8Work-2.1.71-win-arm64.exe) |
+| **macOS** Apple 芯片 | [Ai8Work-2.1.71-mac-arm64.dmg](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.71/Ai8Work-2.1.71-mac-arm64.dmg) |
+| **macOS** Intel    | [Ai8Work-2.1.71-mac-x64.dmg](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.71/Ai8Work-2.1.71-mac-x64.dmg)     |
+| **Linux** amd64    | [Ai8Work-2.1.71-linux-amd64.deb](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.71/Ai8Work-2.1.71-linux-amd64.deb) |
+| **Linux** arm64    | [Ai8Work-2.1.71-linux-arm64.deb](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.71/Ai8Work-2.1.71-linux-arm64.deb) |
+| **安卓 / 手机**     | 无需安装原生包：浏览器直接访问 **WebUI（PWA）** 即可使用，或自行部署 WebUI 服务后随处访问               |
 
 ### 2. 配置模型（一次配置，全局可用）
 
@@ -322,6 +279,7 @@ _支持 10+ 种格式：PDF、Word、Excel、PPT、代码、Markdown、图片、
 
 - **对话工作区** — 打开任意助手开始 Cowork
 - **无限画布** — 点击左侧导航「无限画布」进入画布工作区，用 Chat / 图片 / 视频节点搭出你的 AI 工作流
+- **知识笔记** — 左侧导航「知识笔记」选择本地目录，拖入文件或保存对话，开始沉淀你的第二大脑
 - **定时任务** — 设置 → 定时任务，让 AI 24/7 自动驾驶
 
 ---
@@ -333,7 +291,7 @@ _支持 10+ 种格式：PDF、Word、Excel、PPT、代码、Markdown、图片、
 ```
 ┌──────────────────────────── Ai8 Work (Electron) ────────────────────────────┐
 │ 桌面端 renderer (React + Arco Design)                                        │
-│   ├─ 会话 / 团队 / 定时任务 / 设置 工作区                                     │
+│   ├─ 会话 / 团队 / 定时任务 / 知识笔记 / 设置 工作区                          │
 │   └─ 无限画布工作区（iframe 嵌入）                                             │
 │         ▲ postMessage 配置桥（aionui:config）                                │
 │         └─ tapnow.html — Ai8 Studio 单文件画布引擎（?raw → Blob URL）         │
@@ -346,7 +304,7 @@ _支持 10+ 种格式：PDF、Word、Excel、PPT、代码、Markdown、图片、
 - **智能体引擎**：内置 aionrs 引擎 + 外部 CLI 智能体（ACP 协议）+ MCP 工具统一管理
 - **无限画布**：自包含的 Ai8 Studio 单文件画布引擎（tapnow.html），以 Blob URL 在 sandbox iframe 中运行，主进程隔离、独立升级
 - **模型打通**：设置 → 模型 的 OpenAI 兼容 / Gemini 供应商 → postMessage（`aionui:config`）→ 画布内自动注入并按能力分类为 Chat / Image / Video（零配置）
-- **数据存储**：会话/设置本地存储；画布数据随应用以 localStorage 本地持久化
+- **数据存储**：会话/设置本地存储；笔记与文档为本地文件（Markdown）；画布数据随应用以 localStorage 本地持久化
 
 ---
 
@@ -380,6 +338,7 @@ node scripts/verify-canvas-e2e.js
 
 本项目基于 [Apache-2.0](LICENSE) 开源许可发布。
 
+- 🙏 **特别感谢 [AionUi 项目组](https://github.com/iOfficeAI/AionUi)（iOfficeAI）** — Ai8 Work 站在巨人的肩膀上：本项目始于 AionUi（Apache-2.0）并深度演进为独立产品，感谢 AionUi 项目组与社区的无私开源贡献
 - 上游基础：**[iOfficeAI/AionUi](https://github.com/iOfficeAI/AionUi)**（Apache-2.0）
 - 画布引擎：**[Tapnow Studio](https://github.com/chapterv/Tapnow-Studio-PP)**（节点式 AI 工作流画布，衍生为「Ai8 Studio」单文件引擎；其上游遵循 GPLv3，分发时请注意，本仓库整体仍以 Apache-2.0 发布）
 - Office 文档能力：**[iOfficeAI/OfficeCLI](https://github.com/iOfficeAI/OfficeCLI)**
