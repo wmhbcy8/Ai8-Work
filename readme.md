@@ -258,15 +258,15 @@ _不用再在「云端笔记」和「你的数据」之间做选择。知识笔�
 
 从 **[GitHub Releases](https://github.com/wmhbcy8/Ai8-Work/releases/latest)** 下载对应平台安装包，安装即用：
 
-| 平台               | 安装包（v2.1.72）                                                                                          |
-| ------------------ | --------------------------------------------------------------------------------------------------------- |
-| **Windows** x64    | [Ai8Work-2.1.72-win-x64.exe](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.72/Ai8Work-2.1.72-win-x64.exe) |
-| **Windows** arm64  | [Ai8Work-2.1.72-win-arm64.exe](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.72/Ai8Work-2.1.72-win-arm64.exe) |
-| **macOS** Apple 芯片 | [Ai8Work-2.1.72-mac-arm64.dmg](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.72/Ai8Work-2.1.72-mac-arm64.dmg) |
-| **macOS** Intel    | [Ai8Work-2.1.72-mac-x64.dmg](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.72/Ai8Work-2.1.72-mac-x64.dmg)     |
-| **Linux** amd64    | [Ai8Work-2.1.72-linux-amd64.deb](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.72/Ai8Work-2.1.72-linux-amd64.deb) |
-| **Linux** arm64    | [Ai8Work-2.1.72-linux-arm64.deb](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.72/Ai8Work-2.1.72-linux-arm64.deb) |
-| **安卓 / 手机**     | 无需安装原生包：浏览器直接访问 **WebUI（PWA）** 即可使用，或自行部署 WebUI 服务后随处访问               |
+| 平台                 | 安装包（v2.1.72）                                                                                                              |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| **Windows** x64      | [Ai8Work-2.1.72-win-x64.exe](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.72/Ai8Work-2.1.72-win-x64.exe)         |
+| **Windows** arm64    | [Ai8Work-2.1.72-win-arm64.exe](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.72/Ai8Work-2.1.72-win-arm64.exe)     |
+| **macOS** Apple 芯片 | [Ai8Work-2.1.72-mac-arm64.dmg](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.72/Ai8Work-2.1.72-mac-arm64.dmg)     |
+| **macOS** Intel      | [Ai8Work-2.1.72-mac-x64.dmg](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.72/Ai8Work-2.1.72-mac-x64.dmg)         |
+| **Linux** amd64      | [Ai8Work-2.1.72-linux-amd64.deb](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.72/Ai8Work-2.1.72-linux-amd64.deb) |
+| **Linux** arm64      | [Ai8Work-2.1.72-linux-arm64.deb](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.72/Ai8Work-2.1.72-linux-arm64.deb) |
+| **安卓 / 手机**      | 无需安装原生包：浏览器直接访问 **WebUI（PWA）** 即可使用，或自行部署 WebUI 服务后随处访问                                      |
 
 ### 2. 配置模型（一次配置，全局可用）
 
