@@ -16,6 +16,8 @@ import log from 'electron-log';
 import { EventEmitter } from 'events';
 import fs from 'fs';
 import path from 'path';
+import { execFile } from 'child_process';
+import { promisify } from 'util';
 import { gt, parse } from 'semver';
 import {
   recordAutoUpdateNativeInstallError,
@@ -29,6 +31,56 @@ import { buildCdnFeedOptions } from './updateFeed';
 const FORCE_DEV_AUTO_UPDATE_ENV = 'AIONUI_FORCE_DEV_AUTO_UPDATE';
 const DEBUG_AUTO_UPDATE_CURRENT_VERSION_ENV = 'AIONUI_DEBUG_AUTO_UPDATE_CURRENT_VERSION';
 const MAC_NATIVE_INSTALL_READY_TIMEOUT_MS = 60_000;
+
+const execFileAsync = promisify(execFile);
+
+/** Cache for the macOS native-update capability probe. */
+let macNativeAutoUpdateSupportedCache: boolean | undefined;
+
+/**
+ * Whether the native (Squirrel.Mac) auto-update path can ever succeed on this
+ * build. Squirrel.Mac validates an update against the designated requirement
+ * (DR) of the *currently installed* app. Ad-hoc signed or entirely unsigned
+ * apps carry a per-build cdhash in their DR, so every rebuild invalidates the
+ * previous one and the in-app update install always fails with
+ * "Code signature ... did not pass validation". Only a genuine Developer ID
+ * (or Apple Development) signature produces a stable DR, so without one we
+ * must fall back to the manual GitHub/官网 DMG download flow.
+ *
+ * Non-macOS platforms are always "supported" (Windows/Linux don't enforce a
+ * Squirrel-style signature check for the zip/exe handoff in this setup).
+ */
+async function isMacNativeAutoUpdateSupported(): Promise<boolean> {
+  if (process.platform !== 'darwin') return true;
+  if (!app.isPackaged) return true; // dev builds keep existing behavior
+  if (macNativeAutoUpdateSupportedCache !== undefined) return macNativeAutoUpdateSupportedCache;
+  try {
+    // app.getPath('exe') → …/Ai8 Work.app/Contents/MacOS/Ai8 Work
+    const appBundlePath = path.resolve(app.getPath('exe'), '..', '..', '..');
+    const { stdout, stderr } = await execFileAsync('codesign', ['-dvvv', appBundlePath], {
+      timeout: 15_000,
+      maxBuffer: 4 * 1024 * 1024,
+    });
+    const info = `${stdout}\n${stderr}`;
+    // Real Developer ID / Apple Development signature → "Authority=…" lines.
+    // Ad-hoc signature → "Signature=adhoc" and no Authority lines.
+    const authorityPresent = /(^|\n)Authority=/.test(`\n${info}`);
+    const adhoc = /\bSignature=adhoc\b/.test(info);
+    macNativeAutoUpdateSupportedCache = authorityPresent && !adhoc;
+    log.info('[auto-update] macOS code-signature probe', {
+      authorityPresent,
+      adhoc,
+      supported: macNativeAutoUpdateSupportedCache,
+    });
+  } catch (error) {
+    // codesign failed → app is unsigned (or codesign unavailable)
+    macNativeAutoUpdateSupportedCache = false;
+    log.warn('[auto-update] macOS native auto-update unavailable (codesign probe failed)', {
+      error: error instanceof Error ? error.message : String(error),
+    });
+  }
+  return macNativeAutoUpdateSupportedCache;
+}
 
 /**
  * Returns the appropriate update channel name based on the current platform and architecture.
@@ -624,6 +676,17 @@ class AutoUpdaterService extends EventEmitter {
         return { success: true };
       }
 
+      // macOS: Squirrel.Mac can only install updates when the app is signed with
+      // a real Developer ID certificate. Ad-hoc/unsigned builds would download
+      // the update and then fail signature validation at install time, so treat
+      // them as "no auto update" and let the UI offer the manual DMG download.
+      if (process.platform === 'darwin' && !(await isMacNativeAutoUpdateSupported())) {
+        log.info(
+          '[auto-update] macOS app is not Developer ID signed — native auto-update disabled, using manual GitHub download flow'
+        );
+        return { success: true };
+      }
+
       const result = await autoUpdater.checkForUpdates();
       if (!result) {
         const { default: i18n } = await import('./i18n');
@@ -796,6 +859,13 @@ class AutoUpdaterService extends EventEmitter {
       return this._activeDownloadPromise;
     }
 
+    // macOS unsigned/ad-hoc builds cannot install via Squirrel.Mac — never
+    // download through the native path (manual DMG flow is used instead).
+    if (process.platform === 'darwin' && !(await isMacNativeAutoUpdateSupported())) {
+      const { default: i18n } = await import('./i18n');
+      return { success: false, error: i18n.t('update.errors.downloadFailed') };
+    }
+
     const cancellationToken = new CancellationToken();
     this._activeDownloadCancellationToken = cancellationToken;
 
@@ -844,6 +914,20 @@ class AutoUpdaterService extends EventEmitter {
   }
 
   async quitAndInstall(): Promise<void> {
+    // macOS unsigned/ad-hoc builds can never pass Squirrel.Mac signature
+    // validation — refuse the native handoff entirely.
+    if (process.platform === 'darwin' && !(await isMacNativeAutoUpdateSupported())) {
+      const { default: i18n } = await import('./i18n');
+      const userMessage = i18n.t('update.errors.prepareInstallFailed');
+      log.warn(
+        '[auto-update] Refusing native quitAndInstall on macOS unsigned/ad-hoc build; manual DMG download required'
+      );
+      this.broadcastStatus({
+        status: 'error',
+        error: userMessage,
+      });
+      return;
+    }
     await this.waitForNativeInstallReady();
 
     if (this._beforeQuitAndInstallCallback) {
@@ -906,6 +990,12 @@ class AutoUpdaterService extends EventEmitter {
    */
   async checkForUpdatesAndNotify(): Promise<void> {
     try {
+      // macOS unsigned/ad-hoc builds cannot install through Squirrel.Mac, so
+      // the startup native notification would only lead to a failed install.
+      if (process.platform === 'darwin' && !(await isMacNativeAutoUpdateSupported())) {
+        log.info('[auto-update] Skipping startup native update notification on macOS (app not Developer ID signed)');
+        return;
+      }
       // Ensure clean state: prevent stale allowDowngrade=true from prior setAllowPrerelease(true) calls
       autoUpdater.allowDowngrade = false;
       await autoUpdater.checkForUpdatesAndNotify();

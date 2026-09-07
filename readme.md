@@ -33,7 +33,7 @@
 
 ## 🔄 近期更新 / _What's New_
 
-> 最新版本：**v2.1.73**（2026-09-07）
+> 最新版本：**v2.1.74**（2026-09-07）
 
 - 📝 **知识笔记（全新）** — 左侧导航新增「知识笔记」工作区：把任意本地文件夹变成你的**第二大脑**
   - **导入即笔记** — 拖入 PDF / Word / Excel / PPT / TXT / Markdown / 网页 / 文件夹… 自动提炼要点、生成结构化笔记
@@ -42,6 +42,7 @@
   - **纯 Markdown 本地保存** — 笔记就是你自己的 `.md` 文件，可用 Obsidian 或任何工具打开；数据不离开你的电脑
 - 🐛 **体验修复** — 修复「新建笔记无反应」「知识库长文无法滚动到底」等问题
 - 🍎 **macOS 图标修复（v2.1.73）** — 安装包与应用图标已更新为 Ai8 Work 新 LOGO（Windows / Linux 此前已同步新图标）
+- 🍎 **macOS 更新体验修复（v2.1.74）** — 未签名（ad-hoc）构建不再走原生自动安装（该路径会被系统签名校验拦截），改为检测到新版本时引导从官网/GitHub 下载安装包
 - 🏷️ **渠道增强（v2.1.70）** — 渠道设置全新界面：Telegram / Slack / Discord / 飞书（Lark）/ 钉钉 / 企业微信，一处配置
 - **历史更新** — v2.1.65：模型通道可靠性（自动拉取供应商权威 `/v1/models`，修复聊天 "Failed to fetch"）；v2.1.62：品牌升级「百技助手」、画布引擎迁移至「Ai8 Studio」
 
@@ -164,7 +165,7 @@ Ai8 Work 自动检测并统一管理，在一个界面里与它们全部协作�
 - 🚀 **YOLO / 全自动模式** — 支持无人值守模式的智能体可一键开启（具体权限行为取决于所选智能体）
 
 <p align="center">
-  <img src="./docs/screenshots/agents.jpg" alt="设置 → Agents：数十种智能体统一管理（v2.1.73 实拍）" width="800">
+  <img src="./docs/screenshots/agents.jpg" alt="设置 → Agents：数十种智能体统一管理（v2.1.74 实拍）" width="800">
 </p>
 
 ### 👨‍👩‍👧 团队模式 —— 多智能体协同作战
@@ -245,7 +246,7 @@ _不用再在「云端笔记」和「你的数据」之间做选择。知识笔�
 - **🔍 随时检索** — 全部笔记统一检索，让沉淀的知识随时可被调取
 
 <p align="center">
-  <img src="./docs/screenshots/knowledge.jpg" alt="知识笔记（Ai8 Work v2.1.73 实拍）" width="800">
+  <img src="./docs/screenshots/knowledge.jpg" alt="知识笔记（Ai8 Work v2.1.74 实拍）" width="800">
   <img src="./docs/screenshots/knowledge-note.jpg" alt="真实用户笔记：万字长文导入自动摘要，原文完整保留可回查（已获用户授权展示）" width="800">
 </p>
 
@@ -259,14 +260,14 @@ _不用再在「云端笔记」和「你的数据」之间做选择。知识笔�
 
 从 **[GitHub Releases](https://github.com/wmhbcy8/Ai8-Work/releases/latest)** 下载对应平台安装包，安装即用：
 
-| 平台                 | 安装包（v2.1.73）                                                                                                              |
+| 平台                 | 安装包（v2.1.74）                                                                                                              |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| **Windows** x64      | [Ai8Work-2.1.73-win-x64.exe](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.73/Ai8Work-2.1.73-win-x64.exe)         |
-| **Windows** arm64    | [Ai8Work-2.1.73-win-arm64.exe](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.73/Ai8Work-2.1.73-win-arm64.exe)     |
-| **macOS** Apple 芯片 | [Ai8Work-2.1.73-mac-arm64.dmg](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.73/Ai8Work-2.1.73-mac-arm64.dmg)     |
-| **macOS** Intel      | [Ai8Work-2.1.73-mac-x64.dmg](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.73/Ai8Work-2.1.73-mac-x64.dmg)         |
-| **Linux** amd64      | [Ai8Work-2.1.73-linux-amd64.deb](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.73/Ai8Work-2.1.73-linux-amd64.deb) |
-| **Linux** arm64      | [Ai8Work-2.1.73-linux-arm64.deb](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.73/Ai8Work-2.1.73-linux-arm64.deb) |
+| **Windows** x64      | [Ai8Work-2.1.74-win-x64.exe](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.74/Ai8Work-2.1.74-win-x64.exe)         |
+| **Windows** arm64    | [Ai8Work-2.1.74-win-arm64.exe](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.74/Ai8Work-2.1.74-win-arm64.exe)     |
+| **macOS** Apple 芯片 | [Ai8Work-2.1.74-mac-arm64.dmg](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.74/Ai8Work-2.1.74-mac-arm64.dmg)     |
+| **macOS** Intel      | [Ai8Work-2.1.74-mac-x64.dmg](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.74/Ai8Work-2.1.74-mac-x64.dmg)         |
+| **Linux** amd64      | [Ai8Work-2.1.74-linux-amd64.deb](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.74/Ai8Work-2.1.74-linux-amd64.deb) |
+| **Linux** arm64      | [Ai8Work-2.1.74-linux-arm64.deb](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.74/Ai8Work-2.1.74-linux-arm64.deb) |
 | **安卓 / 手机**      | 无需安装原生包：浏览器直接访问 **WebUI（PWA）** 即可使用，或自行部署 WebUI 服务后随处访问                                      |
 
 ### 2. 配置模型（一次配置，全局可用）
