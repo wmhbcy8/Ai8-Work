@@ -753,7 +753,10 @@
       }
     },
     "pathCopied": "Ruta copiada",
-    "copyFailed": "No se pudo copiar la ruta"
+    "copyFailed": "No se pudo copiar la ruta",
+    "refreshFiles": "Actualizar archivos",
+    "refreshChanges": "Actualizar cambios",
+    "collapseAll": "Contraer todo"
   },
   "terminal": {
     "running": "En ejecución",
@@ -776,5 +779,11 @@
     "rateLimited": "Los mensajes automáticos entre «{{from}}» y «{{to}}» son inusualmente frecuentes y podrían estar en bucle.",
     "stopBoth": "Detener ambas conversaciones",
     "disableFeature": "Desactivar los mensajes entre conversaciones"
+  },
+  "planBar": {
+    "title": "Plan",
+    "progress": "{{completed}}/{{total}}",
+    "expand": "Expandir plan",
+    "collapse": "Contraer plan"
   }
 }

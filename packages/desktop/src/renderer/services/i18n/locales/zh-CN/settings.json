@@ -342,7 +342,9 @@
     "denied": "通知已被拦截 —— 请在浏览器的网站设置中开启",
     "insecureContext": "浏览器通知需要通过 HTTPS 或 localhost 访问",
     "bodyConfirmation": "有一个 agent 正在等待你的确认",
-    "bodyTurnCompleted": "agent 已完成本轮回复"
+    "bodyTurnCompleted": "已完成本轮回复",
+    "bodyConfirmationNamed": "「{{name}}」正在等待你确认",
+    "bodyTurnCompletedNamed": "「{{name}}」已完成本轮回复"
   },
   "notification": "通知",
   "cronNotificationEnabled": "定时任务完成通知",
@@ -856,7 +858,6 @@
   "bugReportModuleSessionDescription": "适用于搜索、历史记录、重命名、置顶、删除或会话列表展示异常。",
   "bugReportModuleWorkspaceDescription": "适用于项目、文件上传、目录选择、Office 文件、预览或差异对比异常。",
   "bugReportModuleAgentTeamDescription": "适用于团队创建、Leader 或 Teammate 协作、任务分派或团队消息流异常。",
-  "bugReportModuleKnowledgeDescription": "适用于知识笔记的笔记列表、笔记编辑、搜索、文件导入或 AI 设置异常。",
   "bugReportModuleDisplaySettingsDescription": "适用于主题、缩放、界面样式、窗口显示或桌面宠物展示异常。",
   "bugReportModuleSystemSettingsDescription": "适用于系统权限、开机启动、通知、存储路径或平台集成相关问题。",
   "bugReportModuleOtherDescription": "当问题跨越多个模块，或你不确定应该归到哪一类时，请选择此项。",
@@ -865,7 +866,6 @@
   "bugReportModuleDisplaySettings": "界面显示与桌面宠物",
   "bugReportModulePlugin": "插件系统",
   "bugReportModuleAgentTeam": "团队协作",
-  "bugReportModuleKnowledge": "知识笔记",
   "bugReportModulePet": "宠物",
   "bugReportModuleOther": "其他",
   "contactMe": "联系我",
@@ -1409,5 +1409,13 @@
   "crossSessionMessageDesc": "允许 Agent 向你的其他会话发送消息。关闭后，输入框的 @@ 会话提及与投递能力同时停用。",
   "crossSessionMessageDisabledBanner": "跨会话消息已关闭，输入框的 @@ 会话提及不可用。",
   "crossSessionMessageResume": "重新开启",
-  "crossSessionMessageUpdateFailed": "跨会话消息设置更新失败"
+  "crossSessionMessageUpdateFailed": "跨会话消息设置更新失败",
+  "bugReportModuleKnowledgeDescription": "适用于知识笔记的笔记列表、笔记编辑、搜索、文件导入或 AI 设置异常。",
+  "bugReportModuleKnowledge": "知识笔记",
+  "fontWeightSystemDefault": "系统默认",
+  "fontWeightLight": "细体",
+  "fontWeightRegular": "常规",
+  "fontWeightMedium": "中等",
+  "fontWeightSemibold": "半粗",
+  "fontWeightBold": "粗体"
 }

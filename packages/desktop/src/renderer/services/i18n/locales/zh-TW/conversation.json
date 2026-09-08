@@ -752,7 +752,10 @@
       }
     },
     "pathCopied": "已複製路徑",
-    "copyFailed": "複製路徑失敗"
+    "copyFailed": "複製路徑失敗",
+    "refreshFiles": "重新整理檔案",
+    "refreshChanges": "重新整理變更",
+    "collapseAll": "全部摺疊"
   },
   "terminal": {
     "running": "執行中",
@@ -775,5 +778,11 @@
     "rateLimited": "對話「{{from}}」與「{{to}}」之間的自動訊息過於頻繁，可能在空轉。",
     "stopBoth": "停止這兩個對話",
     "disableFeature": "關閉跨對話訊息"
+  },
+  "planBar": {
+    "title": "計劃",
+    "progress": "{{completed}}/{{total}}",
+    "expand": "展開計劃",
+    "collapse": "收合計劃"
   }
 }

@@ -342,7 +342,9 @@
     "denied": "Notifications bloquées : activez-les dans les paramètres du site de votre navigateur",
     "insecureContext": "Les notifications du navigateur nécessitent un accès HTTPS ou localhost",
     "bodyConfirmation": "Un agent attend votre confirmation",
-    "bodyTurnCompleted": "L'agent a fini de répondre"
+    "bodyTurnCompleted": "L'agent a fini de répondre",
+    "bodyConfirmationNamed": "« {{name}} » attend votre confirmation",
+    "bodyTurnCompletedNamed": "« {{name}} » a fini de répondre"
   },
   "notification": "Notifications",
   "cronNotificationEnabled": "Fin de tâche planifiée",
@@ -1406,5 +1408,11 @@
   "crossSessionMessageDesc": "Permet aux agents d'envoyer des messages à vos autres conversations. La désactivation coupe aussi la mention @@ dans la zone de saisie.",
   "crossSessionMessageDisabledBanner": "Les messages entre conversations sont désactivés, la mention @@ est indisponible.",
   "crossSessionMessageResume": "Réactiver",
-  "crossSessionMessageUpdateFailed": "Échec de la mise à jour du réglage des messages entre conversations"
+  "crossSessionMessageUpdateFailed": "Échec de la mise à jour du réglage des messages entre conversations",
+  "fontWeightSystemDefault": "Par défaut du système",
+  "fontWeightLight": "Fin",
+  "fontWeightRegular": "Normal",
+  "fontWeightMedium": "Moyen",
+  "fontWeightSemibold": "Demi-gras",
+  "fontWeightBold": "Gras"
 }

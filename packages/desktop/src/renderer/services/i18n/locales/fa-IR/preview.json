@@ -167,5 +167,15 @@
   "zoomIn": "بزرگ‌نمایی",
   "zoomOut": "کوچک‌نمایی",
   "zoomReset": "بازنشانی نما",
-  "mermaidZoomHint": "برای بزرگنمایی اسکرول کنید • برای جابهجایی بکشید • ESC برای بستن"
+  "mermaidZoomHint": "برای بزرگنمایی اسکرول کنید • برای جابهجایی بکشید • ESC برای بستن",
+  "maximizePanel": "بزرگ‌نمایی",
+  "restorePanel": "بازگردانی",
+  "close": "بستن",
+  "closeUnmodified": "بستن تغییرنیافته‌ها",
+  "copyPath": "کپی مسیر",
+  "copyRelativePath": "کپی مسیر نسبی",
+  "openLocation": "نمایش در پوشه",
+  "openLocationFailed": "باز کردن پوشه حاوی ناموفق بود",
+  "wavedromTitle": "نمودار WaveDrom",
+  "diagramZoomHint": "برای بزرگنمایی اسکرول کنید • برای جابهجایی بکشید • ESC برای بستن"
 }

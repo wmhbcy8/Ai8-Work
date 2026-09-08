@@ -169,5 +169,15 @@
   "zoomIn": "Увеличить",
   "zoomOut": "Уменьшить",
   "zoomReset": "Сбросить вид",
-  "mermaidZoomHint": "Колесо — масштаб • Перетаскивание — панорама • ESC — закрыть"
+  "mermaidZoomHint": "Колесо — масштаб • Перетаскивание — панорама • ESC — закрыть",
+  "maximizePanel": "Развернуть",
+  "restorePanel": "Восстановить",
+  "close": "Закрыть",
+  "closeUnmodified": "Закрыть неизменённые",
+  "copyPath": "Копировать путь",
+  "copyRelativePath": "Копировать относительный путь",
+  "openLocation": "Показать в папке",
+  "openLocationFailed": "Не удалось открыть содержащую папку",
+  "wavedromTitle": "Диаграмма WaveDrom",
+  "diagramZoomHint": "Колесо — масштаб • Перетаскивание — панорама • ESC — закрыть"
 }

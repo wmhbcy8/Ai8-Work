@@ -133,7 +133,7 @@ describe('MermaidBlock pan/zoom', () => {
     render(<MermaidBlock code={'graph TD; A-->B'} />);
     const diagram = await screen.findByTestId('mermaid-diagram');
     fireEvent.click(diagram);
-    expect(screen.getByTestId('mermaid-zoom-overlay')).toBeInTheDocument();
+    expect(screen.getByTestId('diagram-zoom-overlay')).toBeInTheDocument();
   });
 
   it('opens the zoom overlay on click without panning when drag-to-pan is enabled', async () => {
@@ -146,7 +146,7 @@ describe('MermaidBlock pan/zoom', () => {
 
     const inner = diagram.firstElementChild as HTMLElement;
     expect(inner.style.transform).toContain('translate(0px, 0px) scale(1)');
-    expect(screen.getByTestId('mermaid-zoom-overlay')).toBeInTheDocument();
+    expect(screen.getByTestId('diagram-zoom-overlay')).toBeInTheDocument();
   });
 
   it('pans instead of opening the overlay when the pointer drags past the threshold', async () => {

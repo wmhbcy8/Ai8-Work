@@ -753,7 +753,10 @@
       }
     },
     "pathCopied": "Pfad kopiert",
-    "copyFailed": "Pfad konnte nicht kopiert werden"
+    "copyFailed": "Pfad konnte nicht kopiert werden",
+    "refreshFiles": "Dateien aktualisieren",
+    "refreshChanges": "Änderungen aktualisieren",
+    "collapseAll": "Alle einklappen"
   },
   "terminal": {
     "running": "Läuft",
@@ -776,5 +779,11 @@
     "rateLimited": "Automatische Nachrichten zwischen „{{from}}“ und „{{to}}“ sind ungewöhnlich häufig und laufen möglicherweise im Kreis.",
     "stopBoth": "Beide Unterhaltungen stoppen",
     "disableFeature": "Nachrichten zwischen Unterhaltungen ausschalten"
+  },
+  "planBar": {
+    "title": "Plan",
+    "progress": "{{completed}}/{{total}}",
+    "expand": "Plan ausklappen",
+    "collapse": "Plan einklappen"
   }
 }

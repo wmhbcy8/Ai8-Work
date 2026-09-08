@@ -151,6 +151,7 @@ export const createInitStyle = (
     font-size:var(--code-font-size, 13px);
     line-height:20px;
     font-family: var(--font-mono);
+    font-weight: var(--font-mono-weight);
   }
 
   .markdown-shadow-body>p:last-child{
@@ -186,6 +187,7 @@ export const createInitStyle = (
     border-radius: 4px;
     font-size: 0.875em;
     font-family: var(--font-mono);
+    font-weight: var(--font-mono-weight);
   }
   blockquote {
     border-left: 3px solid var(--bg-3);
@@ -237,6 +239,11 @@ export const createInitStyle = (
       border: 1px solid var(--bg-3);
       background-color: var(--bg-1);
       font-weight: bold;
+      /* Without this the UA default (text-align: center) applies and the header
+         row is centred while every body row is start-aligned. GFM alignment
+         markers (:---, :---:, ---:) still win: remark-gfm emits them as an
+         inline style, which outranks this rule. */
+      text-align: start;
     }
     td{
         padding: 8px;

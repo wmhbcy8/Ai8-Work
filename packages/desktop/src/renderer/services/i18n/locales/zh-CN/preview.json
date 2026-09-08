@@ -167,5 +167,15 @@
   "zoomIn": "放大",
   "zoomOut": "缩小",
   "zoomReset": "重置视图",
-  "mermaidZoomHint": "滚轮缩放 • 拖拽平移 • ESC 关闭"
+  "mermaidZoomHint": "滚轮缩放 • 拖拽平移 • ESC 关闭",
+  "maximizePanel": "最大化",
+  "restorePanel": "还原",
+  "close": "关闭",
+  "closeUnmodified": "关闭未修改",
+  "copyPath": "复制路径",
+  "copyRelativePath": "复制相对路径",
+  "openLocation": "打开文件所在目录",
+  "openLocationFailed": "无法打开所在目录",
+  "wavedromTitle": "WaveDrom 波形图",
+  "diagramZoomHint": "滚轮缩放 • 拖拽平移 • ESC 关闭"
 }

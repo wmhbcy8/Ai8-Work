@@ -752,7 +752,10 @@
       }
     },
     "pathCopied": "Path copied",
-    "copyFailed": "Failed to copy path"
+    "copyFailed": "Failed to copy path",
+    "refreshFiles": "Refresh files",
+    "refreshChanges": "Refresh changes",
+    "collapseAll": "Collapse all"
   },
   "terminal": {
     "running": "Running",
@@ -775,5 +778,11 @@
     "rateLimited": "Automatic messages between \"{{from}}\" and \"{{to}}\" are unusually frequent and may be looping.",
     "stopBoth": "Stop both conversations",
     "disableFeature": "Turn off cross-conversation messages"
+  },
+  "planBar": {
+    "title": "Plan",
+    "progress": "{{completed}}/{{total}}",
+    "expand": "Expand plan",
+    "collapse": "Collapse plan"
   }
 }

@@ -758,7 +758,10 @@
       }
     },
     "pathCopied": "Caminho copiado",
-    "copyFailed": "Falha ao copiar o caminho"
+    "copyFailed": "Falha ao copiar o caminho",
+    "refreshFiles": "Atualizar arquivos",
+    "refreshChanges": "Atualizar alterações",
+    "collapseAll": "Recolher tudo"
   },
   "terminal": {
     "running": "Executando",
@@ -781,5 +784,11 @@
     "rateLimited": "As mensagens automáticas entre \"{{from}}\" e \"{{to}}\" estão excepcionalmente frequentes e podem estar em loop.",
     "stopBoth": "Parar as duas conversas",
     "disableFeature": "Desativar mensagens entre conversas"
+  },
+  "planBar": {
+    "title": "Plano",
+    "progress": "{{completed}}/{{total}}",
+    "expand": "Expandir plano",
+    "collapse": "Recolher plano"
   }
 }
