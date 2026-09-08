@@ -1,5 +1,30 @@
 # Changelog
 
+## Ai8 Work v2.1.75 — Upstream feature sync (AionUi v2.2.1)
+
+Ai8 Work catches up with the full feature delta of its upstream project
+[iOfficeAI/AionUi](https://github.com/iOfficeAI/AionUi) since the fork
+point (v2.1.60). Highlights:
+
+- WaveDrom timing diagrams in Markdown code blocks
+- Markdown table column alignment
+- Preview panel maximize mode (fills the space of the hidden chat),
+  tab context menu, previewTabPaths, keyboard shortcuts
+- Rename a conversation by clicking its empty title
+- Font customization (weights / families / sizes)
+- Waiting-for-user loading state in the sidebar
+- Turn-completed notifications now name the conversation and brand as
+  "Ai8 Work"
+- Silent session refresh on 401; reconnect-storm guard
+- Explorer tab refresh, repo rediscover, collapse-all
+- Slash menu: Tab accepts the highlighted command
+- GUID page fallback when no model is configured
+- PlanBar pinned above the send box
+
+Kept Ai8-side: Infinite Canvas / Knowledge-Base, update management,
+branding & icons, packaging/CI. Localizations refreshed across all
+13 languages.
+
 ## [2.2.1](https://github.com/iOfficeAI/AionUi/compare/v2.1.61...v2.2.1) (2026-09-01)
 
 ### Desktop
