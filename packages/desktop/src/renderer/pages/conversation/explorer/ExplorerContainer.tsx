@@ -509,6 +509,14 @@ export const ExplorerContainer: React.FC<ExplorerContainerProps> = ({ projectId 
     }
   };
 
+  // Per-root context-menu reload (right-click a pe root → 刷新 / Refresh): re-fetch
+  // project detail and remount just that root's listing. Kept alongside the tab-bar
+  // refresh above — the menu targets a single stale root, the tab bar reloads all.
+  const handleRefreshRoot = (peId: string): void => {
+    void mutate();
+    refreshRoot(peId);
+  };
+
   const tabButton = (key: 'files' | 'changes', label: string) => (
     <Button
       type='text'
@@ -628,6 +636,7 @@ export const ExplorerContainer: React.FC<ExplorerContainerProps> = ({ projectId 
             roots={roots}
             workspacePeId={workspacePeId}
             onRemoveRoot={handleRemoveFolder}
+            onRefreshRoot={handleRefreshRoot}
             onOpenFile={handleOpenFile}
             onRename={handleRename}
             onDelete={handleDelete}
