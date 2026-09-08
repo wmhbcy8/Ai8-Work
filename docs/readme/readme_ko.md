@@ -297,11 +297,6 @@ _여러분의 24/7 AI 어시스턴트 — 어떤 기기, 어디서나 AionUi에 
   - **WeCom(企业微信)**, **Slack**, **Discord** 등 더 많은 플랫폼이 곧 출시됩니다
 
 > **설정:** AionUi 설정 → WebUI 설정 → Channel, Bot Token을 구성하세요.
-
-<p align="center">
-  <img src="../../resources/webui-remote.gif" alt="WebUI remote access demo" width="800">
-</p>
-
 <p align="center"><em>에이전트 원격 감시 및 제어 — Claude, Gemini, Codex. 브라우저나 휴대폰에서 Claude Code remote처럼 사용하세요.</em></p>
 
 > [원격 인터넷 접근 튜토리얼](https://github.com/iOfficeAI/AionUi/wiki/Remote-Internet-Access-Guide-Chinese)
@@ -364,11 +359,6 @@ _10+ 형식: PDF, Word, Excel, PPT, 코드, Markdown, 이미지, HTML, Diff — 
 - **실시간 추적 + 편집 가능** — 파일 변경을 자동으로 추적; Markdown, 코드, HTML의 라이브 편집 지원
 - **멀티 탭 지원** — 여러 파일을 동시에 열고 각각 자체 탭에서
 - **버전 기록** — 파일의 이전 버전을 보고 복원(Git 기반)
-
-<p align="center">
-  <img src="../../resources/preview.gif" alt="Preview Panel" width="800">
-</p>
-
 <details>
 <summary><strong>🔍 전체 형식 목록 보기 ▶️</strong></summary>
 
@@ -444,11 +434,6 @@ _Excel 데이터를 깊이 분석하고, 보고서를 자동으로 아름답게 
 ### **AI 이미지 생성 및 편집**
 
 _Gemini 구동의 지능형 이미지 생성, 편집 및 인식_
-
-<p align="center">
-  <img src="../../resources/Image_Generation.gif" alt="AI Image Generation" width="800">
-</p>
-
 <details>
 <summary><strong>🔍 이미지 생성 기능 보기 ▶️</strong></summary>
 
@@ -507,11 +492,6 @@ _자신만의 CSS 코드로 커스터마이징하여 인터페이스를 선호�
 ### **멀티태스크 병렬 처리**
 
 _여러 대화를 열고, 작업이 섞이지 않으며, 독립적인 메모리, 효율이 두 배_
-
-<p align="center">
-  <img src="../../resources/multichat-side-by-side.gif" alt="Multi-Task Parallel" width="800">
-</p>
-
 - ✅ **독립적인 컨텍스트** — 각 대화가 자체 컨텍스트와 기록을 유지합니다
 - ✅ **병렬 실행** — 간섭 없이 여러 작업을 동시에 실행합니다
 - ✅ **스마트 관리** — 시각적 표시기로 대화 간 쉽게 전환

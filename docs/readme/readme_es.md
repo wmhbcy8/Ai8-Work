@@ -297,11 +297,6 @@ _Tu asistente AI 24/7 — accede a AionUi desde cualquier dispositivo, en cualqu
   - **WeCom (企业微信), Slack, Discord** y más plataformas próximamente
 
 > **Configuración:** AionUi Settings → WebUI Settings → Channel, configura el Bot Token.
-
-<p align="center">
-  <img src="../../resources/webui-remote.gif" alt="WebUI remote access demo" width="800">
-</p>
-
 <p align="center"><em>Controla y supervisa tu agente en remoto — Claude, Gemini, Codex. Desde el navegador o el móvil, como Claude Code remote.</em></p>
 
 > [Tutorial de acceso remoto a Internet](https://github.com/iOfficeAI/AionUi/wiki/Remote-Internet-Access-Guide-Chinese)
@@ -364,11 +359,6 @@ _10+ formatos: PDF, Word, Excel, PPT, código, Markdown, imágenes, HTML, Diff �
 - **Seguimiento en tiempo real + editable** — rastrea automáticamente los cambios de archivos; admite edición en vivo de Markdown, código, HTML
 - **Soporte de múltiples pestañas** — abre múltiples archivos simultáneamente, cada uno en su propia pestaña
 - **Historial de versiones** — visualiza y restaura versiones históricas de archivos (basado en Git)
-
-<p align="center">
-  <img src="../../resources/preview.gif" alt="Preview Panel" width="800">
-</p>
-
 <details>
 <summary><strong>🔍 Ver lista completa de formatos ▶️</strong></summary>
 
@@ -444,11 +434,6 @@ _Analiza profundamente los datos de Excel, embellece automáticamente los inform
 ### **Generación y edición de imágenes AI**
 
 _Generación, edición y reconocimiento inteligente de imágenes, impulsado por Gemini_
-
-<p align="center">
-  <img src="../../resources/Image_Generation.gif" alt="AI Image Generation" width="800">
-</p>
-
 <details>
 <summary><strong>🔍 Ver funciones de generación de imágenes ▶️</strong></summary>
 
@@ -507,11 +492,6 @@ _Personaliza con tu propio código CSS, haz que tu interfaz coincida con tus pre
 ### **Procesamiento paralelo de múltiples tareas**
 
 _Abre múltiples conversaciones, las tareas no se mezclan, memoria independiente, eficiencia doble_
-
-<p align="center">
-  <img src="../../resources/multichat-side-by-side.gif" alt="Multi-Task Parallel" width="800">
-</p>
-
 - ✅ **Contexto independiente** — Cada conversación mantiene su propio contexto e historial
 - ✅ **Ejecución paralela** — Ejecuta múltiples tareas simultáneamente sin interferencia
 - ✅ **Gestión inteligente** — Cambio fácil entre conversaciones con indicadores visuales

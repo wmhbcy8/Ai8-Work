@@ -300,11 +300,6 @@ _您的 24/7 AI 助手 — 手機、平板、電腦，隨時隨地都能用。_
   - **WeCom（企業微信）**、**Slack**、**Discord** 等更多平台即將推出
 
 > **設定：** AionUi 設定 → WebUI 設定 → Channel，配置 Bot Token。
-
-<p align="center">
-  <img src="../../resources/webui-remote.gif" alt="WebUI remote access demo" width="800">
-</p>
-
 <p align="center"><em>遠程監管你的 Agent — Claude、Gemini、Codex，瀏覽器或手機即可遠程控制與查看，如同 Claude Code remote。</em></p>
 
 > [遠端網際網路存取教學](https://github.com/iOfficeAI/AionUi/wiki/Remote-Internet-Access-Guide-Chinese)
@@ -367,11 +362,6 @@ _支援 10+ 種格式：PDF、Word、Excel、PPT、程式碼、Markdown、圖像
 - **即時同步 + 直接編輯** — 檔案一有變化就自動同步；Markdown、程式碼、HTML 都能即時編輯
 - **多標籤並行** — 同時開啟多個檔案，每個檔案都有獨立標籤，管理更方便
 - **版本回溯** — 隨時查看和恢復檔案的歷史版本（基於 Git）
-
-<p align="center">
-  <img src="../../resources/preview.gif" alt="Preview Panel" width="800">
-</p>
-
 <details>
 <summary><strong>🔍 查看完整格式列表 ▶️</strong></summary>
 
@@ -447,11 +437,6 @@ _深度分析 Excel 資料，自動美化報告，產生洞察 — 這些複雜�
 ### **AI 圖像生成與編輯**
 
 _智慧圖像生成、編輯和識別，由 Gemini 驅動_
-
-<p align="center">
-  <img src="../../resources/Image_Generation.gif" alt="AI Image Generation" width="800">
-</p>
-
 <details>
 <summary><strong>🔍 查看圖像生成功能 ▶️</strong></summary>
 
@@ -510,11 +495,6 @@ _想怎麼改就怎麼改，用 CSS 程式碼打造您的專屬介面_
 ### **多任務並行處理**
 
 _同時開啟多個對話，任務不會亂，每個都有獨立記憶，效率直接翻倍_
-
-<p align="center">
-  <img src="../../resources/multichat-side-by-side.gif" alt="Multi-Task Parallel" width="800">
-</p>
-
 - ✅ **獨立上下文** — 每個對話都有自己的上下文和歷史，互不干擾
 - ✅ **並行執行** — 多個任務同時進行，各幹各的，互不影響
 - ✅ **智慧管理** — 對話之間輕鬆切換，還有視覺提示，一目了然

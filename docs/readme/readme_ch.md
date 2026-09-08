@@ -300,11 +300,6 @@ _你的 24/7 AI 助手 — 手机、平板、电脑，随时随地都能用。_
   - **WeCom（企业微信）**、**Slack**、**Discord** 等更多平台即将推出
 
 > **设置：** AionUi 设置 → WebUI 设置 → Channel，配置 Bot Token。
-
-<p align="center">
-  <img src="../../resources/webui-remote.gif" alt="WebUI remote access demo" width="800">
-</p>
-
 <p align="center"><em>远程监管你的 Agent — Claude、Gemini、Codex，浏览器或手机即可远程控制与查看，如同 Claude Code remote。</em></p>
 
 > [远程互联网访问教程](https://github.com/iOfficeAI/AionUi/wiki/Remote-Internet-Access-Guide-Chinese)
@@ -367,11 +362,6 @@ _支持 10+ 种格式：PDF、Word、Excel、PPT、代码、Markdown、图像、
 - **实时同步 + 直接编辑** — 文件一有变化就自动同步；Markdown、代码、HTML 都能实时编辑
 - **多标签并行** — 同时打开多个文件，每个文件都有独立标签，管理更方便
 - **版本回溯** — 随时查看和恢复文件的历史版本（基于 Git）
-
-<p align="center">
-  <img src="../../resources/preview.gif" alt="Preview Panel" width="800">
-</p>
-
 <details>
 <summary><strong>🔍 查看完整格式列表 ▶️</strong></summary>
 
@@ -418,11 +408,6 @@ _批量重命名、自动整理、智能分类、文件合并 — 这些繁琐�
 ### **Excel 数据处理 — 让 AI 帮你分析数据**
 
 _深度分析 Excel 数据，自动美化报告，生成洞察 — 这些复杂的数据工作，AI Agent 全包了。_
-
-<p align="center">
-  <img src="../../resources/generate_xlsx.gif" alt="Excel Processing" width="800">
-</p>
-
 <details>
 <summary><strong>🔍 查看 Excel 处理功能 ▶️</strong></summary>
 
@@ -447,11 +432,6 @@ _深度分析 Excel 数据，自动美化报告，生成洞察 — 这些复杂�
 ### **AI 图像生成与编辑**
 
 _想生成图片、编辑图片、识别图片？Gemini 驱动的 AI 图像功能，样样都行_
-
-<p align="center">
-  <img src="../../resources/Image_Generation.gif" alt="AI Image Generation" width="800">
-</p>
-
 <details>
 <summary><strong>🔍 查看图像生成功能 ▶️</strong></summary>
 
@@ -510,11 +490,6 @@ _想怎么改就怎么改，用 CSS 代码打造你的专属界面_
 ### **多任务并行处理**
 
 _同时开多个对话，任务不会乱，每个都有独立记忆，效率直接翻倍_
-
-<p align="center">
-  <img src="../../resources/multichat-side-by-side.gif" alt="Multi-Task Parallel" width="800">
-</p>
-
 - ✅ **独立上下文** — 每个对话都有自己的上下文和历史，互不干扰
 - ✅ **并行执行** — 多个任务同时进行，各干各的，互不影响
 - ✅ **智能管理** — 对话之间轻松切换，还有视觉提示，一目了然

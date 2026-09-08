@@ -297,11 +297,6 @@ _7/24 AI asistanınız — AionUi'ye herhangi bir cihazdan, her yerden erişin._
   - **WeCom (企业微信), Slack, Discord** ve yakında daha fazla platform
 
 > **Kurulum:** AionUi Ayarları → WebUI Ayarları → Kanal, Bot Token'ı yapılandırın.
-
-<p align="center">
-  <img src="../../resources/webui-remote.gif" alt="WebUI remote access demo" width="800">
-</p>
-
 <p align="center"><em>Agent'ınızı uzaktan kontrol edin ve izleyin — Claude, Gemini, Codex. Tarayıcı veya telefondan, Claude Code remote gibi.</em></p>
 
 > [Uzaktan İnternet Erişimi Öğreticisi](https://github.com/iOfficeAI/AionUi/wiki/Remote-Internet-Access-Guide-Chinese)
@@ -364,11 +359,6 @@ _10+ format: PDF, Word, Excel, PPT, kod, Markdown, görüntüler, HTML, Diff —
 - **Gerçek Zamanlı Takip + Düzenlenebilir** — dosya değişikliklerini otomatik olarak takip eder; Markdown, kod, HTML'in canlı düzenlemesini destekler
 - **Çoklu Sekme Desteği** — birden fazla dosyayı aynı anda açın, her biri kendi sekmesinde
 - **Sürüm Geçmişi** — dosyaların geçmiş sürümlerini görüntüleyin ve geri yükleyin (Git tabanlı)
-
-<p align="center">
-  <img src="../../resources/preview.gif" alt="Preview Panel" width="800">
-</p>
-
 <details>
 <summary><strong>🔍 Tam Format Listesini Görüntüle ▶️</strong></summary>
 
@@ -444,11 +434,6 @@ _Excel verilerini derinlemesine analiz edin, raporları otomatik olarak güzelle
 ### **AI Görüntü Oluşturma ve Düzenleme**
 
 _Gemini tarafından desteklenen akıllı görüntü oluşturma, düzenleme ve tanıma_
-
-<p align="center">
-  <img src="../../resources/Image_Generation.gif" alt="AI Image Generation" width="800">
-</p>
-
 <details>
 <summary><strong>🔍 Görüntü Oluşturma Özelliklerini Görüntüle ▶️</strong></summary>
 
@@ -507,11 +492,6 @@ _Kendi CSS kodunuzla özelleştirin, arayüzünüzü tercihlerinize uygun hale g
 ### **Çoklu Görev Paralel İşleme**
 
 _Birden fazla konuşma açın, görevler karışmaz, bağımsız bellek, verimlilik iki katına çıkar_
-
-<p align="center">
-  <img src="../../resources/multichat-side-by-side.gif" alt="Multi-Task Parallel" width="800">
-</p>
-
 - ✅ **Bağımsız Bağlam** — Her konuşma kendi bağlamını ve geçmişini korur
 - ✅ **Paralel Yürütme** — Müdahale olmadan birden fazla görevi aynı anda çalıştırın
 - ✅ **Akıllı Yönetim** — Görsel göstergelerle konuşmalar arasında kolay geçiş
