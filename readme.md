@@ -33,9 +33,11 @@
 
 ## 🔄 近期更新 / _What's New_
 
-> 最新版本：**v2.1.74**（2026-09-07）
+> 最新版本：**v2.1.76**（2026-09-09）
 
-- 📝 **知识笔记（全新）** — 左侧导航新增「知识笔记」工作区：把任意本地文件夹变成你的**第二大脑**
+- 🛰️ **反馈与崩溃上报接入（v2.1.76）** — 「反馈问题」与崩溃报告现已接入开发者的错误追踪后台（Sentry），你反馈的问题能被开发者看到并修复
+- 📦 **仓库瘦身（v2.1.76）** — 清理 11 个超大演示 GIF（约 357 MB），克隆与更新更轻快
+- 📝 **知识笔记（全新，v2.1.74）** — 左侧导航新增「知识笔记」工作区：把任意本地文件夹变成你的**第二大脑**
   - **导入即笔记** — 拖入 PDF / Word / Excel / PPT / TXT / Markdown / 网页 / 文件夹… 自动提炼要点、生成结构化笔记
   - **对话一键存档** — 任何一段 AI 对话都能一键保存为笔记，方法与结论统统留档
   - **长文可追溯** — 超长文档自动摘要 + 原文附录，阅读流畅、随时回查
@@ -260,14 +262,14 @@ _不用再在「云端笔记」和「你的数据」之间做选择。知识笔�
 
 从 **[GitHub Releases](https://github.com/wmhbcy8/Ai8-Work/releases/latest)** 下载对应平台安装包，安装即用：
 
-| 平台                 | 安装包（v2.1.74）                                                                                                              |
+| 平台                 | 安装包（v2.1.76）                                                                                                              |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| **Windows** x64      | [Ai8Work-2.1.74-win-x64.exe](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.74/Ai8Work-2.1.74-win-x64.exe)         |
-| **Windows** arm64    | [Ai8Work-2.1.74-win-arm64.exe](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.74/Ai8Work-2.1.74-win-arm64.exe)     |
-| **macOS** Apple 芯片 | [Ai8Work-2.1.74-mac-arm64.dmg](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.74/Ai8Work-2.1.74-mac-arm64.dmg)     |
-| **macOS** Intel      | [Ai8Work-2.1.74-mac-x64.dmg](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.74/Ai8Work-2.1.74-mac-x64.dmg)         |
-| **Linux** amd64      | [Ai8Work-2.1.74-linux-amd64.deb](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.74/Ai8Work-2.1.74-linux-amd64.deb) |
-| **Linux** arm64      | [Ai8Work-2.1.74-linux-arm64.deb](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.74/Ai8Work-2.1.74-linux-arm64.deb) |
+| **Windows** x64      | [Ai8Work-2.1.76-win-x64.exe](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.76/Ai8Work-2.1.76-win-x64.exe)         |
+| **Windows** arm64    | [Ai8Work-2.1.76-win-arm64.exe](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.76/Ai8Work-2.1.76-win-arm64.exe)     |
+| **macOS** Apple 芯片 | [Ai8Work-2.1.76-mac-arm64.dmg](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.76/Ai8Work-2.1.76-mac-arm64.dmg)     |
+| **macOS** Intel      | [Ai8Work-2.1.76-mac-x64.dmg](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.76/Ai8Work-2.1.76-mac-x64.dmg)         |
+| **Linux** amd64      | [Ai8Work-2.1.76-linux-amd64.deb](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.76/Ai8Work-2.1.76-linux-amd64.deb) |
+| **Linux** arm64      | [Ai8Work-2.1.76-linux-arm64.deb](https://github.com/wmhbcy8/Ai8-Work/releases/download/v2.1.76/Ai8Work-2.1.76-linux-arm64.deb) |
 | **安卓 / 手机**      | 无需安装原生包：浏览器直接访问 **WebUI（PWA）** 即可使用，或自行部署 WebUI 服务后随处访问                                      |
 
 ### 2. 配置模型（一次配置，全局可用）

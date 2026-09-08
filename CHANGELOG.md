@@ -1,5 +1,16 @@
 # Changelog
 
+## Ai8 Work v2.1.76 — Sentry feedback & crash reporting
+
+- **Feedback now reaches the developer** — the in-app "Report issue" /
+  feedback dialog and crash reports are wired to the project's own Sentry
+  backend (`zero-play` org, `ai8-work` project). Feedback, screenshots,
+  logs and DB diagnostics submitted by users now land where the maintainer
+  can read them (previously they were silently dropped because no Sentry
+  DSN was configured).
+- **Repo slim-down** — removed 11 oversized upstream demo GIFs (~357 MB)
+  from the tree; readme localization cleanup.
+
 ## Ai8 Work v2.1.75 — Upstream feature sync (AionUi v2.2.1)
 
 Ai8 Work catches up with the full feature delta of its upstream project
