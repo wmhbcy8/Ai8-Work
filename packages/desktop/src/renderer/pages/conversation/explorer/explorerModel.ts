@@ -574,6 +574,7 @@ export type ExplorerMenuCaps = Record<ExplorerMenuItemKey, boolean>;
  *   1. add-to-chat
  *   2. read-only utilities (open location, copy relative, copy absolute, refresh)
  *   3. mutate (new file, new dir, rename, delete, remove-from-project)
+ *
  * `refresh` is a root-only reload (re-fetch the pe root's listings); it sits with
  * the other non-mutating node utilities rather than the mutate group so it never
  * neighbours the destructive remove/delete. Only enabled items appear, and only

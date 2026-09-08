@@ -342,7 +342,9 @@
     "denied": "通知已被封鎖 —— 請在瀏覽器的網站設定中開啟",
     "insecureContext": "瀏覽器通知需要透過 HTTPS 或 localhost 存取",
     "bodyConfirmation": "有一個 agent 正在等待你的確認",
-    "bodyTurnCompleted": "agent 已完成本輪回覆"
+    "bodyTurnCompleted": "已完成本輪回覆",
+    "bodyConfirmationNamed": "「{{name}}」正在等待你確認",
+    "bodyTurnCompletedNamed": "「{{name}}」已完成本輪回覆"
   },
   "notification": "通知",
   "cronNotificationEnabled": "定時任務完成通知",
@@ -1408,5 +1410,11 @@
   "crossSessionMessageDesc": "允許 Agent 向你的其他對話傳送訊息。關閉後，輸入框的 @@ 對話提及與投遞功能會同時停用。",
   "crossSessionMessageDisabledBanner": "跨對話訊息已關閉，輸入框的 @@ 對話提及不可用。",
   "crossSessionMessageResume": "重新開啟",
-  "crossSessionMessageUpdateFailed": "跨對話訊息設定更新失敗"
+  "crossSessionMessageUpdateFailed": "跨對話訊息設定更新失敗",
+  "fontWeightSystemDefault": "系統預設",
+  "fontWeightLight": "細體",
+  "fontWeightRegular": "標準",
+  "fontWeightMedium": "中等",
+  "fontWeightSemibold": "半粗",
+  "fontWeightBold": "粗體"
 }

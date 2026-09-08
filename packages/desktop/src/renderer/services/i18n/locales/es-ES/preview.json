@@ -167,5 +167,15 @@
   "zoomIn": "Acercar",
   "zoomOut": "Alejar",
   "zoomReset": "Restablecer vista",
-  "mermaidZoomHint": "Desplazarse para ampliar • Arrastrar para mover • ESC para cerrar"
+  "mermaidZoomHint": "Desplazarse para ampliar • Arrastrar para mover • ESC para cerrar",
+  "maximizePanel": "Maximizar",
+  "restorePanel": "Restaurar",
+  "close": "Cerrar",
+  "closeUnmodified": "Cerrar sin modificar",
+  "copyPath": "Copiar ruta",
+  "copyRelativePath": "Copiar ruta relativa",
+  "openLocation": "Mostrar en carpeta",
+  "openLocationFailed": "Error al abrir la carpeta contenedora",
+  "wavedromTitle": "Diagrama WaveDrom",
+  "diagramZoomHint": "Desplazarse para ampliar • Arrastrar para mover • ESC para cerrar"
 }

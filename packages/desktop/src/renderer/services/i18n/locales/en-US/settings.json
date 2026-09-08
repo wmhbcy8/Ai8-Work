@@ -342,7 +342,9 @@
     "denied": "Notifications blocked — enable them in your browser's site settings",
     "insecureContext": "Browser notifications require HTTPS or localhost access",
     "bodyConfirmation": "An agent is waiting for your confirmation",
-    "bodyTurnCompleted": "The agent has finished responding"
+    "bodyTurnCompleted": "The agent has finished responding",
+    "bodyConfirmationNamed": "\"{{name}}\" is waiting for your confirmation",
+    "bodyTurnCompletedNamed": "\"{{name}}\" has finished responding"
   },
   "notification": "Notifications",
   "cronNotificationEnabled": "Scheduled Task Completion",
@@ -856,7 +858,6 @@
   "bugReportModuleSessionDescription": "For issues with search, history, rename, pin, delete, or how conversation lists are displayed.",
   "bugReportModuleWorkspaceDescription": "For issues with projects, uploads, folder selection, Office files, preview panels, or diff views.",
   "bugReportModuleAgentTeamDescription": "For issues with team creation, leader or teammate coordination, task dispatch, or team message flow.",
-  "bugReportModuleKnowledgeDescription": "For issues with knowledge notes, note lists, the note editor, search, importing files, or AI settings in Knowledge Notes.",
   "bugReportModuleDisplaySettingsDescription": "For issues with theme, scaling, UI styles, window display, or desktop pet presentation.",
   "bugReportModuleSystemSettingsDescription": "For issues with system permissions, launch at startup, notifications, storage paths, or platform integration.",
   "bugReportModuleOtherDescription": "Use this when the issue spans multiple modules, or when you are not sure which category fits best.",
@@ -865,7 +866,6 @@
   "bugReportModuleDisplaySettings": "Interface, Display & Desktop Pet",
   "bugReportModulePlugin": "Plugin System",
   "bugReportModuleAgentTeam": "Team Collaboration",
-  "bugReportModuleKnowledge": "Knowledge Notes",
   "bugReportModulePet": "Pet",
   "bugReportModuleOther": "Other",
   "contactMe": "Contact Me",
@@ -1408,5 +1408,13 @@
   "crossSessionMessageDesc": "Let agents send messages to your other conversations. Turning this off also disables the @@ conversation mention in the input box.",
   "crossSessionMessageDisabledBanner": "Cross-conversation messages are off, so the @@ conversation mention is unavailable.",
   "crossSessionMessageResume": "Turn back on",
-  "crossSessionMessageUpdateFailed": "Failed to update the cross-conversation message setting"
+  "crossSessionMessageUpdateFailed": "Failed to update the cross-conversation message setting",
+  "bugReportModuleKnowledgeDescription": "For issues with knowledge notes, note lists, the note editor, search, importing files, or AI settings in Knowledge Notes.",
+  "bugReportModuleKnowledge": "Knowledge Notes",
+  "fontWeightSystemDefault": "System default",
+  "fontWeightLight": "Light",
+  "fontWeightRegular": "Regular",
+  "fontWeightMedium": "Medium",
+  "fontWeightSemibold": "Semibold",
+  "fontWeightBold": "Bold"
 }

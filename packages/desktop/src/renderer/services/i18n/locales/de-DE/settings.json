@@ -1323,7 +1323,9 @@
     "denied": "Notifications blocked — enable them in your browser's site settings",
     "insecureContext": "Browser notifications require HTTPS or localhost access",
     "bodyConfirmation": "An agent is waiting for your confirmation",
-    "bodyTurnCompleted": "The agent has finished responding"
+    "bodyTurnCompleted": "The agent has finished responding",
+    "bodyConfirmationNamed": "\"{{name}}\" is waiting for your confirmation",
+    "bodyTurnCompletedNamed": "\"{{name}}\" has finished responding"
   },
   "repair": {
     "pathLabel": "Launch Path",
@@ -1406,5 +1408,11 @@
   "crossSessionMessageDesc": "Erlaubt Agenten, Nachrichten an Ihre anderen Unterhaltungen zu senden. Beim Ausschalten wird auch die @@-Erwähnung im Eingabefeld deaktiviert.",
   "crossSessionMessageDisabledBanner": "Nachrichten zwischen Unterhaltungen sind aus, die @@-Erwähnung ist nicht verfügbar.",
   "crossSessionMessageResume": "Wieder einschalten",
-  "crossSessionMessageUpdateFailed": "Einstellung konnte nicht aktualisiert werden"
+  "crossSessionMessageUpdateFailed": "Einstellung konnte nicht aktualisiert werden",
+  "fontWeightSystemDefault": "Systemstandard",
+  "fontWeightLight": "Leicht",
+  "fontWeightRegular": "Normal",
+  "fontWeightMedium": "Mittel",
+  "fontWeightSemibold": "Halbfett",
+  "fontWeightBold": "Fett"
 }

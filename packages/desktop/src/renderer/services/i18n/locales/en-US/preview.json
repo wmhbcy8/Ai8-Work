@@ -167,5 +167,15 @@
   "zoomIn": "Zoom in",
   "zoomOut": "Zoom out",
   "zoomReset": "Reset view",
-  "mermaidZoomHint": "Scroll to zoom • Drag to pan • ESC to close"
+  "mermaidZoomHint": "Scroll to zoom • Drag to pan • ESC to close",
+  "maximizePanel": "Maximize",
+  "restorePanel": "Restore",
+  "close": "Close",
+  "closeUnmodified": "Close Unmodified",
+  "copyPath": "Copy Path",
+  "copyRelativePath": "Copy Relative Path",
+  "openLocation": "Show in folder",
+  "openLocationFailed": "Failed to open containing folder",
+  "wavedromTitle": "WaveDrom Diagram",
+  "diagramZoomHint": "Scroll to zoom • Drag to pan • ESC to close"
 }

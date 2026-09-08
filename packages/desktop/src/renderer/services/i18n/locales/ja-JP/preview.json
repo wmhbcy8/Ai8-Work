@@ -167,5 +167,15 @@
   "zoomIn": "拡大",
   "zoomOut": "縮小",
   "zoomReset": "表示をリセット",
-  "mermaidZoomHint": "スクロールでズーム • ドラッグで移動 • ESC で閉じる"
+  "mermaidZoomHint": "スクロールでズーム • ドラッグで移動 • ESC で閉じる",
+  "maximizePanel": "最大化",
+  "restorePanel": "元に戻す",
+  "close": "閉じる",
+  "closeUnmodified": "未変更を閉じる",
+  "copyPath": "パスをコピー",
+  "copyRelativePath": "相対パスをコピー",
+  "openLocation": "ファイルの場所を開く",
+  "openLocationFailed": "フォルダーを開けませんでした",
+  "wavedromTitle": "WaveDrom 波形図",
+  "diagramZoomHint": "スクロールでズーム • ドラッグで移動 • ESC で閉じる"
 }

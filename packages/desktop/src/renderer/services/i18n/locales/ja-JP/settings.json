@@ -342,7 +342,9 @@
     "denied": "通知がブロックされています — ブラウザのサイト設定から有効にしてください",
     "insecureContext": "ブラウザ通知には HTTPS または localhost からのアクセスが必要です",
     "bodyConfirmation": "エージェントが確認を待っています",
-    "bodyTurnCompleted": "エージェントが応答を完了しました"
+    "bodyTurnCompleted": "エージェントが応答を完了しました",
+    "bodyConfirmationNamed": "「{{name}}」が確認を待っています",
+    "bodyTurnCompletedNamed": "「{{name}}」の応答が完了しました"
   },
   "notification": "通知",
   "cronNotificationEnabled": "定期タスク完了通知",
@@ -1408,5 +1410,11 @@
   "crossSessionMessageDesc": "エージェントが他の会話にメッセージを送れるようにします。オフにすると入力欄の @@ 会話メンションも無効になります。",
   "crossSessionMessageDisabledBanner": "会話間メッセージはオフです。入力欄の @@ 会話メンションは使用できません。",
   "crossSessionMessageResume": "再度オンにする",
-  "crossSessionMessageUpdateFailed": "会話間メッセージ設定の更新に失敗しました"
+  "crossSessionMessageUpdateFailed": "会話間メッセージ設定の更新に失敗しました",
+  "fontWeightSystemDefault": "システムのデフォルト",
+  "fontWeightLight": "ライト",
+  "fontWeightRegular": "レギュラー",
+  "fontWeightMedium": "ミディアム",
+  "fontWeightSemibold": "セミボールド",
+  "fontWeightBold": "ボールド"
 }

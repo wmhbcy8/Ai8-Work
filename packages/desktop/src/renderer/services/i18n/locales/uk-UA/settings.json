@@ -350,7 +350,9 @@
     "denied": "Сповіщення заблоковано — увімкніть їх у налаштуваннях сайту браузера",
     "insecureContext": "Сповіщення браузера вимагають доступу через HTTPS або localhost",
     "bodyConfirmation": "Агент чекає вашого підтвердження",
-    "bodyTurnCompleted": "Агент завершив відповідь"
+    "bodyTurnCompleted": "Агент завершив відповідь",
+    "bodyConfirmationNamed": "«{{name}}» чекає вашого підтвердження",
+    "bodyTurnCompletedNamed": "«{{name}}» завершив відповідь"
   },
   "notification": "Сповіщення",
   "cronNotificationEnabled": "Завершення запланованих завдань",
@@ -1421,5 +1423,11 @@
   "crossSessionMessageDesc": "Дозволяє агентам надсилати повідомлення до ваших інших розмов. Вимкнення також відключає згадку @@ у полі введення.",
   "crossSessionMessageDisabledBanner": "Повідомлення між розмовами вимкнено, згадка @@ недоступна.",
   "crossSessionMessageResume": "Увімкнути знову",
-  "crossSessionMessageUpdateFailed": "Не вдалося оновити налаштування повідомлень між розмовами"
+  "crossSessionMessageUpdateFailed": "Не вдалося оновити налаштування повідомлень між розмовами",
+  "fontWeightSystemDefault": "Системний за замовчуванням",
+  "fontWeightLight": "Тонкий",
+  "fontWeightRegular": "Звичайний",
+  "fontWeightMedium": "Середній",
+  "fontWeightSemibold": "Напівжирний",
+  "fontWeightBold": "Жирний"
 }

@@ -335,7 +335,9 @@ export default defineConfig(({ mode }) => {
                 id.includes('/@monaco-editor/') ||
                 id.includes('/codemirror/') ||
                 id.includes('/@codemirror/') ||
-                id.includes('/katex/')
+                id.includes('/katex/') ||
+                // WaveDrom timing diagrams (markdown code blocks, CJS)
+                id.includes('/wavedrom/')
               )
                 return 'vendor';
               if (id.includes('/@icon-park/')) return 'vendor-icons';
@@ -387,6 +389,7 @@ export default defineConfig(({ mode }) => {
           '@uiw/react-codemirror',
           '@codemirror/lang-markdown',
           '@codemirror/language',
+          'wavedrom',
         ],
       },
     },

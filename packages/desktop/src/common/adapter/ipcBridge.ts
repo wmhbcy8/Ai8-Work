@@ -1407,6 +1407,15 @@ export const database = {
     ),
     fromApiSearchResult
   ),
+  /**
+   * Newest message of one type, or null. Serves the plan bar: `upsert_message`
+   * does not refresh `created_at`, so a plan row stays anchored at the start of
+   * its turn and a busy turn buries it outside the paginated load.
+   */
+  getLatestConversationMessageOfType: httpGet<
+    import('@/common/chat/chatLib').TMessage | null,
+    { conversation_id: string; type: string }
+  >((p) => `/api/conversations/${p.conversation_id}/messages/latest?type=${encodeURIComponent(p.type)}`),
 };
 
 // Preview panel

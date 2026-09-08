@@ -48,9 +48,6 @@ export type ExplorerPanelProps = {
   workspacePeId?: string;
   /** Remove an attached root from the project. Omit to disable the action. */
   onRemoveRoot?: (peId: string) => void;
-  /** Manually refresh a pe root's subtree — re-fetch its visible directories'
-   * listings (and retry an unreachable root). Root-only; omit to hide the item. */
-  onRefreshRoot?: (peId: string) => void;
   /** Open a file (leaf) in the preview panel. Called when a file node is selected. */
   onOpenFile?: (peId: string, relativePath: string) => void;
   /** File operations (A): rename + delete on an entry, create-file / create-dir
@@ -79,6 +76,10 @@ export type ExplorerPanelProps = {
    * resolved backend-side (the front end never holds it), so this is Electron
    * desktop-only — a remote WebUI must not expose it. Omit to hide the item. */
   onCopyAbsolutePath?: (peId: string, relativePath: string) => void;
+  /** Re-fetch a pe root's listing (root-only reload). Reloads the root's subtree
+   * from the backend, e.g. after files changed on disk outside the watcher's
+   * reach. Omit to hide the item (non-root nodes never offer it). */
+  onRefreshRoot?: (peId: string) => void;
   /** Import OS files (A-paste) dropped onto a node into that node's directory
    * (a file node routes to its parent dir). `filePaths` are absolute OS paths
    * (Electron only — empty in the browser, where the drop is ignored). Omit to
@@ -96,7 +97,6 @@ export const ExplorerPanel: React.FC<ExplorerPanelProps> = ({
   roots,
   workspacePeId,
   onRemoveRoot,
-  onRefreshRoot,
   onOpenFile,
   onRename,
   onDelete,
@@ -106,6 +106,7 @@ export const ExplorerPanel: React.FC<ExplorerPanelProps> = ({
   onRevealInFolder,
   onCopyRelativePath,
   onCopyAbsolutePath,
+  onRefreshRoot,
   onImportFiles,
   onTransfer,
 }) => {
@@ -326,7 +327,6 @@ export const ExplorerPanel: React.FC<ExplorerPanelProps> = ({
         revealInFolder: canReveal,
         copyRelativePath: Boolean(onCopyRelativePath),
         copyAbsolutePath: canCopyAbsolutePath,
-        // Refresh reloads a pe root's listings, so it is offered only on root nodes.
         refresh: isRoot && Boolean(onRefreshRoot),
         newFile: !isFile && Boolean(onNewFile),
         newDir: !isFile && Boolean(onNewDir),
@@ -357,9 +357,9 @@ export const ExplorerPanel: React.FC<ExplorerPanelProps> = ({
         else if (menuKey === 'delete') onDelete?.(peId, rel, name);
         else if (menuKey === 'remove' && removable) onRemoveRoot?.(peId);
         else if (menuKey === 'revealInFolder') onRevealInFolder?.(peId, rel);
+        else if (menuKey === 'refresh') onRefreshRoot?.(peId);
         else if (menuKey === 'copyRelativePath') onCopyRelativePath?.(peId, rel, name);
         else if (menuKey === 'copyAbsolutePath') onCopyAbsolutePath?.(peId, rel);
-        else if (menuKey === 'refresh') onRefreshRoot?.(peId);
       };
 
       const renderMenuItem = (key: ExplorerMenuItemKey): React.ReactNode => {
@@ -445,7 +445,6 @@ export const ExplorerPanel: React.FC<ExplorerPanelProps> = ({
     },
     [
       onRemoveRoot,
-      onRefreshRoot,
       onRename,
       onDelete,
       onNewFile,
@@ -453,6 +452,7 @@ export const ExplorerPanel: React.FC<ExplorerPanelProps> = ({
       onAddToChat,
       onImportFiles,
       onTransfer,
+      onRefreshRoot,
       dragOverKey,
       workspacePeId,
       t,

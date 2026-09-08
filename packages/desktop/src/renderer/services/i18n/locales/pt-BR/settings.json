@@ -342,7 +342,9 @@
     "denied": "Notificações bloqueadas — ative-as nas configurações de site do seu navegador",
     "insecureContext": "As notificações do navegador exigem acesso via HTTPS ou localhost",
     "bodyConfirmation": "Um agente está aguardando sua confirmação",
-    "bodyTurnCompleted": "O agente terminou de responder"
+    "bodyTurnCompleted": "O agente terminou de responder",
+    "bodyConfirmationNamed": "\"{{name}}\" está aguardando sua confirmação",
+    "bodyTurnCompletedNamed": "\"{{name}}\" terminou de responder"
   },
   "notification": "Notificações",
   "cronNotificationEnabled": "Conclusão de Tarefa Agendada",
@@ -1409,5 +1411,11 @@
   "crossSessionMessageDesc": "Permite que agentes enviem mensagens para suas outras conversas. Desativar também desliga a menção @@ na caixa de entrada.",
   "crossSessionMessageDisabledBanner": "As mensagens entre conversas estão desativadas, a menção @@ não está disponível.",
   "crossSessionMessageResume": "Ativar novamente",
-  "crossSessionMessageUpdateFailed": "Falha ao atualizar a configuração de mensagens entre conversas"
+  "crossSessionMessageUpdateFailed": "Falha ao atualizar a configuração de mensagens entre conversas",
+  "fontWeightSystemDefault": "Padrão do sistema",
+  "fontWeightLight": "Fina",
+  "fontWeightRegular": "Normal",
+  "fontWeightMedium": "Média",
+  "fontWeightSemibold": "Seminegrito",
+  "fontWeightBold": "Negrito"
 }

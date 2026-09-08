@@ -752,7 +752,10 @@
       }
     },
     "pathCopied": "パスをコピーしました",
-    "copyFailed": "パスのコピーに失敗しました"
+    "copyFailed": "パスのコピーに失敗しました",
+    "refreshFiles": "ファイルを更新",
+    "refreshChanges": "変更を更新",
+    "collapseAll": "すべて折りたたむ"
   },
   "terminal": {
     "running": "実行中",
@@ -775,5 +778,11 @@
     "rateLimited": "「{{from}}」と「{{to}}」の間の自動メッセージが異常に頻繁で、空転している可能性があります。",
     "stopBoth": "両方の会話を停止",
     "disableFeature": "会話間メッセージをオフにする"
+  },
+  "planBar": {
+    "title": "プラン",
+    "progress": "{{completed}}/{{total}}",
+    "expand": "プランを展開",
+    "collapse": "プランを折りたたむ"
   }
 }

@@ -752,7 +752,10 @@
       }
     },
     "pathCopied": "Chemin copié",
-    "copyFailed": "Échec de la copie du chemin"
+    "copyFailed": "Échec de la copie du chemin",
+    "refreshFiles": "Actualiser les fichiers",
+    "refreshChanges": "Actualiser les modifications",
+    "collapseAll": "Tout réduire"
   },
   "terminal": {
     "running": "En cours",
@@ -775,5 +778,11 @@
     "rateLimited": "Les messages automatiques entre « {{from}} » et « {{to}} » sont anormalement fréquents et semblent boucler.",
     "stopBoth": "Arrêter les deux conversations",
     "disableFeature": "Désactiver les messages entre conversations"
+  },
+  "planBar": {
+    "title": "Plan",
+    "progress": "{{completed}}/{{total}}",
+    "expand": "Développer le plan",
+    "collapse": "Réduire le plan"
   }
 }
