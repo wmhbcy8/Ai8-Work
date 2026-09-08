@@ -177,9 +177,7 @@ Si ya usas Claude Code, Codex, Hermes Agent u OpenClaw, AionUi los detecta autom
 
 Ejecuta múltiples AI Agents como un equipo organizado: un agente **Leader** recibe tus instrucciones, las divide en subtareas y las delega a agentes **Teammate** a través de un Team MCP Server integrado. Los Teammates se ejecutan en paralelo, comparten resultados a través de un buzón asíncrono y escriben en un tablero de tareas compartido.
 
-<p align="center">
-  <img src="../../resources/AionUi_team.gif" alt="Team Mode overview" width="800">
-</p>
+
 
 - **Ejecución paralela multi-agent** — Leader divide y delega tareas a Teammates en paralelo; los Agents externos se conectan mediante ACP (Agent Client Protocol) y AionUi coordina el equipo
 - **Orquestación del Leader** — Leader asigna, rastrea y agrega resultados; backends compatibles: Claude Code, Codex, Hermes Agent, Gemini, Snow CLI y Aion CLI
@@ -392,9 +390,7 @@ _10+ formatos: PDF, Word, Excel, PPT, código, Markdown, imágenes, HTML, Diff �
 
 _Renombrado por lotes, organización automática, clasificación inteligente, fusión de archivos — el Cowork Agent lo maneja por ti._
 
-<p align="center">
-  <img src="../../resources/aionui sort file 2.gif" alt="Smart File Management" width="800">
-</p>
+
 
 <details>
 <summary><strong>🔍 Ver detalles de funciones de gestión de archivos ▶️</strong></summary>

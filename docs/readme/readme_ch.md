@@ -179,9 +179,7 @@ AionUi 自带完整的 AI Agent。不像其他工具需要你手动安装各种 
 
 以团队形式运行多个 AI Agent：**Leader** Agent 接收你的指令，将其分解为子任务，并通过内置 Team MCP Server 委派给 **Teammate** Agent。Teammate 并行执行，通过异步邮箱共享结果，并将进度写入共享任务看板。
 
-<p align="center">
-  <img src="../../resources/AionUi_team.gif" alt="Team Mode overview" width="800">
-</p>
+
 
 - **多 Agent 并行执行** — Leader 将任务拆分并委派给并行运行的 Teammate；外部 Agent 通过 ACP（Agent Client Protocol）连接，由 AionUi 负责团队协调
 - **Leader 统筹编排** — Leader 分配、追踪并汇总结果；支持的后端包括 Claude Code、Codex、Hermes Agent、Gemini、Snow CLI 和 Aion CLI
@@ -395,9 +393,7 @@ _支持 10+ 种格式：PDF、Word、Excel、PPT、代码、Markdown、图像、
 
 _批量重命名、自动整理、智能分类、文件合并 — 这些繁琐的事，交给 Cowork Agent 就行。_
 
-<p align="center">
-  <img src="../../resources/aionui sort file 2.gif" alt="Smart File Management" width="800">
-</p>
+
 
 <details>
 <summary><strong>🔍 查看文件管理功能详情 ▶️</strong></summary>

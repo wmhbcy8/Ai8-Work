@@ -177,9 +177,7 @@ Zaten Claude Code, Codex, Hermes Agent veya OpenClaw kullanıyorsanız, AionUi b
 
 Birden fazla AI Agent'ı organize bir ekip olarak çalıştırın: bir **Leader** Agent talimatlarınızı alır, bunları alt görevlere böler ve yerleşik Team MCP Server aracılığıyla **Teammate** Agent'lara devreder. Teammate'ler paralel olarak çalışır, asenkron posta kutusu üzerinden sonuçları paylaşır ve paylaşılan görev panosuna yazar.
 
-<p align="center">
-  <img src="../../resources/AionUi_team.gif" alt="Team Mode overview" width="800">
-</p>
+
 
 - **Paralel çoklu agent çalıştırma** — Leader görevleri bölüp Teammate'lere paralel olarak devreder; harici Agent'lar ACP (Agent Client Protocol) ile bağlanır ve ekibi AionUi koordine eder
 - **Leader orkestrasyonu** — Leader atar, izler ve sonuçları toplar; desteklenen arka uçlar: Claude Code, Codex, Hermes Agent, Gemini, Snow CLI ve Aion CLI
@@ -392,9 +390,7 @@ _10+ format: PDF, Word, Excel, PPT, kod, Markdown, görüntüler, HTML, Diff —
 
 _Toplu yeniden adlandırma, otomatik organizasyon, akıllı sınıflandırma, dosya birleştirme — Cowork Agent sizin için halleder._
 
-<p align="center">
-  <img src="../../resources/aionui sort file 2.gif" alt="Smart File Management" width="800">
-</p>
+
 
 <details>
 <summary><strong>🔍 Dosya Yönetimi Özellik Detaylarını Görüntüle ▶️</strong></summary>
